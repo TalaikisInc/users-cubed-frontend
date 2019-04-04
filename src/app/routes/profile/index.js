@@ -1,32 +1,30 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { frontloadConnect } from 'react-frontload';
-import Page from '../../components/page';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { frontloadConnect } from 'react-frontload'
 
-import {
-  getCurrentProfile,
-  removeCurrentProfile
-} from '../../../modules/profile';
+import Page from '../../components/page'
+import { getCurrentProfile, removeCurrentProfile } from '../../../modules/profile'
 
-const frontload = async props =>
-  await props.getCurrentProfile(+props.match.params.id);
+const frontload = async (props) => {
+  await props.getCurrentProfile(+props.match.params.id)
+}
 
 class Profile extends Component {
-  componentWillUnmount() {
-    this.props.removeCurrentProfile();
+  componentWillUnmount () {
+    this.props.removeCurrentProfile()
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate (nextProps) {
     if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.props.getCurrentProfile(+nextProps.match.params.id);
+      this.props.getCurrentProfile(+nextProps.match.params.id)
     }
 
-    return true;
+    return true
   }
 
-  render() {
-    const { name, id, image } = this.props.currentProfile;
+  render () {
+    const { name, id, image } = this.props.currentProfile
 
     return (
       <Page
@@ -34,7 +32,7 @@ class Profile extends Component {
         title={name}
         description={`This is user profile number ${id}`}
         image={image}
-      >
+        path={`/profile/${id}`} >
         <p>
           <b>Name:</b> {name}
         </p>
@@ -43,23 +41,19 @@ class Profile extends Component {
         </p>
         <img src={image} alt={name} style={{ width: '400px' }} />
       </Page>
-    );
+    )
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentProfile: state.profile.currentProfile
-});
+})
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getCurrentProfile, removeCurrentProfile }, dispatch);
+const mapDispatchToProps = (dispatch) => {
+  bindActionCreators({ getCurrentProfile, removeCurrentProfile }, dispatch)
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(
-  frontloadConnect(frontload, {
-    onMount: true,
-    onUpdate: false
-  })(Profile)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(frontloadConnect(frontload, {
+  onMount: true,
+  onUpdate: false
+})(Profile))

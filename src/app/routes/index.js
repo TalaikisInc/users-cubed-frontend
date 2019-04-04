@@ -1,59 +1,78 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import AuthenticatedRoute from '../components/authenticated-route';
-import UnauthenticatedRoute from '../components/unauthenticated-route';
-import Loadable from 'react-loadable';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
-import NotFound from './not-found';
+import AuthenticatedRoute from '../components/authenticated-route'
+import UnauthenticatedRoute from '../components/unauthenticated-route'
+import NotFound from './not-found'
 
 const Homepage = Loadable({
   loader: () => import(/* webpackChunkName: "homepage" */ './homepage'),
   loading: () => null,
   modules: ['homepage']
-});
+})
 
 const About = Loadable({
   loader: () => import(/* webpackChunkName: "about" */ './about'),
   loading: () => null,
   modules: ['about']
-});
+})
+
+const Disclaimer = Loadable({
+  loader: () => import(/* webpackChunkName: "disclaimer" */ './disclaimer'),
+  loading: () => null,
+  modules: ['disclaimer']
+})
+
+const PrivacyPolicy = Loadable({
+  loader: () => import(/* webpackChunkName: "privacy-policy" */ './privacy-policy'),
+  loading: () => null,
+  modules: ['privacy-policy']
+})
+
+
+const TermsOfService = Loadable({
+  loader: () => import(/* webpackChunkName: "terms-of-service" */ './terms-of-service'),
+  loading: () => null,
+  modules: ['terms-of-service']
+})
 
 const Dashboard = Loadable({
   loader: () => import(/* webpackChunkName: "dashboard" */ './dashboard'),
   loading: () => null,
   modules: ['dashboard']
-});
+})
 
-const Login = Loadable({
-  loader: () => import(/* webpackChunkName: "login" */ './login'),
+const Signin = Loadable({
+  loader: () => import(/* webpackChunkName: "signin" */ './signin'),
   loading: () => null,
-  modules: ['login']
-});
+  modules: ['signin']
+})
 
-const Logout = Loadable({
-  loader: () => import(/* webpackChunkName: "logout" */ './logout'),
+const Signout = Loadable({
+  loader: () => import(/* webpackChunkName: "signout" */ './signout'),
   loading: () => null,
-  modules: ['logout']
-});
+  modules: ['signout']
+})
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ './profile'),
   loading: () => null,
   modules: ['profile']
-});
+})
 
 export default () => (
   <Switch>
     <Route exact path="/" component={Homepage} />
     <Route exact path="/about" component={About} />
-
+    <Route exact path="/about" component={About} />
+    <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+    <Route exact path="/terms-of-service" component={TermsOfService} />
+    <Route exact path="/disclaimer" component={Disclaimer} />
     <Route exact path="/profile/:id" component={Profile} />
-
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
-
-    <UnauthenticatedRoute exact path="/login" component={Login} />
-    <AuthenticatedRoute exact path="/logout" component={Logout} />
-
+    <UnauthenticatedRoute exact path="/signin" component={Signin} />
+    <AuthenticatedRoute exact path="/signout" component={Signout} />
     <Route component={NotFound} />
   </Switch>
-);
+)

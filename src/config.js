@@ -25,3 +25,5 @@ export const FB_SITE = ''
 export const FB_APP_ID = ''
 
 export const GOOGLE_PUB = 'ca-pub-7892370499383985'
+
+export const UPDATE_FREQUENCY = '3 hours'
