@@ -1,11 +1,11 @@
-import React from 'react';
-import Page from '../../components/page';
+import React from 'react'
 
-import logo from '../../assets/logo.jpg';
+import Page from '../../components/page'
+
+// title, path, image, description, noCrawl, locale
 
 export default () => (
-  <Page id="homepage">
+  <Page id="homepage" title="Home" path="/">
     <p>Here's our homepage. All are welcome.</p>
-    <img src={logo} alt="Homepage" style={{ width: '400px' }} />
   </Page>
-);
+)
