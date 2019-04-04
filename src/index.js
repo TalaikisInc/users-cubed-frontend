@@ -9,6 +9,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import createStore from './store'
 
 import App from './app/app'
+import { unregister } from './serviceWorker'
 import './index.css'
 const { store, history } = createStore()
 
@@ -20,14 +21,15 @@ const Application = (
       </Frontload>
     </ConnectedRouter>
   </Provider>
-);
+)
 
-const root = document.querySelector('#root');
+unregister()
+const root = document.querySelector('#root')
 
 if (root.hasChildNodes() === true) {
   Loadable.preloadReady().then(() => {
-    hydrate(Application, root);
-  });
+    hydrate(Application, root)
+  })
 } else {
-  render(Application, root);
+  render(Application, root)
 }

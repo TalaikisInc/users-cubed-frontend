@@ -9,6 +9,7 @@ module.exports = {
       css: ['./src/styles/*.css']
     }),
     require('postcss-nested'),
+    require('cssnano'),
     require('autoprefixer')
   ]
 }

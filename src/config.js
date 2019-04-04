@@ -10,7 +10,7 @@ export const UPLOAD_API_URL = 'https://upload.ufunc.com/'
 
 export const DEFAULT_DESCRIPTION = 'Awesome website'
 
-export const DEFAULT_IMAGE = `${IMAGES_URL}logo.svg`
+export const DEFAULT_IMAGE = 'default.jpg'
 
 export const TITLE = 'The Company'
 

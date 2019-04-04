@@ -1,25 +1,18 @@
-// Express requirements
-import path from 'path';
-import fs from 'fs';
+import path from 'path'
+import fs from 'fs'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import Helmet from 'react-helmet'
+import { Provider } from 'react-redux'
+import { StaticRouter } from 'react-router'
+import { Frontload, frontloadServerRender } from 'react-frontload'
+import Loadable from 'react-loadable'
 
-// React requirements
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import Helmet from 'react-helmet';
-import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router';
-import { Frontload, frontloadServerRender } from 'react-frontload';
-import Loadable from 'react-loadable';
+import createStore from '../src/store'
+import App from '../src/app/app'
+import manifest from '../build/asset-manifest.json'
+import { setCurrentUser, logoutUser } from '../src/modules/auth'
 
-// Our store, entrypoint, and manifest
-import createStore from '../src/store';
-import App from '../src/app/app';
-import manifest from '../build/asset-manifest.json';
-
-// Some optional Redux functions related to user authentication
-import { setCurrentUser, logoutUser } from '../src/modules/auth';
-
-// LOADER
 export default (req, res) => {
   /*
     A simple helper function to prepare the HTML markup. This loads:
@@ -113,16 +106,9 @@ export default (req, res) => {
           // Let's format those assets into pretty <script> tags
           const extraChunks = extractAssets(manifest, modules).map(
             c => `<script type="text/javascript" src="/${c.replace(/^\//, '')}"></script>`
-          );
+          )
 
-          // We need to tell Helmet to compute the right meta tags, title, and such
-          const helmet = Helmet.renderStatic();
-
-          // NOTE: Disable if you desire
-          // Let's output the title, just to see SSR is working as intended
-          console.log('THE TITLE', helmet.title.toString());
-
-          // Pass all this nonsense into our HTML formatting function above
+          const helmet = Helmet.renderStatic()
           const html = injectHTML(htmlData, {
             html: helmet.htmlAttributes.toString(),
             title: helmet.title.toString(),
@@ -130,12 +116,11 @@ export default (req, res) => {
             body: routeMarkup,
             scripts: extraChunks,
             state: JSON.stringify(store.getState()).replace(/</g, '\\u003c')
-          });
+          })
 
-          // We have all the final HTML, let's send it to the user already!
-          res.send(html);
+          res.send(html)
         }
-      });
+      })
     }
-  );
-};
+  )
+}
