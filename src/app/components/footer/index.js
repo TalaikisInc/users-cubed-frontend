@@ -2,20 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const Footer = ({ company }) => {
+import { Container, Content, Hero, Footer } from 'react-bulma-components'
+
+const CubedFooter = ({ company }) => {
   return (
-    <footer>
-      <div className="p-10 cell-4 offset-4">
-        <div>
-          <p className="text-secondary text-center">&copy; { new Date().getFullYear() }, <Link to="/">{ company }</Link></p>
-        </div>
-      </div>
-    </footer>
+    <Hero.Footer>
+      <Footer>
+        <Container>
+          <Content style={{ textAlign: 'center' }}>
+            <p>
+              &copy; { new Date().getFullYear() }, <strong><Link to="/">{ company }</Link></strong> |&nbsp;
+              <Link to="/privacy-policy">Privacy Policy</Link> |&nbsp;
+              <Link to="/disclaimer">Disclaimer</Link> |&nbsp;
+              <Link to="/terms-of-service">Terms of Service</Link>
+            </p>
+          </Content>
+        </Container>
+      </Footer>
+    </Hero.Footer>
   )
 }
 
-Footer.propTypes = {
+CubedFooter.propTypes = {
   company: PropTypes.string.isRequired
 }
 
-export default Footer
+export default CubedFooter

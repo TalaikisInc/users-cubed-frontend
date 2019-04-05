@@ -37,6 +37,12 @@ const TermsOfService = Loadable({
   modules: ['terms-of-service']
 })
 
+const SignedOut = Loadable({
+  loader: () => import(/* webpackChunkName: "signed-out" */ './signed-out'),
+  loading: () => null,
+  modules: ['signed-out']
+})
+
 const Dashboard = Loadable({
   loader: () => import(/* webpackChunkName: "dashboard" */ './dashboard'),
   loading: () => null,
@@ -69,6 +75,7 @@ export default () => (
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
     <Route exact path="/terms-of-service" component={TermsOfService} />
     <Route exact path="/disclaimer" component={Disclaimer} />
+    <Route exact path="/signed-out" component={SignedOut} />
     <Route exact path="/profile/:id" component={Profile} />
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />

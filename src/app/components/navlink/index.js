@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Navbar, Button, Icon } from 'react-bulma-components'
 
 const isActive = (to, current) => {
   if (to === '/' && current === to) {
@@ -13,15 +13,19 @@ const isActive = (to, current) => {
 }
 
 const Navlink = ({ link, title, icon, current, primary }) => {
-  let classes = primary ? 'button rounded alert' : 'button rounded'
-  classes = isActive(link, current) ? classes.concat(' active') : classes
+  let button = primary ? <Button rounded color="danger">
+    <Icon icon={icon} /> { title }
+  </Button> : <Button rounded>
+    <Icon icon={icon} /> { title }
+  </Button>
+  button = isActive(link, current) ? <Button rounded color="warning">
+    <Icon icon={icon} /> { title } { title } </Button>
+    : button
 
   return (
-    <li className="brand no-hover">
-      <Link to={link}>
-        <button className={classes}><span className={icon}></span> { title }</button>
-      </Link>
-    </li>
+    <Navbar.Item href={link}>
+      { button }
+    </Navbar.Item>
   )
 }
 

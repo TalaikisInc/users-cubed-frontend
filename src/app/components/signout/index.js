@@ -1,4 +1,5 @@
 import React from 'react'
+import { Navbar, Button, Icon } from 'react-bulma-components'
 
 const logout = () => {
   /*
@@ -10,7 +11,9 @@ const logout = () => {
 }
 
 export default () => (
-  <li className="brand no-hover">
-    <button className="button rounded" onClick={logout}><span className="mif-exit"></span> Sign Out</button>
-  </li>
+  <Navbar.Item>
+    <Button rounded onClick={logout}>
+      <Icon icon="sign-out-alt" /> Sign Out
+    </Button>
+  </Navbar.Item>
 )

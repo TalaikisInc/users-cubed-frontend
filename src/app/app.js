@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
+import { Section, Container } from 'react-bulma-components'
 
 import { establishCurrentUser } from '../modules/auth'
 import { isServer } from '../store'
 import Routes from './routes'
 import Header from './components/header'
-import Footer from './components/footer'
+import CubedFooter from './components/footer'
 import { TITLE } from '../config'
 
-class App extends Component {
+class App extends PureComponent {
   componentWillMount () {
     if (!isServer) {
       // this.props.establishCurrentUser()
@@ -19,15 +20,15 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <Fragment>
         <Header isAuthenticated={this.props.isAuthenticated} current={this.props.location.pathname}/>
-        <div className="pt-20 cell-4 offset-4">
-          <div>
+        <Section>
+          <Container>
             <Routes />
-          </div>
-        </div>
-        <Footer company={TITLE} />
-      </div>
+          </Container>
+        </Section>
+        <CubedFooter company={TITLE} />
+      </Fragment>
     )
   }
 }

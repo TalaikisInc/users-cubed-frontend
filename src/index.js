@@ -7,7 +7,6 @@ import { Frontload } from 'react-frontload'
 import { ConnectedRouter } from 'connected-react-router'
 
 import createStore from './store'
-
 import App from './app/app'
 import { unregister } from './serviceWorker'
 import './index.css'

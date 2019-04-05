@@ -1,10 +1,10 @@
-import { Component } from 'react'
+import { PureComponent } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { logoutUser } from '../../../modules/auth'
 
-class Signout extends Component {
+class Signout extends PureComponent {
   componentWillMount () {
     this.props.logoutUser()
     this.props.history.push('/')
