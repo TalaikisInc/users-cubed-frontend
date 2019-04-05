@@ -18,7 +18,7 @@ const Meta = ({ title, path, image, description, noCrawl, locale }) => {
     <Helmet>
       <title>{ pageProps.fullTitle }</title>
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      { noCrawl ? <meta name='robots' content='noindex, nofollow' />
+      { /*noCrawl ? <meta name='robots' content='noindex, nofollow' />
         : <Fragment>
           <link rel='canonical' href={pageProps.fullUrl} />
           <meta name='robots' content='index, follow' />
@@ -31,7 +31,7 @@ const Meta = ({ title, path, image, description, noCrawl, locale }) => {
           <meta property='og:locale' content='en_GB' />
           <meta property='og:site_name' content={FB_SITE} />
           <meta property='fb:app_id' content={FB_APP_ID} />
-          <meta property='og:locale' content='pageProps.locale' />
+          <meta property='og:locale' content={pageProps.locale} />
           <meta property='twitter:card' content='summary_large_image' />
           <meta property='twitter:site' content={TWITTER_HANDLE} />
           <meta property='twitter:creator' content={TWITTER_HANDLE} />
@@ -41,7 +41,7 @@ const Meta = ({ title, path, image, description, noCrawl, locale }) => {
           <meta property='twitter:image:src' content={pageProps.image} />
           <meta property='twitter:handle' content={TWITTER_HANDLE} />
         </Fragment>
-      }
+      */}
     </Helmet>
   )
 }

@@ -5,7 +5,7 @@ import Meta from '../meta'
 
 class Page extends PureComponent {
   render () {
-    const { children, id, className, ...rest } = this.props
+    const { children, ...rest } = this.props
 
     return (
       <Fragment>

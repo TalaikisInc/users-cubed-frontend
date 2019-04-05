@@ -5,7 +5,7 @@ const register = ignoreStyles.default
 const extensions = ['.gif', '.jpeg', '.jpg', '.png', '.svg']
 
 register(ignoreStyles.DEFAULT_EXTENSIONS, (mod, filename) => {
-  if (!extensions.find(f => filename.endsWith(f))) {
+  if (!extensions.find((f) => filename.endsWith(f))) {
     return ignoreStyles.noOp()
   } else {
     const hash = md5File.sync(filename).slice(0, 8)

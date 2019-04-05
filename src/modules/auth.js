@@ -68,18 +68,18 @@ export const loginUser = (email, password) => dispatch =>
     resolve(user);
   });
 
-export const logoutUser = () => dispatch =>
+export const logoutUser = () => dispatch => 
   new Promise(resolve => {
     dispatch({
       type: AUTHENTICATE,
       authenticated: false
-    });
+    })
 
     dispatch({
       type: SET_CURRENT_USER,
       user: {}
-    });
+    })
 
-    Cookies.remove('mywebsite');
-    resolve({});
-  });
+    Cookies.remove('mywebsite')
+    resolve({})
+  })

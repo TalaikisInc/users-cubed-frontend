@@ -19,8 +19,6 @@ class Profile extends PureComponent {
     if (nextProps.match.params.id !== this.props.match.params.id) {
       this.props.getCurrentProfile(+nextProps.match.params.id)
     }
-
-    return true
   }
 
   render () {

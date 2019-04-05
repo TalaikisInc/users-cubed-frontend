@@ -43,6 +43,18 @@ const SignedOut = Loadable({
   modules: ['signed-out']
 })
 
+const Signup = Loadable({
+  loader: () => import(/* webpackChunkName: "signup" */ './signup'),
+  loading: () => null,
+  modules: ['signup']
+})
+
+const ContactUs = Loadable({
+  loader: () => import(/* webpackChunkName: "contact-us" */ './contact-us'),
+  loading: () => null,
+  modules: ['contact-us']
+})
+
 const Dashboard = Loadable({
   loader: () => import(/* webpackChunkName: "dashboard" */ './dashboard'),
   loading: () => null,
@@ -71,7 +83,8 @@ export default () => (
   <Switch>
     <Route exact path="/" component={Homepage} />
     <Route exact path="/about" component={About} />
-    <Route exact path="/about" component={About} />
+    <Route exact path="/signup" component={Signup} />
+    <Route exact path="/contact-us" component={ContactUs} />
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
     <Route exact path="/terms-of-service" component={TermsOfService} />
     <Route exact path="/disclaimer" component={Disclaimer} />
