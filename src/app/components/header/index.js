@@ -14,11 +14,11 @@ export default ({ isAuthenticated, current }) => (
       </Navbar.Container>
       <Navbar.Container position="end">
         { !isAuthenticated ? <Fragment>
-          <Navlink link="/signin" title="Sign In" icon="sign-in-alt" current={current} />
-          <Navlink link="/signup" title="Sign Up" icon="sign-out-alt" current={current} primary />
+          <Navlink link="/signin" title="Sign In" current={current} />
+          <Navlink link="/signup" title="Sign Up" current={current} primary />
         </Fragment>
           : <Fragment>
-            <Navlink link="/dashboard" title="" icon="user" current={current} />
+            <Navlink link="/dashboard" title="Dashboard" current={current} />
             <Signout />
           </Fragment>
         }

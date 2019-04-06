@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Navbar, Button, Icon } from 'react-bulma-components'
+import { Navbar, Button } from 'react-bulma-components'
 
 const isActive = (to, current) => {
   if (to === '/' && current === to) {
@@ -12,15 +12,9 @@ const isActive = (to, current) => {
   return false
 }
 
-const Navlink = ({ link, title, icon, current, primary }) => {
-  let button = primary ? <Button rounded color="danger">
-    <Icon icon={icon} /> { title }
-  </Button> : <Button rounded>
-    <Icon icon={icon} /> { title }
-  </Button>
-  button = isActive(link, current) ? <Button rounded color="warning">
-    <Icon icon={icon} /> { title } { title } </Button>
-    : button
+const Navlink = ({ link, title, current, primary }) => {
+  let button = primary ? <Button rounded color="danger">{ title }</Button> : <Button rounded>{ title }</Button>
+  button = isActive(link, current) ? <Button rounded color="warning">{ title } </Button> : button
 
   return (
     <Navbar.Item href={link}>
@@ -31,8 +25,7 @@ const Navlink = ({ link, title, icon, current, primary }) => {
 
 Navlink.propTypes = {
   link: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 }
 
 export default Navlink

@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Notification, Button } from 'react-bulma-components'
 
 const Error = ({ msg }) => (
-  msg.length > 0 ?
-    <div className="p-5">
-      <div className="mx-auto p-2 bg-red fg-white text-center">
-        { msg }
-      </div>
-    </div>
+  msg.length > 0 ? <Notification color="danger">
+    { msg }
+    <Button remove />
+  </Notification>
     : null
 )
 

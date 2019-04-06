@@ -79,6 +79,18 @@ const Profile = Loadable({
   modules: ['profile']
 })
 
+const ProfileEdit = Loadable({
+  loader: () => import(/* webpackChunkName: "profile-edit" */ './profile-edit'),
+  loading: () => null,
+  modules: ['profile-edit']
+})
+
+const ProfileDeleted = Loadable({
+  loader: () => import(/* webpackChunkName: "profile-deleted" */ './profile-deleted'),
+  loading: () => null,
+  modules: ['profile-deleted']
+})
+
 export default () => (
   <Switch>
     <Route exact path="/" component={Homepage} />
@@ -90,9 +102,11 @@ export default () => (
     <Route exact path="/disclaimer" component={Disclaimer} />
     <Route exact path="/signed-out" component={SignedOut} />
     <Route exact path="/profile/:id" component={Profile} />
-    <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
+    <Route exact path="/profile-deleted" component={ProfileDeleted} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />
+    <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
     <AuthenticatedRoute exact path="/signout" component={Signout} />
+    <AuthenticatedRoute exact path="/profile-edit" component={ProfileEdit} />
     <Route component={NotFound} />
   </Switch>
 )

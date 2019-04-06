@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import Page from '../../components/page'
 import { loginUser } from '../../../modules/auth'
 
-const Signin = props => (
+const Signin = (props) => (
   <Page id="signin" title="Signin" description="We need to log in to stuff." path="/signin">
     <button onClick={() => props.loginUser('user@mydomain.com', 'password123')}>
       Click the button...
@@ -18,3 +18,16 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(Signin)
+
+/*
+export default class Signup extends React.Component {
+  submit = values => {
+    // print the form values to the console
+    console.log(values)
+  }
+  render() {
+    return <ContactForm onSubmit={this.submit} />
+  }
+}
+
+*/
