@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { Section, Container } from 'react-bulma-components'
 
-import { establishCurrentUser } from '../modules/auth'
+import { getUser } from '../modules/auth'
 import { isServer } from '../store'
 import Routes from './routes'
 import Header from './components/header'
@@ -14,7 +14,7 @@ import { TITLE } from '../config'
 class App extends PureComponent {
   componentWillMount () {
     if (!isServer) {
-      // this.props.establishCurrentUser()
+      // this.props.getUser()
     }
   }
 
@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => {
-  bindActionCreators({ establishCurrentUser }, dispatch)
+  bindActionCreators({ getUser }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

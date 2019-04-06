@@ -1,12 +1,12 @@
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 
-export const AUTHENTICATE = 'auth/AUTHENTICATE';
-export const SET_CURRENT_USER = 'auth/SET_CURRENT_USER';
+export const AUTHENTICATE = 'auth/AUTHENTICATE'
+export const SET_CURRENT_USER = 'auth/SET_CURRENT_USER'
 
 const initialState = {
   isAuthenticated: false,
   currentUser: {}
-};
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -14,61 +14,61 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: action.authenticated
-      };
+      }
 
     case SET_CURRENT_USER:
       return {
         ...state,
         currentUser: action.user
-      };
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const setCurrentUser = user => dispatch =>
   new Promise(resolve => {
     dispatch({
       type: SET_CURRENT_USER,
       user
-    });
+    })
 
-    Cookies.set('mywebsite', user);
+    Cookies.set('mywebsite', user)
 
     dispatch({
       type: AUTHENTICATE,
       authenticated: true
-    });
+    })
 
-    resolve(user);
-  });
+    resolve(user)
+  })
 
-export const establishCurrentUser = () => dispatch =>
+export const getUser = () => dispatch =>
   new Promise(resolve => {
-    let userFromCookie = Cookies.getJSON('mywebsite');
+    let userFromCookie = Cookies.getJSON('mywebsite')
 
     if (userFromCookie) {
-      dispatch(setCurrentUser(userFromCookie));
-      resolve(userFromCookie);
+      dispatch(setCurrentUser(userFromCookie))
+      resolve(userFromCookie)
     } else {
-      resolve({});
+      resolve({})
     }
-  });
+  })
 
-export const loginUser = (email, password) => dispatch =>
+export const signinUser = (email, password) => dispatch =>
   new Promise((resolve, reject) => {
     const user = {
       email,
       password,
       name: 'Awesome User'
-    };
+    }
 
-    dispatch(setCurrentUser(user));
-    resolve(user);
-  });
+    dispatch(setCurrentUser(user))
+    resolve(user)
+  })
 
-export const logoutUser = () => dispatch => 
+export const signoutUser = () => dispatch => 
   new Promise(resolve => {
     dispatch({
       type: AUTHENTICATE,

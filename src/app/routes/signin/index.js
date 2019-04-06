@@ -1,34 +1,33 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { SubmissionError } from 'redux-form'
 
 import Page from '../../components/page'
-import { loginUser } from '../../../modules/auth'
+import { signinUser } from '../../../modules/auth'
+import SigninForm from '../../components/signin-form'
 
-const Signin = (props) => (
-  <Page id="signin" title="Signin" description="We need to log in to stuff." path="/signin">
-    <button onClick={() => props.loginUser('user@mydomain.com', 'password123')}>
-      Click the button...
-    </button>
-  </Page>
-)
+class Signin extends PureComponent {
+  state = {
+    loading: false
+  }
+
+  submit = (values) => {
+    console.log('values')
+    console.log(values)
+    this.props.signinUser('user@mydomain.com', 'password123')
+  }
+
+  render() {
+    return (
+      <Page title="Signin" description="We need to log in to stuff." path="/signin">
+        <SigninForm handleSubmit={this.submit} loading={this.state.loading} />
+      </Page>
+    )
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
-  bindActionCreators({ loginUser }, dispatch)
+  bindActionCreators({ signinUser }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(Signin)
-
-/*
-export default class Signup extends React.Component {
-  submit = values => {
-    // print the form values to the console
-    console.log(values)
-  }
-  render() {
-    return <ContactForm onSubmit={this.submit} />
-  }
-}
-
-*/

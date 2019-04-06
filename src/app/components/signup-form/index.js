@@ -2,8 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
 
-import { renderInput } from '../input'
-import { renderCheckbox } from '../checkbox'
+import renderInput from '../input'
+import renderCheckbox from '../checkbox'
 import Submit from '../submit'
 
 const validate = (values) => {
@@ -39,15 +39,15 @@ const warn = (values) => {
 }
 
 const SignupForm = (props) => {
-  const { handleSubmit, disabled } = props
+  const { handleSubmit, loading } = props
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="email" type="email" component={renderInput} label="Email" />
+      <Field name="email" type="email" component='input' label="Email" />
       <Field name="password" type="text" component={renderInput} label="Password" />
       <Field name="repeatPassword" type="text" component={renderInput} label="Repeat Password" />
       <Field name="tosAgreement" component={renderCheckbox} />
-      <Submit label="Sign Up" loading={disabled} />
+      <Submit label="Sign Up" loading={loading} />
     </form>
   )
 }

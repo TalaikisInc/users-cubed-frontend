@@ -12,16 +12,9 @@ export const isServer = !(
 )
 
 export default (url = '/') => {
-  // Create a history depending on the environment
-  const history = isServer
-    ? createMemoryHistory({
-      initialEntries: [url]
-    })
-    : createBrowserHistory();
+  const history = isServer ? createMemoryHistory({ initialEntries: [url] }) : createBrowserHistory()
+  const enhancers = []
 
-  const enhancers = [];
-
-  // Dev tools are helpful
   if (process.env.NODE_ENV === 'development' && !isServer) {
     const devToolsExtension = window.devToolsExtension
 

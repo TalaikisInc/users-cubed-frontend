@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+// , { Fragment }
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
-import { TITLE, URL, FB_SITE, FB_APP_ID, TWITTER_HANDLE, DEFAULT_DESCRIPTION, DEFAULT_IMAGE, IMAGES_URL } from '../../../config'
+import { TITLE, URL, DEFAULT_DESCRIPTION, DEFAULT_IMAGE, IMAGES_URL } from '../../../config'
+// , FB_SITE, FB_APP_ID, TWITTER_HANDLE
 
 const Meta = ({ title, path, image, description, noCrawl, locale }) => {
   const pageProps = {

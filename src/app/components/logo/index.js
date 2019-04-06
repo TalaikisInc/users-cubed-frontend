@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import { Navbar } from 'react-bulma-components'
 
 class Logo extends PureComponent {
-  /*state = {
+  state = {
     open: false
-  }*/
+  }
 
   render () {
     return (
@@ -16,7 +16,6 @@ class Logo extends PureComponent {
             width="112"
             height="28" />
         </Navbar.Item>
-        {/* active={this.state.open} */}
         <Navbar.Burger onClick={() => {
           this.setState({ open: !this.state.open })
         }} />

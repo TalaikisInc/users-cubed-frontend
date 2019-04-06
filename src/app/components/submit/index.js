@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Field, Control, Button } from 'react-bulma-components'
 
 const Submit = ({ label, loading }) => (
-  <Field kind="group">
+  <Field>
     <Control>
       <Button type="primary" loading={loading}>{ label }</Button>
     </Control>

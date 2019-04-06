@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react'
-import { SubmissionError } from 'redux-form'
 
 import ContactForm from '../../components/contact-form'
 
 export default class ContactUs extends PureComponent {
+  state = {
+    loading: false
+  }
+
   submit = (values) => {
     console.log(values)
   }
 
   render() {
-    return <ContactForm onSubmit={this.submit} />
+    return <ContactForm handleSubmit={this.submit} loading={this.state.loading} />
   }
 }

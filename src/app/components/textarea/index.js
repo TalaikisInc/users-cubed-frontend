@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, Textarea, Control, Label, Help } from 'react-bulma-components'
 
-export const renderTextarea = ({ input, label, meta: { touched, error, warning } }) => (
+const renderTextarea = ({ input, label, meta: { touched, error, warning } }) => (
   <Field>
     <Label>{ label }</Label>
     <Control>
@@ -13,3 +13,5 @@ export const renderTextarea = ({ input, label, meta: { touched, error, warning }
     )}
   </Field>
 )
+
+export default renderTextarea

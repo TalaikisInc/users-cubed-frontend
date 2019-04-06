@@ -2,8 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
 
-import { renderInput } from '../input'
-import { renderTextarea } from '../textarea'
+import renderInput from '../input'
+import renderTextarea from '../textarea'
 import Submit from '../submit'
 
 const validate = (values) => {
@@ -35,14 +35,14 @@ const warn = (values) => {
 }
 
 const ContactForm = (props) => {
-  const { handleSubmit, disabled } = props
+  const { handleSubmit, loading } = props
 
   return (
     <form onSubmit={handleSubmit}>
       <Field name="name" type="text" component={renderInput} label="Name" />
       <Field name="email" type="email" component={renderInput} label="Email" />
       <Field name="message" component={renderTextarea} label="Message" />
-      <Submit label="Send" loading={disabled} />
+      <Submit label="Send" loading={loading} />
     </form>
   )
 }

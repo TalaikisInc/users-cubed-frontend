@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, Input, Control, Label, Help } from 'react-bulma-components'
 
-export const renderInput = ({ input, label, type, meta: { touched, error, warning } }) => (
+const renderInput = ({ input, label, type, meta: { touched, error, warning } }) => (
   <Field>
     <Label>{label}</Label>
     <Control>
@@ -13,3 +13,5 @@ export const renderInput = ({ input, label, type, meta: { touched, error, warnin
     )}
   </Field>
 )
+
+export default renderInput

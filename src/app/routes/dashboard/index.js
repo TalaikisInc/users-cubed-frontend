@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Page from '../../components/page'
 
 const Dashboard = ({ currentUser }) => (
-  <Page id="dashboard" title="Dashboard" noCrawl>
+  <Page title="Dashboard" noCrawl>
     <p>
       <b>Name:</b> {currentUser.firstName}
     </p>

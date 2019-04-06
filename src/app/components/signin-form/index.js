@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
 
-import { renderInput } from '../input'
+import renderInput from '../input'
 import Submit from '../submit'
 
 const validate = (values) => {
@@ -28,13 +28,13 @@ const warn = (values) => {
 }
 
 const SigninForm = (props) => {
-  const { handleSubmit, disabled } = props
+  const { handleSubmit, loading } = props
 
   return (
     <form onSubmit={handleSubmit}>
       <Field name="email" type="email" component={renderInput} label="Email" />
       <Field name="password" type="text" component={renderInput} label="Password" />
-      <Submit label="Sign In" loading={disabled} />
+      <Submit label="Sign In" loading={loading} />
     </form>
   )
 }

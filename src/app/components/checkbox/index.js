@@ -1,10 +1,10 @@
 import React from 'react'
 import { Field, Control, Help, Checkbox } from 'react-bulma-components'
 
-export const renderCheckbox = ({ input, meta: { touched, error, warning } }) => (
+const renderCheckbox = ({ input, meta: { touched, error, warning } }) => (
   <Field>
     <Control>
-      <Checkbox {...input} onChange={this.onChange}>
+      <Checkbox {...input}>
         I agree to the <a href="#terms-of-service">Terms of Service</a>
       </Checkbox>
     </Control>
@@ -14,3 +14,5 @@ export const renderCheckbox = ({ input, meta: { touched, error, warning } }) => 
     )}
   </Field>
 )
+
+export default renderCheckbox
