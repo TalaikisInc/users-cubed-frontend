@@ -1,7 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import isemail from 'isemail'
 
-import { renderInput } from '..//input'
+import { renderInput } from '../input'
 import { renderCheckbox } from '../checkbox'
 import Submit from '../submit'
 
@@ -46,7 +47,7 @@ const SignupForm = (props) => {
       <Field name="password" type="text" component={renderInput} label="Password" />
       <Field name="repeatPassword" type="text" component={renderInput} label="Repeat Password" />
       <Field name="tosAgreement" component={renderCheckbox} />
-      <Submit label="Sign Up" />
+      <Submit label="Sign Up" loading={disabled} />
     </form>
   )
 }

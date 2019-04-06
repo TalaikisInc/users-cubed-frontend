@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
+import { SubmissionError } from 'redux-form'
 
-import Page from '../../components/page'
+import ContactForm from '../../components/contact-form'
 
-export default () => (
-  <Page
-    id="not-found"
-    path="/not-found"
-    title="Not Found"
-    noCrawl>
-    <p>We can't find anything like this.</p>
-  </Page>
-)
+export default class ContactUs extends PureComponent {
+  submit = (values) => {
+    console.log(values)
+  }
+
+  render() {
+    return <ContactForm onSubmit={this.submit} />
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { SubmissionError } from 'redux-form'
 
 import Page from '../../components/page'
 import { loginUser } from '../../../modules/auth'
