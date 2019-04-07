@@ -34,6 +34,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "build:scss": "node-sass --omit-source-map-url src/styles/styles.scss src/styles/main.css",
     "build:css": "postcss src/styles/main.css -o src/index.css",
     "watch:css": " postcss src/styles/main.css -o src/index.css -w",
     "start:css": "npm-run-all -p watch:css start-js",
@@ -61,6 +62,7 @@
     "@tensorflow/tfjs": "^1.0.4",
     "autoprefixer": "^9.5.0",
     "babel-plugin-dynamic-import-node": "^2.1.0",
+    "bulma": "^0.7.4",
     "cssnano": "^4.1.10",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",

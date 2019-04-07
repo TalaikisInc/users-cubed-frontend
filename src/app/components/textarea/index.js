@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const TextareaField = ({ input, label, meta: { touched, error, warning } }) => (
-  <div class="field">
-    <div class="label">{ label }</div>
-    <div class="control">
-      <textarea class="textarea" placeholder={label} {...input}></textarea>
+  <div className="field">
+    <div className="label">{ label }</div>
+    <div className="control">
+      <textarea className="textarea" placeholder={label} {...input}></textarea>
     </div>
     { touched && (
-      (error && <p class="help is-danger">{ error }</p>) ||
-      (warning && <p class="help is-warning">{ warning }</p>)
+      (error && <p className="help is-danger">{ error }</p>) ||
+      (warning && <p className="help is-warning">{ warning }</p>)
     )}
   </div>
 )

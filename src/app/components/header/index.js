@@ -9,7 +9,7 @@ import Signout from '../signout'
 const Header = ({ isAuthenticated, current }) => (
   <Navbar>
     <Logo />
-    <Navbar.Menu>
+    <div id="navbar-menu" className="navbar-menu">
       <Navbar.Container>
         <Navbar.Item href="/products">Products</Navbar.Item>
       </Navbar.Container>
@@ -24,7 +24,7 @@ const Header = ({ isAuthenticated, current }) => (
           </Fragment>
         }
       </Navbar.Container>
-    </Navbar.Menu>
+    </div>
   </Navbar>
 )
 

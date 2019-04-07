@@ -6,17 +6,17 @@ const InputField = ({ input, label, type, icon, meta: { touched, error, warning 
   const classes = touched && error ? 'input is-danger' : 'input'
 
   return (
-    <div class="field">
-      <label class="label"> {label }</label>
-      <div class="control has-icons-left">
-        <input class={classes} type={type} placeholder={label} {...input} />
-        <span class="icon is-small is-left">
-          <i class={iconClass}></i>
+    <div className="field">
+      <label className="label"> {label }</label>
+      <div className="control has-icons-left">
+        <input className={classes} type={type} placeholder={label} {...input} />
+        <span className="icon is-small is-left">
+          <i className={iconClass}></i>
         </span>
       </div>
       { touched && (
-        (error && <p class="help is-danger">{ error }</p>) ||
-        (warning && <p class="help is-warning">{ warning }</p>)
+        (error && <p className="help is-danger">{ error }</p>) ||
+        (warning && <p className="help is-warning">{ warning }</p>)
       )}
     </div>
   )

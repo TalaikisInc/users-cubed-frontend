@@ -16,9 +16,11 @@ class Logo extends PureComponent {
             width="112"
             height="28" />
         </Navbar.Item>
-        <Navbar.Burger onClick={() => {
-          this.setState({ open: !this.state.open })
-        }} />
+        <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </Navbar.Brand>
     )
   }
