@@ -2,8 +2,10 @@ import React from 'react'
 
 import Page from '../../components/page'
 
-export default () => (
+const Homepage = () => (
   <Page title="Home" path="/">
     <p>This is homepage.</p>
   </Page>
 )
+
+export default Homepage

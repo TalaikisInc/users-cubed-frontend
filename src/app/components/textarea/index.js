@@ -1,17 +1,23 @@
 import React from 'react'
-import { Field, Textarea, Control, Label, Help } from 'react-bulma-components'
+import PropTypes from 'prop-types'
 
-const renderTextarea = ({ input, label, meta: { touched, error, warning } }) => (
-  <Field>
-    <Label>{ label }</Label>
-    <Control>
-      <Textarea {...input} onChange={this.onChange} placeholder={label} />
-    </Control>
+const TextareaField = ({ input, label, meta: { touched, error, warning } }) => (
+  <div class="field">
+    <div class="label">{ label }</div>
+    <div class="control">
+      <textarea class="textarea" placeholder={label} {...input}></textarea>
+    </div>
     { touched && (
-      (error && <Help color="danger">{ error }</Help>) ||
-      (warning && <Help color="warning">{ warning }</Help>)
+      (error && <p class="help is-danger">{ error }</p>) ||
+      (warning && <p class="help is-warning">{ warning }</p>)
     )}
-  </Field>
+  </div>
 )
 
-export default renderTextarea
+TextareaField.propTypes = {
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired
+}
+
+export default TextareaField

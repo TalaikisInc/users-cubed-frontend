@@ -2,7 +2,7 @@ import React from 'react'
 
 import Page from '../../components/page'
 
-export default () => (
+const NotFound = () => (
   <Page
     id="not-found"
     path="/not-found"
@@ -11,3 +11,5 @@ export default () => (
     <p>We can't find anything like this.</p>
   </Page>
 )
+
+export default NotFound

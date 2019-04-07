@@ -13,19 +13,15 @@ const isActive = (to, current) => {
 }
 
 const Navlink = ({ link, title, current, primary }) => {
-  let button = primary ? <Button rounded color="danger">{ title }</Button> : <Button rounded>{ title }</Button>
-  button = isActive(link, current) ? <Button rounded color="warning">{ title } </Button> : button
-
-  return (
-    <Navbar.Item href={link}>
-      { button }
-    </Navbar.Item>
-  )
+  const button = primary ? <Button rounded color="danger">{ title }</Button> : <Button rounded>{ title }</Button>
+  return isActive(link, current) ? null : <Navbar.Item href={link}>{ button }</Navbar.Item>
 }
 
 Navlink.propTypes = {
   link: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  current: PropTypes.string.isRequired,
+  primary: PropTypes.bool
 }
 
 export default Navlink

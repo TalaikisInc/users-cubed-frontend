@@ -5,7 +5,7 @@ import Logo from '../logo'
 import Navlink from '../navlink'
 import Signout from '../signout'
 
-export default ({ isAuthenticated, current }) => (
+const HeaderHero ({ isAuthenticated, current }) => (
   <Hero color="primary">
     <Navbar>
       <Logo />
@@ -50,3 +50,5 @@ export default ({ isAuthenticated, current }) => (
     </Hero.Body>
   </Hero>
 )
+
+export default HeaderHero

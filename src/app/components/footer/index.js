@@ -14,7 +14,8 @@ const CubedFooter = ({ company }) => {
               &copy; { new Date().getFullYear() }, <strong><Link to="/">{ company }</Link></strong> |&nbsp;
               <Link to="/privacy-policy">Privacy Policy</Link> |&nbsp;
               <Link to="/disclaimer">Disclaimer</Link> |&nbsp;
-              <Link to="/terms-of-service">Terms of Service</Link>
+              <Link to="/terms-of-service">Terms of Service</Link> |&nbsp;
+              <Link to="/contact-us">Contact Us</Link>
             </p>
           </Content>
         </Container>

@@ -1,18 +1,23 @@
 import React from 'react'
-import { Field, Control, Help, Checkbox } from 'react-bulma-components'
+import PropTypes from 'prop-types'
 
-const renderCheckbox = ({ input, meta: { touched, error, warning } }) => (
-  <Field>
-    <Control>
-      <Checkbox {...input}>
-        I agree to the <a href="#terms-of-service">Terms of Service</a>
-      </Checkbox>
-    </Control>
+const CheckboxField = ({ input, meta: { touched, error, warning } }) => (
+  <div class="field">
+    <div class="control">
+      <label class="checkbox">
+        <input {...input} type="checkbox"/> I agree to the <a href="/terms-of-service">Terms of Service</a>
+      </label>
+    </div>
     { touched && (
-      (error && <Help color="danger">{ error }</Help>) ||
-      (warning && <Help color="warning">{ warning }</Help>)
+      (error && <p class="help is-danger">{ error }</p>) ||
+      (warning && <p class="help is-warning">{ warning }</p>)
     )}
-  </Field>
+  </div>
 )
 
-export default renderCheckbox
+CheckboxField.propTypes = {
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired
+}
+
+export default CheckboxField

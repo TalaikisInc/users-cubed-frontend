@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 
-const EditProfile = ({ currentUser }) => (
+const ProfileEdit = ({ currentUser }) => (
   <Page title="Dashboard" noCrawl>
     <p>
       <b>Name:</b> {currentUser.firstName}
@@ -21,4 +21,4 @@ const mapStateToProps = state => ({
   currentUser: state.auth.currentUser
 })
 
-export default connect(mapStateToProps, null)(EditProfile)
+export default connect(mapStateToProps, null)(ProfileEdit)

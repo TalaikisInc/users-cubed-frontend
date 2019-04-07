@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
 import { Navbar } from 'react-bulma-components'
+import PropTypes from 'prop-types'
 
 import Logo from '../logo'
 import Navlink from '../navlink'
 import Signout from '../signout'
 
-export default ({ isAuthenticated, current }) => (
+const Header = ({ isAuthenticated, current }) => (
   <Navbar>
     <Logo />
     <Navbar.Menu>
@@ -26,3 +27,10 @@ export default ({ isAuthenticated, current }) => (
     </Navbar.Menu>
   </Navbar>
 )
+
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  current: PropTypes.string.isRequired
+}
+
+export default Header

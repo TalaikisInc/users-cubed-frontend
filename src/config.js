@@ -10,11 +10,19 @@ export const UPLOAD_API_URL = 'https://upload.talaikis.com/'
 
 export const CONTACT_API_URL = 'https://mail.talaikis.com/'
 
+export const COMPANY_EMAIL = 'info@talaikis.com'
+
 export const DEFAULT_DESCRIPTION = 'Default description of awesome website'
 
 export const DEFAULT_IMAGE = 'default.jpg'
 
 export const TITLE = 'The Company'
+
+export const COMPANY = 'The Company Ltd.'
+
+export const COMPANY_ADDRESS = 'The Company address'
+
+export const DPM_EMAIL = 'privacy@talaikis.com'
 
 export const GA = 'UA-137539256-1'
 
@@ -35,6 +43,6 @@ export const DESCRIPTIONS = {
   signin: '',
   signup: '',
   disclaimer: '',
-  tos: '',
-  privacy: ''
+  ToS: '',
+  privacyPolicy: ''
 }

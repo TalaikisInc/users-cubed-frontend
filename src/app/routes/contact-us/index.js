@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
 
 import ContactForm from '../../components/contact-form'
+import Page from '../../components/page'
 
-export default class ContactUs extends PureComponent {
+class ContactUs extends PureComponent {
   state = {
     loading: false
   }
@@ -12,6 +13,12 @@ export default class ContactUs extends PureComponent {
   }
 
   render() {
-    return <ContactForm handleSubmit={this.submit} loading={this.state.loading} />
+    return (
+      <Page title="Contact Us" path="/contact-us">
+        <ContactForm handleSubmit={this.submit} loading={this.state.loading} />
+      </Page>
+    )
   }
 }
+
+export default ContactUs

@@ -1,20 +1,28 @@
 import React from 'react'
-import { Field, Select, Control, Label, Help } from 'react-bulma-components'
+import PropTypes from 'prop-types'
 
-export const renderSelect = ({ input, label, meta: { touched, error, warning } }) => (
-  <Field>
-    <Label>{ label }</Label>
-    <Control>
-      <Select {...input}>
-        <option value="">Select</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other?</option>
-      </Select>
-    </Control>
+const SelectField = ({ input, label, meta: { touched, error, warning } }) => (
+  <div class="field">
+    <div class="label">{ label }</div>
+    <div class="control">
+      <div class="select">
+        <select {...input}>
+          <option value="0">Select dropdown</option>
+          <option value="1">With options</option>
+        </select>
+      </div>
+    </div>
     { touched && (
-      (error && <Help color="danger">{ error }</Help>) ||
-      (warning && <Help color="warning">{ warning }</Help>)
+      (error && <p class="help is-danger">{ error }</p>) ||
+      (warning && <p class="help is-warning">{ warning }</p>)
     )}
-  </Field>
+  </div>
 )
+
+SelectField.propTypes = {
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired
+}
+
+export default SelectField

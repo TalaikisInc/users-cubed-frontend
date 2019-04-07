@@ -10,10 +10,12 @@ const signout = () => {
   */
 }
 
-export default () => (
+const Signout = () => (
   <Navbar.Item>
     <Button rounded onClick={signout}>
       <Icon icon="sign-out-alt" /> Sign Out
     </Button>
   </Navbar.Item>
 )
+
+export default Signout

@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Field, Control, Button } from 'react-bulma-components'
+import { Button, Columns } from 'react-bulma-components'
 
 const Submit = ({ label, loading }) => (
-  <Field>
-    <Control>
-      <Button type="primary" loading={loading}>{ label }</Button>
-    </Control>
-  </Field>
+  <Columns>
+    <Columns.Column size={12}>
+      <Button color="primary" loading={loading} rounded>{ label }</Button>
+    </Columns.Column>
+  </Columns>
 )
 
 Submit.propTypes = {

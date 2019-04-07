@@ -1,10 +1,8 @@
 import React from 'react'
-// , { Fragment }
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
-import { TITLE, URL, DEFAULT_DESCRIPTION, DEFAULT_IMAGE, IMAGES_URL } from '../../../config'
-// , FB_SITE, FB_APP_ID, TWITTER_HANDLE
+import { TITLE, URL, DEFAULT_DESCRIPTION, DEFAULT_IMAGE, IMAGES_URL, FB_SITE, FB_APP_ID, TWITTER_HANDLE } from '../../../config'
 
 const Meta = ({ title, path, image, description, noCrawl, locale }) => {
   const pageProps = {
@@ -20,8 +18,8 @@ const Meta = ({ title, path, image, description, noCrawl, locale }) => {
     <Helmet>
       <title>{ pageProps.fullTitle }</title>
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      { /*noCrawl ? <meta name='robots' content='noindex, nofollow' />
-        : <Fragment>
+      { noCrawl ? <meta name='robots' content='noindex, nofollow' />
+        : <div>
           <link rel='canonical' href={pageProps.fullUrl} />
           <meta name='robots' content='index, follow' />
           <meta name='description' content={pageProps.description} />
@@ -42,8 +40,8 @@ const Meta = ({ title, path, image, description, noCrawl, locale }) => {
           <meta property='twitter:url' content={pageProps.fullUrl} />
           <meta property='twitter:image:src' content={pageProps.image} />
           <meta property='twitter:handle' content={TWITTER_HANDLE} />
-        </Fragment>
-      */}
+        </div>
+      }
     </Helmet>
   )
 }

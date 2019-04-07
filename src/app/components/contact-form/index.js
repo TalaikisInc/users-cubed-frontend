@@ -2,15 +2,16 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
 
-import renderInput from '../input'
-import renderTextarea from '../textarea'
+import InputField from '../input'
+import TextareaField from '../textarea'
 import Submit from '../submit'
+import Form from '../form'
 
 const validate = (values) => {
   const errors = {}
   if (!values.email) {
     errors.email = 'Email is required'
-  } else if (!isemail.validate(values.username)) {
+  } else if (!isemail.validate(values.email)) {
     errors.email = 'Invalid email'
   }
 
@@ -38,13 +39,13 @@ const ContactForm = (props) => {
   const { handleSubmit, loading } = props
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Field name="name" type="text" component={renderInput} label="Name" />
-      <Field name="email" type="email" component={renderInput} label="Email" />
-      <Field name="message" component={renderTextarea} label="Message" />
+    <Form onSubmit={handleSubmit}>
+      <Field name="name" type="text" component={InputField} label="Name" icon="user" />
+      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" />
+      <Field name="message" component={TextareaField} label="Message" />
       <Submit label="Send" loading={loading} />
-    </form>
+    </Form>
   )
 }
 
-export default reduxForm({ form: 'signup', validate, warn })(ContactForm)
+export default reduxForm({ form: 'contact', validate, warn })(ContactForm)
