@@ -17,7 +17,7 @@ const ProfileEdit = ({ currentUser }) => (
   </Page>
 )
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser
 })
 

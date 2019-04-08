@@ -6,17 +6,17 @@ class Logo extends PureComponent {
     open: false
   }
 
+  toggleBurger = () => {
+
+  }
+
   render () {
     return (
       <Navbar.Brand>
         <Navbar.Item renderAs="a" href="/">
-          <img
-            src="https://bulma.io/images/bulma-logo.png"
-            alt="Bulma: a modern CSS framework based on Flexbox"
-            width="112"
-            height="28" />
+          <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
         </Navbar.Item>
-        <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+        <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu" onClick={this.toggleBurger}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>

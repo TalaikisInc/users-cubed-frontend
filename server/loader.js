@@ -8,10 +8,12 @@ import { StaticRouter } from 'react-router'
 import { Frontload, frontloadServerRender } from 'react-frontload'
 import Loadable from 'react-loadable'
 
+import manifest from '../build/asset-manifest.json'
 import createStore from '../src/store'
 import App from '../src/app/app'
-import manifest from '../build/asset-manifest.json'
 import { setCurrentUser, signoutUser } from '../src/modules/auth'
+import { COOKIE_ID } from '../src/config'
+import { extraChunks } from './utils'
 
 export default (req, res) => {
   const injectHTML = (data, { html, title, meta, body, scripts, state }) => {
@@ -36,18 +38,18 @@ export default (req, res) => {
     }
 
     // Create a store (with a memory history) from our current url
-    const { store } = createStore(req.url);
+    const { store } = createStore(req.url)
 
     // If the user has a cookie (i.e. they're signed in) - set them as the current user
     // Otherwise, we want to set the current state to be logged out, just in case this isn't the default
-    if ('mywebsite' in req.cookies) {
-      store.dispatch(setCurrentUser(req.cookies.mywebsite));
+    if (COOKIE_ID in req.cookies) {
+      store.dispatch(setCurrentUser(req.cookies[COOKIE_ID]))
     } else {
       store.dispatch(signoutUser())
     }
 
-    const context = {};
-    const modules = [];
+    const context = {}
+    const modules = []
 
     /*
         Here's the core funtionality of this file. We do the following in specific order (inside-out):
@@ -77,33 +79,31 @@ export default (req, res) => {
       )
     ).then(routeMarkup => {
       if (context.url) {
-        // If context has a url property, then we need to handle a redirection in Redux Router
         res.writeHead(302, {
           Location: context.url
         })
 
         res.end()
       } else {
-        // Otherwise, we carry on...
-
-        // Let's give ourself a function to load all our page-specific JS assets for code splitting
+        /*
         const extractAssets = (assets, chunks) =>
           Object.keys(assets)
             .filter(asset => chunks.indexOf(asset.replace('.js', '')) > -1)
-            .map(k => assets[k]);
+            .map(k => assets[k])
 
-        // Let's format those assets into pretty <script> tags
         const extraChunks = extractAssets(manifest, modules).map(
           c => `<script type="text/javascript" src="/${c.replace(/^\//, '')}"></script>`
         )
+            */
 
+        const scripts = extraChunks(manifest, modules)
         const helmet = Helmet.renderStatic()
         const html = injectHTML(htmlData, {
           html: helmet.htmlAttributes.toString(),
           title: helmet.title.toString(),
           meta: helmet.meta.toString(),
           body: routeMarkup,
-          scripts: extraChunks,
+          scripts: scripts,
           state: JSON.stringify(store.getState()).replace(/</g, '\\u003c')
         })
 

@@ -1,4 +1,3 @@
-import { SubmissionError } from 'redux-form'
 import fetch from 'isomorphic-unfetch'
 
 import { API_URL } from '../../config'
@@ -13,7 +12,7 @@ const api = (data) => {
   })
     .then((res) => {
       if (res.status > 300) {
-        throw new SubmissionError({ _error: res.error })
+        return res.error
       }
 
       return res.json()
@@ -22,7 +21,7 @@ const api = (data) => {
       return data
     })
     .catch((err) => {
-      throw new SubmissionError({ _error: err.message })
+      return err.message
     })
 }
 

@@ -5,7 +5,7 @@ import Logo from '../logo'
 import Navlink from '../navlink'
 import Signout from '../signout'
 
-const HeaderHero ({ isAuthenticated, current }) => (
+const HeaderHero = ({ isAuthenticated, current }) => (
   <Hero color="primary">
     <Navbar>
       <Logo />

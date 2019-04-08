@@ -45,8 +45,8 @@ const SignupForm = (props) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Field name="email" type="email" component={InputField} label="Email" icon="envelope" />
-      <Field name="password" type="text" component={InputField} label="Password" icon="lock" />
-      <Field name="repeatPassword" type="text" component={InputField} label="Repeat Password" icon="lock" />
+      <Field name="password" type="password" component={InputField} label="Password" icon="lock" />
+      <Field name="repeatPassword" type="password" component={InputField} label="Repeat Password" icon="lock" />
       <Field name="tosAgreement" component={CheckboxField} />
       <Submit label="Sign Up" loading={loading} />
     </Form>

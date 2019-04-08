@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 
+import { COOKIE_ID } from '../config'
 export const AUTHENTICATE = 'auth/AUTHENTICATE'
 export const SET_CURRENT_USER = 'auth/SET_CURRENT_USER'
 
@@ -27,14 +28,14 @@ export default (state = initialState, action) => {
   }
 }
 
-export const setCurrentUser = user => dispatch =>
-  new Promise(resolve => {
+export const setCurrentUser = (user) => (dispatch) =>
+  new Promise((resolve) => {
     dispatch({
       type: SET_CURRENT_USER,
       user
     })
 
-    Cookies.set('mywebsite', user)
+    Cookies.set(COOKIE_ID, user)
 
     dispatch({
       type: AUTHENTICATE,
@@ -44,9 +45,9 @@ export const setCurrentUser = user => dispatch =>
     resolve(user)
   })
 
-export const getUser = () => dispatch =>
+export const getUser = () => (dispatch) =>
   new Promise(resolve => {
-    let userFromCookie = Cookies.getJSON('mywebsite')
+    let userFromCookie = Cookies.getJSON(COOKIE_ID)
 
     if (userFromCookie) {
       dispatch(setCurrentUser(userFromCookie))
@@ -56,7 +57,7 @@ export const getUser = () => dispatch =>
     }
   })
 
-export const signinUser = (email, password) => dispatch =>
+export const signinUser = (email, password) => (dispatch) =>
   new Promise((resolve, reject) => {
     const user = {
       email,
@@ -68,7 +69,7 @@ export const signinUser = (email, password) => dispatch =>
     resolve(user)
   })
 
-export const signoutUser = () => dispatch => 
+export const signoutUser = () => (dispatch) => 
   new Promise(resolve => {
     dispatch({
       type: AUTHENTICATE,
@@ -80,6 +81,6 @@ export const signoutUser = () => dispatch =>
       user: {}
     })
 
-    Cookies.remove('mywebsite')
+    Cookies.remove(COOKIE_ID)
     resolve({})
   })

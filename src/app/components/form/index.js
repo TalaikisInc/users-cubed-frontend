@@ -13,8 +13,8 @@ const Form = ({ children, onSubmit }) => (
 )
 
 Form.propTypes = {
-  children: PropTypes.object.isRequired,
-  onSubmit: PropTypes.object.isRequired
+  children: PropTypes.array.isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default Form

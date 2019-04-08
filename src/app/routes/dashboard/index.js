@@ -6,9 +6,6 @@ import Page from '../../components/page'
 const Dashboard = ({ currentUser }) => (
   <Page title="Dashboard" noCrawl>
     <p>
-      <b>Name:</b> {currentUser.firstName}
-    </p>
-    <p>
       <b>Email:</b> {currentUser.email}
     </p>
     <p>
@@ -17,7 +14,7 @@ const Dashboard = ({ currentUser }) => (
   </Page>
 )
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser
 })
 

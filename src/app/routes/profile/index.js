@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { frontloadConnect } from 'react-frontload'
@@ -10,7 +10,7 @@ const frontload = async (props) => {
   await props.getCurrentProfile(+props.match.params.id)
 }
 
-class Profile extends PureComponent {
+class Profile extends Component {
   componentWillUnmount () {
     this.props.removeCurrentProfile()
   }

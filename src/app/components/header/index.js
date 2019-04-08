@@ -9,7 +9,7 @@ import Signout from '../signout'
 const Header = ({ isAuthenticated, current }) => (
   <Navbar>
     <Logo />
-    <div id="navbar-menu" className="navbar-menu">
+    <div className="navbar-menu" id="navbar-menu">
       <Navbar.Container>
         <Navbar.Item href="/products">Products</Navbar.Item>
       </Navbar.Container>
