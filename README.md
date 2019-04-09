@@ -16,6 +16,10 @@ Fully featured React.js SSR user management system (frontend).
 * [Create React App](https://github.com/facebook/create-react-app)
 * [Redux](https://github.com/reduxjs/redux)
 
+## API
+
+You should deploy your own [Users Cubed API](https://github.com/TalaikisInc/users-cubed-s3), [contact us API](https://github.com/TalaikisInc/email_service) and set their URLs on src/config.js.
+
 ## Install
 
 ```bash

@@ -5,6 +5,8 @@ import Loadable from 'react-loadable'
 import AuthenticatedRoute from '../components/authenticated-route'
 import UnauthenticatedRoute from '../components/unauthenticated-route'
 import NotFound from './not-found'
+import withTracker from '../utils/ga'
+import { GA } from '../../config'
 
 const Homepage = Loadable({
   loader: () => import(/* webpackChunkName: "homepage" */ './homepage'),
@@ -99,7 +101,7 @@ const Signed = Loadable({
 
 export default () => (
   <Switch>
-    <Route exact path="/" component={Homepage} />
+    <Route exact path="/" component={withTracker(Homepage, { userID: GA })} />
     <Route exact path="/about" component={About} />
     <Route exact path="/contact-us" component={ContactUs} />
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
