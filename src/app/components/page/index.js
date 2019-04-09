@@ -1,10 +1,10 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router'
 import { Section, Container, Columns, Content, Heading } from 'react-bulma-components'
 
 import Meta from '../meta'
 
-class Page extends PureComponent {
+class Page extends Component {
   render () {
     const { children, ...rest } = this.props
 

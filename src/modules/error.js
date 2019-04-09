@@ -21,7 +21,7 @@ export const setError = (error) => (dispatch) =>
   new Promise((resolve) => {
     dispatch({
       type: GENERAL_ERROR,
-      error
+      error: error
     })
 
     resolve(error)

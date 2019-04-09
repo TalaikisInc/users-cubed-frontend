@@ -31,10 +31,10 @@ const PrivacyPolicy = Loadable({
 })
 
 
-const TermsOfService = Loadable({
-  loader: () => import(/* webpackChunkName: "terms-of-service" */ './terms-of-service'),
+const TermsAndConditions = Loadable({
+  loader: () => import(/* webpackChunkName: "terms-and-conditions" */ './terms-and-conditions'),
   loading: () => null,
-  modules: ['terms-of-service']
+  modules: ['terms-and-conditions']
 })
 
 const SignedOut = Loadable({
@@ -91,18 +91,25 @@ const ProfileDeleted = Loadable({
   modules: ['profile-deleted']
 })
 
+const Signed = Loadable({
+  loader: () => import(/* webpackChunkName: "signed" */ './signed'),
+  loading: () => null,
+  modules: ['signed']
+})
+
 export default () => (
   <Switch>
     <Route exact path="/" component={Homepage} />
     <Route exact path="/about" component={About} />
-    <Route exact path="/signup" component={Signup} />
     <Route exact path="/contact-us" component={ContactUs} />
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
-    <Route exact path="/terms-of-service" component={TermsOfService} />
+    <Route exact path="/terms-and-conditions" component={TermsAndConditions} />
     <Route exact path="/disclaimer" component={Disclaimer} />
     <Route exact path="/signed-out" component={SignedOut} />
     <Route exact path="/profile/:id" component={Profile} />
     <Route exact path="/profile-deleted" component={ProfileDeleted} />
+    <Route exact path="/signed" component={Signed} />
+    <UnauthenticatedRoute exact path="/signup" component={Signup} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
     <AuthenticatedRoute exact path="/signout" component={Signout} />

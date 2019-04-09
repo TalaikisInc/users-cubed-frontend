@@ -12,8 +12,6 @@ class Signin extends PureComponent {
   }
 
   submit = (values) => {
-    console.log('values')
-    console.log(values)
     this.props.signinUser('user@mydomain.com', 'password123')
   }
 

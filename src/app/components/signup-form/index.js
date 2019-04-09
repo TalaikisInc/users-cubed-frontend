@@ -28,7 +28,7 @@ const validate = (values) => {
   }
 
   if (!values.tosAgreement) {
-    errors.tosAgreement = 'You should accept the Terms of Service'
+    errors.tosAgreement = 'You should accept the Terms and Conditions'
   }
 
   return errors

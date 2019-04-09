@@ -4,7 +4,7 @@ export const URL = 'https://ufunc.com/'
 
 export const IMAGES_URL = 'https://ufunc.com/images/'
 
-export const API_URL = 'https://api.ufunc.com/api'
+export const API_URL = 'http://localhost:3000/api'
 
 export const UPLOAD_API_URL = 'https://upload.talaikis.com/'
 

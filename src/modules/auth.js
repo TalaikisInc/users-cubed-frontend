@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie'
 
 import { COOKIE_ID } from '../config'
+import api from '../app/utils/api'
+
 export const AUTHENTICATE = 'auth/AUTHENTICATE'
 export const SET_CURRENT_USER = 'auth/SET_CURRENT_USER'
 
@@ -69,8 +71,33 @@ export const signinUser = (email, password) => (dispatch) =>
     resolve(user)
   })
 
+export const signupUser = (email, password, tosAgreement) => (dispatch) =>
+  new Promise((resolve, reject) => {
+    api({ action: 'USER_CREATE', email, password, tosAgreement }, (res) => {
+      if (res && res.error) {
+        /*
+        this.props.history.push({
+          pathname: '/signup',
+          state: { error: res.error }
+        })
+        */
+        dispatch({
+          type: SET_CURRENT_USER,
+          user: {}
+        })
+        resolve({})
+      } else if (res && res.status === 'OK.') {
+        dispatch({
+          type: SET_CURRENT_USER,
+          user: {}
+        })
+        resolve({})
+      }
+    })
+  })
+
 export const signoutUser = () => (dispatch) => 
-  new Promise(resolve => {
+  new Promise((resolve) => {
     dispatch({
       type: AUTHENTICATE,
       authenticated: false

@@ -5,7 +5,7 @@ const CheckboxField = ({ input, meta: { touched, error, warning } }) => (
   <div className="field">
     <div className="control">
       <label className="checkbox">
-        <input {...input} type="checkbox"/> I agree to the <a href="/terms-of-service">Terms of Service</a>
+        <input {...input} type="checkbox"/> I agree to the <a href="/terms-and-conditions">Terms and Conditions</a>
       </label>
     </div>
     { touched && (

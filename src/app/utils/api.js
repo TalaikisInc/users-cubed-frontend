@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 
 import { API_URL } from '../../config'
 
-const api = (data) => {
+const api = (data, done) => {
   fetch(API_URL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -11,17 +11,13 @@ const api = (data) => {
     }
   })
     .then((res) => {
-      if (res.status > 300) {
-        return res.error
-      }
-
       return res.json()
     })
     .then((data) => {
-      return data
+      done(data)
     })
     .catch((err) => {
-      return err.message
+      done({ error: err.message })
     })
 }
 

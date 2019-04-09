@@ -16,7 +16,7 @@ class Signout extends PureComponent {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  bindActionCreators({ signoutUser }, dispatch);
+  bindActionCreators({ signoutUser }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(Signout)
