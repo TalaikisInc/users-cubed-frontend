@@ -44,5 +44,7 @@ export const DESCRIPTIONS = {
   signup: '',
   disclaimer: '',
   ToS: '',
-  privacyPolicy: ''
+  privacyPolicy: '',
+  confirm: '',
+  reset: ''
 }

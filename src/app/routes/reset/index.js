@@ -3,11 +3,11 @@ import React, { PureComponent } from 'react'
 import Page from '../../components/page'
 import Error from '../../components/error'
 import Message from '../../components/message'
-import SignupForm from '../../components/signup-form'
+import ResetForm from '../../components/reset-form'
 import { DESCRIPTIONS } from '../../../config'
 import api from '../../utils/api'
 
-class Signup extends PureComponent {
+class Reset extends PureComponent {
   state = { loading: false }
 
   submit = (e) => {
@@ -15,25 +15,23 @@ class Signup extends PureComponent {
     this.setState({ loading: true })
     const { target } = e
     const email = target[0].value
-    const password = target[1].value
-    const tosAgreement = target[3].value === 'true'
-    if (email && password && tosAgreement) {
-      api({ action: 'USER_CREATE', email: email, password: password, tosAgreement: tosAgreement }, (res) => {
+    if (email) {
+      api({ action: 'RESET_CREATE', email: email }, (res) => {
         if (res && res.error) {
           this.props.history.push({
-            pathname: '/signup',
+            pathname: '/reset',
             state: { error: res.error }
           })
         } else if (res && res.status === 'OK.') {
           this.props.history.push({
-            pathname: '/signup',
+            pathname: '/reset',
             state: { done: true, error: false }
           })
         }
       })
     } else {
       this.props.history.push({
-        pathname: '/signup',
+        pathname: '/reset',
         state: { error: 'Please check the form.' }
       })
     }
@@ -45,14 +43,14 @@ class Signup extends PureComponent {
     const { location } = this.props
 
     return (
-      <Page title="Signup" description={DESCRIPTIONS.signup} path="/signup">
+      <Page title="Reset Password" description={DESCRIPTIONS.reset} path="/reset">
         { location.state && location.state.error ? <Error msg={location.state.error}/> : null }
-        { location.state && location.state.done ? <Message msg='Account registered, please check your email.' />
-          : <SignupForm handleSubmit={this.submit} loading={loading} />
+        { location.state && location.state.done ? <Message msg='Password is reset and sent via email.' />
+          : <ResetForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
     )
   }
 }
 
-export default Signup
+export default Reset

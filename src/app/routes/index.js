@@ -93,10 +93,16 @@ const ProfileDeleted = Loadable({
   modules: ['profile-deleted']
 })
 
-const Signed = Loadable({
-  loader: () => import(/* webpackChunkName: "signed" */ './signed'),
+const Reset = Loadable({
+  loader: () => import(/* webpackChunkName: "reset" */ './reset'),
   loading: () => null,
-  modules: ['signed']
+  modules: ['reset']
+})
+
+const Confirm = Loadable({
+  loader: () => import(/* webpackChunkName: "confirm" */ './confirm'),
+  loading: () => null,
+  modules: ['confirm']
 })
 
 export default () => (
@@ -110,8 +116,9 @@ export default () => (
     <Route exact path="/signed-out" component={SignedOut} />
     <Route exact path="/profile/:id" component={Profile} />
     <Route exact path="/profile-deleted" component={ProfileDeleted} />
-    <Route exact path="/signed" component={Signed} />
-    <UnauthenticatedRoute exact path="/signup" component={Signup} />
+    <Route exact path="/signup" component={Signup} />
+    <Route exact path="/reset" component={Reset} />
+    <Route exact path="/confirm" component={Confirm} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
     <AuthenticatedRoute exact path="/signout" component={Signout} />
