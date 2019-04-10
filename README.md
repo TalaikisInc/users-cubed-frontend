@@ -8,10 +8,10 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* read confirmation tokens
 * profile edit/ delete
 * login
 * dashboard
+* avatars (+backend)
 
 ## Technologies
 
