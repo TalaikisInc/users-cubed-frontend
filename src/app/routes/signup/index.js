@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react'
+import isemail from 'isemail'
+import { Link } from 'react-router-dom'
 
 import Page from '../../components/page'
 import Error from '../../components/error'
@@ -17,7 +19,7 @@ class Signup extends PureComponent {
     const email = target[0].value
     const password = target[1].value
     const tosAgreement = target[3].value === 'true'
-    if (email && password && tosAgreement) {
+    if (isemail.validate(email) && password && password.length > 11 && tosAgreement) {
       api({ action: 'USER_CREATE', email: email, password: password, tosAgreement: tosAgreement }, (res) => {
         if (res && res.error) {
           this.props.history.push({
@@ -47,7 +49,7 @@ class Signup extends PureComponent {
     return (
       <Page title="Signup" description={DESCRIPTIONS.signup} path="/signup">
         { location.state && location.state.error ? <Error msg={location.state.error}/> : null }
-        { location.state && location.state.done ? <Message msg='Account registered, please check your email.' />
+        { location.state && location.state.done ? <Message>Account is registered, please check your email and <Link to="/confirm">confirm</Link> your account</Message>
           : <SignupForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>

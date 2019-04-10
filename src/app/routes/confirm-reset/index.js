@@ -4,31 +4,12 @@ import { Link } from 'react-router-dom'
 import Page from '../../components/page'
 import Error from '../../components/error'
 import Message from '../../components/message'
-import ConfirmForm from '../../components/confirm-form'
+import ConfirmResetForm from '../../components/confirmreset-form'
 import { DESCRIPTIONS } from '../../../config'
 import api from '../../utils/api'
 
-class Confirm extends PureComponent {
-  state = { loading: false, token: null }
-
-  componentWillMount () {
-    const token = this.props.match.params.token
-    if (token && token.length === 64) {
-      api({ action: 'CONFIRM', token: token }, (res) => {
-        if (res && res.error) {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { error: res.error }
-          })
-        } else if (res && res.status === 'OK.') {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { done: true, error: false }
-          })
-        }
-      })
-    }
-  }
+class ConfirmReset extends PureComponent {
+  state = { loading: false }
 
   submit = (e) => {
     e.preventDefault()
@@ -63,14 +44,14 @@ class Confirm extends PureComponent {
     const { location } = this.props
 
     return (
-      <Page title="Confirm" description={DESCRIPTIONS.confirm} path="/confirm">
+      <Page title="Confirm Password Reset" description={DESCRIPTIONS.confirmreset} path="/confirm-reset">
         { location.state && location.state.error ? <Error msg={location.state.error}/> : null }
-        { location.state && location.state.done ? <Message>Account confirmed, you can now <Link to="/signin">login</Link>.</Message>
-          : <ConfirmForm handleSubmit={this.submit} loading={loading} />
+        { location.state && location.state.done ? <Message>Password reset confirmed, your new password is emailed to you. Please check email and <Link to="/signin">login</Link>.</Message>
+          : <ConfirmResetForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
     )
   }
 }
 
-export default Confirm
+export default ConfirmReset

@@ -9,7 +9,7 @@ import { isServer } from '../store'
 import Routes from './routes'
 import Header from './components/header'
 import CubedFooter from './components/footer'
-import { TITLE } from '../config'
+import { COMPANY } from '../config'
 
 class App extends PureComponent {
   componentWillMount () {
@@ -27,7 +27,7 @@ class App extends PureComponent {
             <Routes />
           </Container>
         </Section>
-        <CubedFooter company={TITLE} />
+        <CubedFooter company={COMPANY} />
       </Fragment>
     )
   }

@@ -1,10 +1,12 @@
 import React from 'react'
 
 import Page from '../../components/page'
+import { DESCRIPTIONS } from '../../../config'
+import Error from '../../components/error'
 
-const SignedOut = () => (
-  <Page title="About" description="This is about really cool stuff." path="/privacy-policy">
-    <p>What we're all about</p>
+const SignedOut = ({ location }) => (
+  <Page title="Signed Out" description={DESCRIPTIONS.signedOut} path="/signed-out">
+    { location.state && location.state.error ? <Error msg={location.state.error}/> : <p>You have signed out.</p> }
   </Page>
 )
 

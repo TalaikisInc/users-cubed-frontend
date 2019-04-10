@@ -69,18 +69,6 @@ const Signin = Loadable({
   modules: ['signin']
 })
 
-const Signout = Loadable({
-  loader: () => import(/* webpackChunkName: "signout" */ './signout'),
-  loading: () => null,
-  modules: ['signout']
-})
-
-const Profile = Loadable({
-  loader: () => import(/* webpackChunkName: "profile" */ './profile'),
-  loading: () => null,
-  modules: ['profile']
-})
-
 const ProfileEdit = Loadable({
   loader: () => import(/* webpackChunkName: "profile-edit" */ './profile-edit'),
   loading: () => null,
@@ -105,6 +93,12 @@ const Confirm = Loadable({
   modules: ['confirm']
 })
 
+const ConfirmReset = Loadable({
+  loader: () => import(/* webpackChunkName: "confirm-reset" */ './confirm-reset'),
+  loading: () => null,
+  modules: ['confirm-reset']
+})
+
 export default () => (
   <Switch>
     <Route exact path="/" component={withTracker(Homepage, { userID: GA })} />
@@ -113,15 +107,17 @@ export default () => (
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
     <Route exact path="/terms-and-conditions" component={TermsAndConditions} />
     <Route exact path="/disclaimer" component={Disclaimer} />
-    <Route exact path="/signed-out" component={SignedOut} />
-    <Route exact path="/profile/:id" component={Profile} />
-    <Route exact path="/profile-deleted" component={ProfileDeleted} />
+
     <Route exact path="/signup" component={Signup} />
+    <Route exact path="/signed-out" component={SignedOut} />
+    <Route exact path="/profile-deleted" component={ProfileDeleted} />
     <Route exact path="/reset" component={Reset} />
     <Route exact path="/confirm" component={Confirm} />
+    <Route exact path="/confirm/:token" component={Confirm} />
+    <Route exact path="/confirm-reset" component={ConfirmReset} />
+    <Route exact path="/confirm-reset/:token" component={ConfirmReset} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
-    <AuthenticatedRoute exact path="/signout" component={Signout} />
     <AuthenticatedRoute exact path="/profile-edit" component={ProfileEdit} />
     <Route component={NotFound} />
   </Switch>

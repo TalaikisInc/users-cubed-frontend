@@ -1,4 +1,4 @@
-import { join, resolve } from 'path'
+import { resolve } from 'path'
 import { json, urlencoded } from 'body-parser'
 import compression from 'compression'
 import express from 'express'
@@ -12,7 +12,7 @@ const app = express()
 const PORT = 3000
 const accessLogStream = rfs('access.log', {
   interval: '1d',
-  path: join(__dirname, '../.logs')
+  path: resolve(__dirname, '../.logs')
 })
 
 app.use(compression())

@@ -8,9 +8,9 @@ import Form from '../form'
 const validate = (values) => {
   const errors = {}
   if (!values.token) {
-    errors.token = 'Account confirmation token is required'
+    errors.token = 'Password reset token is required'
   } else if (values.token.length !== 64) {
-    errors.token = 'Invalid account confirmation token'
+    errors.token = 'Invalid password reset token'
   }
 
   return errors
@@ -21,7 +21,7 @@ const warn = (values) => {
   return warnings
 }
 
-const ConfirmForm = (props) => {
+const ConfirmResetForm = (props) => {
   const { handleSubmit, loading } = props
 
   return (
@@ -32,4 +32,4 @@ const ConfirmForm = (props) => {
   )
 }
 
-export default reduxForm({ form: 'confirm', validate, warn })(ConfirmForm)
+export default reduxForm({ form: 'confirmReset', validate, warn })(ConfirmResetForm)

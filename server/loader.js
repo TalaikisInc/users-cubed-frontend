@@ -33,18 +33,16 @@ export default (req, res) => {
     const modules = []
 
     frontloadServerRender(() => {
-      renderToString(
-        <Loadable.Capture report={(m) => modules.push(m)}>
-          <Provider store={store}>
-            <StaticRouter location={req.url} context={context}>
-              <Frontload isServer={true}>
-                <App />
-              </Frontload>
-            </StaticRouter>
-          </Provider>
-        </Loadable.Capture>
-      )
-    }).then(routeMarkup => {
+      renderToString(<Loadable.Capture report={(m) => modules.push(m)}>
+        <Provider store={store}>
+          <StaticRouter location={req.url} context={context}>
+            <Frontload isServer={true}>
+              <App />
+            </Frontload>
+          </StaticRouter>
+        </Provider>
+      </Loadable.Capture>)
+    }).then((routeMarkup) => {
       if (context.url) {
         res.writeHead(302, { Location: context.url })
         res.end()

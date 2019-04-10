@@ -6,6 +6,13 @@ Work in progress.
 
 Fully featured React.js SSR user management system (frontend).
 
+TODO:
+
+* read confirmation tokens
+* profile edit/ delete
+* login
+* dashboard
+
 ## Technologies
 
 * [Users Cubed S3](https://github.com/TalaikisInc/users-cubed-s3)

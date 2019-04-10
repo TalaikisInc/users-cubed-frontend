@@ -2,16 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Notification, Button } from 'react-bulma-components'
 
-const Message = ({ msg }) => (
-  msg.length > 0 ? <Notification color="success">
-    { msg }
+const Message = ({ children }) => (
+  children ? <Notification color="success">
+    { children }
     <Button remove />
   </Notification>
     : null
 )
 
 Error.propTypes = {
-  msg: PropTypes.string.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]).isRequired
 }
 
 export default Message
