@@ -1,5 +1,7 @@
+const PROD = process.env.NODE_ENV === 'produciton'
 const { resolve, basename } = require('path')
-require('dotenv').config({ path: resolve(__dirname, '../.env') })
+const env = PROD ? resolve(__dirname, '../.env') : resolve(__dirname, '../.env.sample')
+require('dotenv').config({ path: env })
 const { strictEqual } = require('assert')
 const { sync } = require('md5-file')
 const ignoreStyles = require('ignore-styles')
