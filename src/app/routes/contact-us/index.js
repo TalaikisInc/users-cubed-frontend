@@ -7,6 +7,7 @@ import Message from '../../components/message'
 import ContactForm from '../../components/contact-form'
 import { DESCRIPTIONS } from '../../../config'
 import contactApi from '../../utils/contact'
+import { t, setLocale } from '../../translations'
 
 class ContactUs extends PureComponent {
   state = { loading: false }

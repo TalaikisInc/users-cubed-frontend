@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Page from '../../components/page'
+import { t, setLocale } from '../../translations'
 
 const ProfileEdit = ({ currentUser }) => (
   <Page title="Dashboard" noCrawl>

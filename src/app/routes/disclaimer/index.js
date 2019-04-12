@@ -2,6 +2,7 @@ import React from 'react'
 
 import Page from '../../components/page'
 import { COMPANY, UPDATE_FREQUENCY, DESCRIPTIONS } from '../../../config'
+import { t, setLocale } from '../../translations'
 
 const Disclaimer = () => (
   <Page title="Disclaimer" description={DESCRIPTIONS.disclaimer} path="/disclaimer">

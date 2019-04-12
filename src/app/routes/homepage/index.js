@@ -2,6 +2,7 @@ import React from 'react'
 
 import Page from '../../components/page'
 import { DESCRIPTIONS } from '../../../config'
+import { t, setLocale } from '../../translations'
 
 const Homepage = () => (
   <Page title="Homepage" description={DESCRIPTIONS.homepage} path="">

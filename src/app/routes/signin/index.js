@@ -8,6 +8,7 @@ import { setCurrentUser } from '../../../modules/auth'
 import SigninForm from '../../components/signin-form'
 import { DESCRIPTIONS } from '../../../config'
 import api from '../../utils/api'
+import { t, setLocale } from '../../translations'
 
 class Signin extends PureComponent {
   state = { loading: false }

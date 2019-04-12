@@ -3,6 +3,7 @@ import React from 'react'
 import Page from '../../components/page'
 
 import { DESCRIPTIONS, COMPANY, URL, DPM_EMAIL } from '../../../config'
+import { t, setLocale } from '../../translations'
 
 const PrivacyPolicy = () => (
   <Page title="Privacy Policy" description={DESCRIPTIONS.privacyPolicy} path="/privacy-policy">

@@ -5,7 +5,7 @@ import { Container, Content, Hero, Footer, Columns, Navbar } from 'react-bulma-c
 
 import SelectLanguage from '../select-language'
 
-const CubedFooter = ({ company }) => {
+const CubedFooter = ({ company, ...rest }) => {
   return (
     <Hero.Footer>
       <Footer>
@@ -29,7 +29,7 @@ const CubedFooter = ({ company }) => {
             <Columns.Column size={3}>
               <Link to="/contact-us"><strong>Contact Us</strong></Link>
               <Navbar.Item>
-                <SelectLanguage />
+                <SelectLanguage {...rest}/>
               </Navbar.Item>
             </Columns.Column>
           </Columns>
@@ -45,7 +45,8 @@ const CubedFooter = ({ company }) => {
 }
 
 CubedFooter.propTypes = {
-  company: PropTypes.string.isRequired
+  company: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
 export default CubedFooter

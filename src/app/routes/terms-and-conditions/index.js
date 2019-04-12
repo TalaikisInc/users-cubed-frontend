@@ -3,6 +3,7 @@ import React from 'react'
 import Page from '../../components/page'
 
 import { DESCRIPTIONS, COMPANY, COMPANY_ADDRESS, URL, COMPANY_EMAIL, API_URL } from '../../../config'
+import { t, setLocale } from '../../translations'
 
 const ToS = () => (
   <Page title="Terms and Conditions" description={DESCRIPTIONS.ToS} path="/terms-and-conditions">

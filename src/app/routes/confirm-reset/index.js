@@ -7,6 +7,7 @@ import Message from '../../components/message'
 import ConfirmResetForm from '../../components/confirmreset-form'
 import { DESCRIPTIONS } from '../../../config'
 import api from '../../utils/api'
+import { t, setLocale } from '../../translations'
 
 class ConfirmReset extends PureComponent {
   state = { loading: false }

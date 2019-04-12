@@ -8,6 +8,7 @@ import Message from '../../components/message'
 import ResetForm from '../../components/reset-form'
 import { DESCRIPTIONS } from '../../../config'
 import api from '../../utils/api'
+import { t, setLocale } from '../../translations'
 
 class Reset extends PureComponent {
   state = { loading: false }

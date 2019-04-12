@@ -103,22 +103,37 @@ export default () => (
   <Switch>
     <Route exact path="/" component={withTracker(Homepage, { userID: GA })} />
     <Route exact path="/about" component={About} />
+    <Route exact path="/about/:locale" component={About} />
     <Route exact path="/contact-us" component={ContactUs} />
+    <Route exact path="/contact-us/:locale" component={ContactUs} />
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+    <Route exact path="/privacy-policy/:locale" component={PrivacyPolicy} />
     <Route exact path="/terms-and-conditions" component={TermsAndConditions} />
+    <Route exact path="/terms-and-conditions/:locale" component={TermsAndConditions} />
     <Route exact path="/disclaimer" component={Disclaimer} />
-
+    <Route exact path="/disclaimer/:locale" component={Disclaimer} />
     <Route exact path="/signup" component={Signup} />
+    <Route exact path="/signup/:locale" component={Signup} />
     <Route exact path="/signed-out" component={SignedOut} />
+    <Route exact path="/signed-out/:locale" component={SignedOut} />
     <Route exact path="/profile-deleted" component={ProfileDeleted} />
+    <Route exact path="/profile-deleted/:locale" component={ProfileDeleted} />
     <Route exact path="/reset" component={Reset} />
+    <Route exact path="/reset/:locale" component={Reset} />
     <Route exact path="/confirm" component={Confirm} />
+    <Route exact path="/confirm/:locale" component={Confirm} />
     <Route exact path="/confirm/:token" component={Confirm} />
+    <Route exact path="/confirm/:token/:locale" component={Confirm} />
     <Route exact path="/confirm-reset" component={ConfirmReset} />
+    <Route exact path="/confirm-reset/:locale" component={ConfirmReset} />
     <Route exact path="/confirm-reset/:token" component={ConfirmReset} />
+    <Route exact path="/confirm-reset/:token/:locale" component={ConfirmReset} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />
+    <UnauthenticatedRoute exact path="/signin/:locale" component={Signin} />
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
+    <AuthenticatedRoute exact path="/dashboard/:locale" component={Dashboard} />
     <AuthenticatedRoute exact path="/profile-edit" component={ProfileEdit} />
+    <AuthenticatedRoute exact path="/profile-edit/:locale" component={ProfileEdit} />
     <Route component={NotFound} />
   </Switch>
 )

@@ -3,6 +3,7 @@ import React from 'react'
 import Page from '../../components/page'
 import { DESCRIPTIONS } from '../../../config'
 import Error from '../../components/error'
+import { t, setLocale } from '../../translations'
 
 const SignedOut = ({ location }) => (
   <Page title="Signed Out" description={DESCRIPTIONS.signedOut} path="/signed-out">

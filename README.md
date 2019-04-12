@@ -12,7 +12,6 @@ TODO:
 * login
 * dashboard
 * social login (+backend part)
-* internationalization
 
 ## Technologies
 

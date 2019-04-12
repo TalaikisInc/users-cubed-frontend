@@ -8,6 +8,7 @@ import Message from '../../components/message'
 import SignupForm from '../../components/signup-form'
 import { DESCRIPTIONS } from '../../../config'
 import api from '../../utils/api'
+import { t, setLocale } from '../../translations'
 
 class Signup extends PureComponent {
   state = { loading: false }

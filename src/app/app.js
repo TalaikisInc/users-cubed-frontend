@@ -27,7 +27,7 @@ class App extends PureComponent {
             <Routes />
           </Container>
         </Section>
-        <CubedFooter company={COMPANY} />
+        <CubedFooter company={COMPANY} {...this.props} />
       </Fragment>
     )
   }

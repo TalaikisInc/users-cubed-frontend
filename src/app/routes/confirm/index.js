@@ -7,6 +7,7 @@ import Message from '../../components/message'
 import ConfirmForm from '../../components/confirm-form'
 import { DESCRIPTIONS } from '../../../config'
 import api from '../../utils/api'
+import { t, setLocale } from '../../translations'
 
 class Confirm extends PureComponent {
   state = { loading: false, token: null }
