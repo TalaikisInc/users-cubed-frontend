@@ -21,7 +21,7 @@ class App extends PureComponent {
   render () {
     return (
       <Fragment>
-        <Header isAuthenticated={this.props.isAuthenticated} current={this.props.location.pathname}/>
+        <Header isAuthenticated={this.props.isAuthenticated} current={this.props.location.pathname} />
         <Section>
           <Container>
             <Routes />

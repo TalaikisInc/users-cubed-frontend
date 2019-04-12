@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { Container, Content, Hero, Footer, Columns, Navbar } from 'react-bulma-components'
 
-import { Container, Content, Hero, Footer, Columns } from 'react-bulma-components'
+import SelectLanguage from '../select-language'
 
 const CubedFooter = ({ company }) => {
   return (
@@ -27,6 +28,9 @@ const CubedFooter = ({ company }) => {
             </Columns.Column>
             <Columns.Column size={3}>
               <Link to="/contact-us"><strong>Contact Us</strong></Link>
+              <Navbar.Item>
+                <SelectLanguage />
+              </Navbar.Item>
             </Columns.Column>
           </Columns>
           <Content style={{ textAlign: 'center' }}>

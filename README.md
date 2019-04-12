@@ -11,13 +11,14 @@ TODO:
 * profile edit/ delete
 * login
 * dashboard
-* avatars (+backend)
+* social login (+backend part)
+* internationalization
 
 ## Technologies
 
 * [Users Cubed S3](https://github.com/TalaikisInc/users-cubed-s3)
 * [Contact us service](https://github.com/TalaikisInc/email_service)
-* [Upload service](https://github.com/TalaikisInc/upload-service)
+* [Upload S3](https://github.com/TalaikisInc/upload-service-s3)
 * [CRA-SSR](https://github.com/cereallarceny/cra-ssr)
 * [React](https://github.com/facebook/react)
 * [Create React App](https://github.com/facebook/create-react-app)

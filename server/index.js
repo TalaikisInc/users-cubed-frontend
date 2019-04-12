@@ -9,6 +9,7 @@ const register = ignoreStyles.default
 const extensions = ['.gif', '.jpeg', '.jpg', '.png', '.svg']
 
 strictEqual(typeof process.env.CONTACT_API_KEY, 'string', 'We need contact us API key')
+strictEqual(typeof process.env.UPLOAD_API_KEY, 'string', 'We need upload API key')
 
 register(ignoreStyles.DEFAULT_EXTENSIONS, (mod, filename) => {
   if (!extensions.find((f) => filename.endsWith(f))) {

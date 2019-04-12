@@ -30,7 +30,8 @@ const Header = ({ isAuthenticated, current }) => (
 
 Header.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  current: PropTypes.string.isRequired
+  current: PropTypes.string.isRequired,
+  setLocale: PropTypes.func.isRequired
 }
 
 export default Header
