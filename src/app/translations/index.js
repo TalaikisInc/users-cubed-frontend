@@ -12,4 +12,6 @@ export const setLocale = (loc) => {
 
 fallback('en')
 
+export const locales = ['en', 'fr']
+
 export { t }

@@ -1,0 +1,15 @@
+12/Apr/2019:19:25:48 +0000 GET / 200 59.453 ms - ::1 - -
+12/Apr/2019:19:25:48 +0000 GET /static/css/main.29dac99f.chunk.css 200 8.722 ms http://localhost:3000/ ::1 - -
+12/Apr/2019:19:25:49 +0000 GET /static/js/homepage.1aae7501.chunk.js 200 58.163 ms http://localhost:3000/ ::1 - -
+12/Apr/2019:19:25:49 +0000 GET /static/js/main.88b41605.chunk.js 200 60.823 ms http://localhost:3000/ ::1 - -
+12/Apr/2019:19:25:49 +0000 GET /static/js/19.dba60099.chunk.js 200 48.434 ms http://localhost:3000/ ::1 - -
+12/Apr/2019:19:25:49 +0000 GET /static/media/logo.86c22e8a.svg 200 23.240 ms http://localhost:3000/ ::1 - -
+12/Apr/2019:19:25:49 +0000 GET /assets/icons/android-chrome-192x192.png 200 18.308 ms http://localhost:3000/ ::1 - -
+12/Apr/2019:19:25:52 +0000 GET /static/js/about.b1a6a326.chunk.js 200 1.181 ms http://localhost:3000/about ::1 - -
+12/Apr/2019:19:26:03 +0000 GET /about/fr 200 12.610 ms - ::1 - -
+12/Apr/2019:19:26:03 +0000 GET /static/css/main.29dac99f.chunk.css 304 2.030 ms http://localhost:3000/about/fr ::1 - -
+12/Apr/2019:19:26:03 +0000 GET /static/js/19.dba60099.chunk.js 304 1.774 ms http://localhost:3000/about/fr ::1 - -
+12/Apr/2019:19:26:03 +0000 GET /static/js/about.b1a6a326.chunk.js 304 1.760 ms http://localhost:3000/about/fr ::1 - -
+12/Apr/2019:19:26:03 +0000 GET /static/js/main.88b41605.chunk.js 304 1.726 ms http://localhost:3000/about/fr ::1 - -
+12/Apr/2019:19:26:03 +0000 GET /static/media/logo.86c22e8a.svg 304 0.490 ms http://localhost:3000/about/fr ::1 - -
+12/Apr/2019:19:26:03 +0000 GET /assets/icons/android-chrome-192x192.png 200 11.866 ms http://localhost:3000/about/fr ::1 - -
