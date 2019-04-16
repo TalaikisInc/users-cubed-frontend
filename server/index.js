@@ -21,6 +21,7 @@ register(ignoreStyles.DEFAULT_EXTENSIONS, (mod, filename) => {
   }
 })
 
+require('@babel/polyfill')
 require('@babel/register')({
   ignore: [/\/(build|node_modules)\//],
   presets: ['@babel/preset-env', '@babel/preset-react'],
@@ -32,7 +33,5 @@ require('@babel/register')({
     'react-loadable/babel'
   ]
 })
-
-require('@babel/polyfill')
 
 require('./server')

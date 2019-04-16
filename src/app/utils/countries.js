@@ -1,4 +1,4 @@
-export default = {
+export default {
   'af': 'Afghanistan',
   'ax': 'Åland Islands',
   'al': 'Albania',

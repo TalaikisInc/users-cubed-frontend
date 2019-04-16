@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import { COOKIE_ID } from '../config'
 import api from '../app/utils/api'
 import contactApi from '../app/utils/contact'
+import secureApi from '../app/utils/secure'
 
 export const AUTHENTICATE = 'auth/AUTHENTICATE'
 export const SET_CURRENT_USER = 'auth/SET_CURRENT_USER'
@@ -35,33 +36,60 @@ export default (state = initialState, action) => {
   }
 }
 
-export const getUser = () => (dispatch) =>
-  new Promise(resolve => {
-    let userFromCookie = Cookies.getJSON(COOKIE_ID)
-
-    if (userFromCookie) {
-      dispatch(signinUser(userFromCookie))
-      resolve(userFromCookie)
-    } else {
-      resolve({})
-    }
-  })
-
-export const signoutUser = () => (dispatch) => 
-  new Promise((resolve) => {
-    dispatch({
-      type: AUTHENTICATE,
-      isAuthenticated: false
+export const getUser = () => {
+  return (dispatch) => {
+    const token = Cookies.getJSON(COOKIE_ID).tokenId
+    secureApi(token, { action: 'USER_GET' }, (res) => {
+      if (res && res.error) {
+        dispatch(error(res.error))
+      } else if (res && res.email) {
+        dispatch(setCurrentUser(res))
+      }
     })
+  }
+}
 
-    dispatch({
-      type: SET_CURRENT_USER,
-      user: {}
+export const editUser = (rest) => {
+  return (dispatch) => {
+    const token = Cookies.getJSON(COOKIE_ID).tokenId
+    secureApi(token, { action: 'USER_EDIT', ...rest }, (res) => {
+      if (res && res.error) {
+        dispatch(error(res.error))
+      } else if (res && res.email) {
+        dispatch(setCurrentUser(res))
+      }
     })
+  }
+}
 
-    Cookies.remove(COOKIE_ID)
-    resolve({})
-  })
+export const deleteUser = () => {
+  return (dispatch) => {
+    const token = Cookies.getJSON(COOKIE_ID).tokenId
+    secureApi(token, { action: 'USER_DESTROY' }, (res) => {
+      if (res && res.error) {
+        dispatch(error(res.error))
+      } else if (res && res.status === 'OK.') {
+        dispatch({ type: AUTHENTICATE, isAuthenticated: false })
+        dispatch(setCurrentUser({}))
+      }
+    })
+  }
+}
+
+export const signoutUser = () => {
+  return (dispatch) => {
+    const tokenId = Cookies.getJSON(COOKIE_ID).tokenId
+    return api({ action: 'TOKEN_DESTROY', tokenId: tokenId }, (res) => {
+      if (res && res.error) {
+        dispatch(error(res.error))
+      } else if (res && res.status === 'OK.') {
+        dispatch({ type: AUTHENTICATE, isAuthenticated: false })
+        dispatch(setCurrentUser({}))
+        Cookies.remove(COOKIE_ID)
+      }
+    })
+  }
+}
 
 const error = (error) => ({
   type: 'ERROR',
@@ -73,7 +101,7 @@ const signupUser = (status) => ({
   payload: status
 })
 
-const signinUser = (userObj) => ({
+const setCurrentUser = (userObj) => ({
   type: 'SET_CURRENT_USER',
   payload: userObj
 })
@@ -117,7 +145,6 @@ export const signin = ({ email, password }) => {
         dispatch(error(res.error))
       } else if (res && res.token) {
         Cookies.set(COOKIE_ID, res)
-        dispatch(signinUser(res))
         dispatch({ type: AUTHENTICATE, isAuthenticated: true })
       }
     })
