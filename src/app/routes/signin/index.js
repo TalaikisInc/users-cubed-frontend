@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { validate } from 'isemail'
 
 import Page from '../../components/page'
-import { setCurrentUser } from '../../../modules/auth'
 import SigninForm from '../../components/signin-form'
+import Error from '../../components/error'
 import { DESCRIPTIONS } from '../../../config'
-import api from '../../utils/api'
+import { signin, setError } from '../../../modules/auth'
 import { t, setLocale } from '../../translations'
 
 class Signin extends PureComponent {
@@ -20,31 +19,37 @@ class Signin extends PureComponent {
     const email = target[0].value
     const password = target[1].value
     if (validate(email) && password && password.length > 11) {
-      api({ action: 'TOKEN_CREATE', email: email, password: password }, (res) => {
-        if (res && res.error) {
-          this.props.history.push({ pathname: '/signin', state: { error: res.error } })
-        } else if (res && res.token) {
-          this.props.setCurrentUser(res)
-          this.props.history.push({ pathname: '/dashboard' })
-        }
-      })
+      this.props.signin({ email, password })
     } else {
-      this.props.history.push({ pathname: '/signin', state: { error: 'Please check the form.' } })
+      this.props.setError(t('check_form'))
     }
     this.setState({ loading: false })
   }
 
   render() {
+    const { loading } = this.state
+    const { error, isAuthenticated, history } = this.props
+    if (isAuthenticated) {
+      history.push({ pathname: '/dashboard' })
+    }
+
     return (
-      <Page title="Signin" description={DESCRIPTIONS.signin} path="/signin">
-        <SigninForm handleSubmit={this.submit} loading={this.state.loading} />
+      <Page title={t('signin')} description={DESCRIPTIONS.signin} path="/signin">
+        { error ? <Error msg={error}/> : null }
+        <SigninForm handleSubmit={this.submit} loading={loading} />
       </Page>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  bindActionCreators({ setCurrentUser }, dispatch)
-}
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+  isAuthenticated: state.auth.isAuthenticated
+})
 
-export default connect(null, mapDispatchToProps)(Signin)
+const mapDispatchToProps = (dispatch) => ({
+  signin: (state) => dispatch(signin(state)),
+  setError: (state) => dispatch(setError(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin)

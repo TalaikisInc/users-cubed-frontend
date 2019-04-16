@@ -6,7 +6,7 @@ import { DESCRIPTIONS, COMPANY, COMPANY_ADDRESS, URL, COMPANY_EMAIL, API_URL } f
 import { t, setLocale } from '../../translations'
 
 const ToS = () => (
-  <Page title="Terms and Conditions" description={DESCRIPTIONS.ToS} path="/terms-and-conditions">
+  <Page title={t('tac')} description={DESCRIPTIONS.ToS} path="/terms-and-conditions">
     This agreement applies as between you, the User of this Web Site and { COMPANY }, the owner(s) of this Web Site. Your agreement to comply with and be bound by these terms and conditions is deemed to occur upon your first use of the Web Site. If you do not agree to be bound by these terms and conditions, you should stop using the Web Site immediately.
     <ol>
       <li><strong>Definitions and Interpretation</strong>. In this Agreement the following terms shall have the following meanings:</li>

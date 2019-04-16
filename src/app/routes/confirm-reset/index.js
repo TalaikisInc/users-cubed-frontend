@@ -6,8 +6,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ConfirmResetForm from '../../components/confirmreset-form'
 import { DESCRIPTIONS } from '../../../config'
-import api from '../../utils/api'
 import { t, setLocale } from '../../translations'
+import { confirmReset, setError } from '../../../modules/auth'
 
 class ConfirmReset extends PureComponent {
   state = { loading: false }
@@ -18,36 +18,21 @@ class ConfirmReset extends PureComponent {
     const { target } = e
     const token = target[0].value
     if (token && token.length === 64) {
-      api({ action: 'CONFIRM', token: token }, (res) => {
-        if (res && res.error) {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { error: res.error }
-          })
-        } else if (res && res.status === 'OK.') {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { done: true, error: false }
-          })
-        }
-      })
+      this.props.confirmReset({ token })
     } else {
-      this.props.history.push({
-        pathname: '/confirm',
-        state: { error: 'Please check the form.' }
-      })
+      this.props.setError(t('check_form'))
     }
     this.setState({ loading: false })
   }
 
   render () {
     const { loading } = this.state
-    const { location } = this.props
+    const { error, status } = this.props
 
     return (
-      <Page title="Confirm Password Reset" description={DESCRIPTIONS.confirmreset} path="/confirm-reset">
-        { location.state && location.state.error ? <Error msg={location.state.error}/> : null }
-        { location.state && location.state.done ? <Message>Password reset confirmed, your new password is emailed to you. Please check email and <Link to="/signin">login</Link>.</Message>
+      <Page title={t('confirm_reset')} description={DESCRIPTIONS.confirmreset} path="/confirm-reset">
+        { error ? <Error msg={error}/> : null }
+        { status ? <Message>{t('reset_confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmResetForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
@@ -55,4 +40,14 @@ class ConfirmReset extends PureComponent {
   }
 }
 
-export default ConfirmReset
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+  status: state.auth.status
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  confirmReset: (state) => dispatch(confirmReset(state)),
+  setError: (state) => dispatch(setError(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmReset)

@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import Page from '../../components/page'
+import { t, setLocale } from '../../translations'
 
 class Dashboard extends PureComponent {
   render () {
     return (
-      <Page title="Dashboard" noCrawl>
+      <Page title={t('dashboard')} noCrawl>
         <p>
           <b>Email:</b> {this.props.currentUser.email}
         </p>

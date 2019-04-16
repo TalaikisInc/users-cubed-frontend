@@ -5,7 +5,7 @@ import Page from '../../components/page'
 import { t, setLocale } from '../../translations'
 
 const ProfileEdit = ({ currentUser }) => (
-  <Page title="Dashboard" noCrawl>
+  <Page title={t('profile_edit')} noCrawl>
     <p>
       <b>Name:</b> {currentUser.firstName}
     </p>

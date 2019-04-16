@@ -6,8 +6,8 @@ import Error from '../../components/error'
 import { t, setLocale } from '../../translations'
 
 const SignedOut = ({ location }) => (
-  <Page title="Signed Out" description={DESCRIPTIONS.signedOut} path="/signed-out">
-    { location.state && location.state.error ? <Error msg={location.state.error}/> : <p>You have signed out.</p> }
+  <Page title={t('signed_out')} description={DESCRIPTIONS.signedOut} path="/signed-out">
+    { location.state && location.state.error ? <Error msg={location.state.error}/> : <p>{t('signed_out_text')}</p> }
   </Page>
 )
 

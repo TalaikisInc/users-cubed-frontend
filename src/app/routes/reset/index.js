@@ -7,8 +7,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ResetForm from '../../components/reset-form'
 import { DESCRIPTIONS } from '../../../config'
-import api from '../../utils/api'
 import { t, setLocale } from '../../translations'
+import { reset, setError } from '../../../modules/auth'
 
 class Reset extends PureComponent {
   state = { loading: false }
@@ -19,36 +19,21 @@ class Reset extends PureComponent {
     const { target } = e
     const email = target[0].value
     if (email && isemail.validate(email)) {
-      api({ action: 'RESET_CREATE', email: email }, (res) => {
-        if (res && res.error) {
-          this.props.history.push({
-            pathname: '/reset',
-            state: { error: res.error }
-          })
-        } else if (res && res.status === 'OK.') {
-          this.props.history.push({
-            pathname: '/reset',
-            state: { done: true, error: false }
-          })
-        }
-      })
+      this.props.reset({ email })
     } else {
-      this.props.history.push({
-        pathname: '/reset',
-        state: { error: 'Please check the form.' }
-      })
+      this.props.setError(t('check_form'))
     }
     this.setState({ loading: false })
   }
 
   render () {
     const { loading } = this.state
-    const { location } = this.props
+    const { error, status } = this.props
 
     return (
-      <Page title="Reset Password" description={DESCRIPTIONS.reset} path="/reset">
-        { location.state && location.state.error ? <Error msg={location.state.error}/> : null }
-        { location.state && location.state.done ? <Message>Password is reset. Email asking to <Link to="/confirm-reset">confirm</Link> the password reset is sent to you.</Message>
+      <Page title={t('reset')} description={DESCRIPTIONS.reset} path="/reset">
+        { error ? <Error msg={error}/> : null }
+        { status ? <Message>{t('password_reset')}<Link to="/confirm-reset">{t('confirm')}</Link>{t('reset_sent')}</Message>
           : <ResetForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
@@ -56,4 +41,14 @@ class Reset extends PureComponent {
   }
 }
 
-export default Reset
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+  status: state.auth.status
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  reset: (state) => dispatch(reset(state)),
+  setError: (state) => dispatch(setError(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reset)

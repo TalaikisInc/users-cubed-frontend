@@ -6,8 +6,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ConfirmForm from '../../components/confirm-form'
 import { DESCRIPTIONS } from '../../../config'
-import api from '../../utils/api'
 import { t, setLocale } from '../../translations'
+import { confirm, setError } from '../../../modules/auth'
 
 class Confirm extends PureComponent {
   state = { loading: false, token: null }
@@ -15,19 +15,7 @@ class Confirm extends PureComponent {
   componentWillMount () {
     const token = this.props.match.params.token
     if (token && token.length === 64) {
-      api({ action: 'CONFIRM', token: token }, (res) => {
-        if (res && res.error) {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { error: res.error }
-          })
-        } else if (res && res.status === 'OK.') {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { done: true, error: false }
-          })
-        }
-      })
+      this.props.confirm(token)
     }
   }
 
@@ -37,36 +25,21 @@ class Confirm extends PureComponent {
     const { target } = e
     const token = target[0].value
     if (token && token.length === 64) {
-      api({ action: 'CONFIRM', token: token }, (res) => {
-        if (res && res.error) {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { error: res.error }
-          })
-        } else if (res && res.status === 'OK.') {
-          this.props.history.push({
-            pathname: '/confirm',
-            state: { done: true, error: false }
-          })
-        }
-      })
+      this.props.confirm({ token })
     } else {
-      this.props.history.push({
-        pathname: '/confirm',
-        state: { error: 'Please check the form.' }
-      })
+      this.props.setError(t('check_form'))
     }
     this.setState({ loading: false })
   }
 
   render () {
     const { loading } = this.state
-    const { location } = this.props
+    const { error, status } = this.props
 
     return (
-      <Page title="Confirm" description={DESCRIPTIONS.confirm} path="/confirm">
-        { location.state && location.state.error ? <Error msg={location.state.error}/> : null }
-        { location.state && location.state.done ? <Message>Account confirmed, you can now <Link to="/signin">login</Link>.</Message>
+      <Page title={t('confirm_title')} description={DESCRIPTIONS.confirm} path="/confirm">
+        { error ? <Error msg={error}/> : null }
+        { status ? <Message>{t('confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
@@ -74,4 +47,14 @@ class Confirm extends PureComponent {
   }
 }
 
-export default Confirm
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+  status: state.auth.status
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  confirm: (state) => dispatch(confirm(state)),
+  setError: (state) => dispatch(setError(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Confirm)

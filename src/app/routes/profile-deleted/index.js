@@ -5,8 +5,8 @@ import { DESCRIPTIONS } from '../../../config'
 import { t, setLocale } from '../../translations'
 
 const ProfileDeleted = () => (
-  <Page title="Profile is Deleted" description={DESCRIPTIONS.profile.deleted} path="/profile-deleted">
-    <p>Profile is deleted.</p>
+  <Page title={t('profile_deleted')} description={DESCRIPTIONS.profile.deleted} path="/profile-deleted">
+    <p>{t('profile_deleted_text')}</p>
   </Page>
 )
 

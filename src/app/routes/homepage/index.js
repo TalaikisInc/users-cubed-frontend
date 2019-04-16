@@ -5,7 +5,7 @@ import { DESCRIPTIONS } from '../../../config'
 import { t, setLocale } from '../../translations'
 
 const Homepage = () => (
-  <Page title="Homepage" description={DESCRIPTIONS.homepage} path="">
+  <Page title={t('home')} description={DESCRIPTIONS.homepage} path="">
     <p>This is homepage.</p>
   </Page>
 )

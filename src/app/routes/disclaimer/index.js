@@ -5,7 +5,7 @@ import { COMPANY, UPDATE_FREQUENCY, DESCRIPTIONS } from '../../../config'
 import { t, setLocale } from '../../translations'
 
 const Disclaimer = () => (
-  <Page title="Disclaimer" description={DESCRIPTIONS.disclaimer} path="/disclaimer">
+  <Page title={t('disclaimer')} description={DESCRIPTIONS.disclaimer} path="/disclaimer">
     <ol>
       <ol>
         <li>{ COMPANY } makes no warranty or representation that this website will meet your requirements, that it will be of satisfactory quality, that it will be fit for a particular purpose, that it will not infringe the rights of third parties, that it will be compatible with all systems, that it will be secure and that all information provided will be accurate. We make no guarantee of any specific results from the use of this website.</li>
