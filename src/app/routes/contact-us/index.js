@@ -13,6 +13,13 @@ import { contact, setError } from '../../../modules/auth'
 class ContactUs extends PureComponent {
   state = { loading: false }
 
+  componentWillMount () {
+    const { params } = this.props.match
+    if (params.locale) {
+      setLocale(params.locale)
+    }
+  }
+
   submit = (e) => {
     e.preventDefault()
     this.setState({ loading: true })
@@ -30,12 +37,12 @@ class ContactUs extends PureComponent {
 
   render () {
     const { loading } = this.state
-    const { error, status } = this.props
+    const { error, contactStatus } = this.props
 
     return (
       <Page title={t('contact')} description={DESCRIPTIONS.contactUs} path="/contact-us">
         { error ? <Error msg={error}/> : null }
-        { status ? <Message>{t('received')}</Message>
+        { contactStatus ? <Message>{t('received')}</Message>
           : <ContactForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
@@ -45,7 +52,7 @@ class ContactUs extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  status: state.auth.status
+  contactStatus: state.auth.contactStatus
 })
 
 const mapDispatchToProps = (dispatch) => ({

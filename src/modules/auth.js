@@ -22,8 +22,14 @@ export default (state = initialState, action) => {
       return { ...state, signupStatus: action.payload }
     case 'ERROR':
       return { ...state, error: action.payload }
-    case 'STATUS':
-      return { ...state, status: action.payload }
+    case 'CONFIRM_STATUS':
+      return { ...state, confirmStatus: action.payload }
+    case 'CONFIRM_RESET_STATUS':
+      return { ...state, confirmResetStatus: action.payload }
+    case 'RESET_STATUS':
+      return { ...state, resetStatus: action.payload }
+    case 'CONTACT_STATUS':
+      return { ...state, contactStatus: action.payload }
     default:
       return state
   }
@@ -72,8 +78,23 @@ const signinUser = (userObj) => ({
   payload: userObj
 })
 
-const setStatus = (status) => ({
-  type: 'STATUS',
+const setConfirmStatus = (status) => ({
+  type: 'CONFIRM_STATUS',
+  payload: status
+})
+
+const setResetStatus = (status) => ({
+  type: 'RESET_STATUS',
+  payload: status
+})
+
+const setResetConfirmStatus = (status) => ({
+  type: 'CONFIRM_RESET_STATUS',
+  payload: status
+})
+
+const setContactStatus = (status) => ({
+  type: 'CONTACT_STATUS',
   payload: status
 })
 
@@ -115,7 +136,7 @@ export const confirm = ({ token }) => {
       if (res && res.error) {
         dispatch(error(res.error))
       } else if (res && res.status === 'OK.') {
-        dispatch(setStatus(true))
+        dispatch(setConfirmStatus(true))
       }
     })
   }
@@ -127,7 +148,7 @@ export const reset = ({ email }) => {
       if (res && res.error) {
         dispatch(error(res.error))
       } else if (res && res.status === 'OK.') {
-        dispatch(setStatus(true))
+        dispatch(setResetStatus(true))
       }
     })
   }
@@ -139,7 +160,7 @@ export const confirmReset = ({ token }) => {
       if (res && res.error) {
         dispatch(error(res.error))
       } else if (res && res.status === 'OK.') {
-        dispatch(setStatus(true))
+        dispatch(setResetConfirmStatus(true))
       }
     })
   }
@@ -151,7 +172,7 @@ export const contact = ({ name, email, message }) => {
       if (res && res.error) {
         dispatch(error(res.error))
       } else if (res && res.status === 'OK.') {
-        dispatch(setStatus(true))
+        dispatch(setContactStatus(true))
       }
     })
   }

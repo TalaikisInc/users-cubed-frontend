@@ -1,22 +1,33 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { t, setLocale } from '../../translations'
 
-const ProfileEdit = ({ currentUser }) => (
-  <Page title={t('profile_edit')} noCrawl>
-    <p>
-      <b>Name:</b> {currentUser.firstName}
-    </p>
-    <p>
-      <b>Email:</b> {currentUser.email}
-    </p>
-    <p>
-      <b>Password:</b> {currentUser.password}
-    </p>
-  </Page>
-)
+class ProfileEdit extends PureComponent {
+  componentWillMount () {
+    const { params } = this.props.match
+    if (params.locale) {
+      setLocale(params.locale)
+    }
+  }
+
+  render () {
+    return (
+      <Page title={t('profile_edit')} noCrawl>
+        <p>
+          <b>Name:</b> {this.props.currentUser.firstName}
+        </p>
+        <p>
+          <b>Email:</b> {this.props.currentUser.email}
+        </p>
+        <p>
+          <b>Password:</b> {this.props.currentUser.password}
+        </p>
+      </Page>
+    )
+  }
+}
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser

@@ -14,6 +14,13 @@ import { reset, setError } from '../../../modules/auth'
 class Reset extends PureComponent {
   state = { loading: false }
 
+  componentWillMount () {
+    const { params } = this.props.match
+    if (params.locale) {
+      setLocale(params.locale)
+    }
+  }
+
   submit = (e) => {
     e.preventDefault()
     this.setState({ loading: true })
@@ -29,12 +36,12 @@ class Reset extends PureComponent {
 
   render () {
     const { loading } = this.state
-    const { error, status } = this.props
+    const { error, resetStatus } = this.props
 
     return (
       <Page title={t('reset')} description={DESCRIPTIONS.reset} path="/reset">
         { error ? <Error msg={error}/> : null }
-        { status ? <Message>{t('password_reset')}<Link to="/confirm-reset">{t('confirm')}</Link>{t('reset_sent')}</Message>
+        { resetStatus ? <Message>{t('password_reset')}<Link to="/confirm-reset">{t('confirm')}</Link>{t('reset_sent')}</Message>
           : <ResetForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
@@ -44,7 +51,7 @@ class Reset extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  status: state.auth.status
+  resetStatus: state.auth.resetStatus
 })
 
 const mapDispatchToProps = (dispatch) => ({

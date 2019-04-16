@@ -14,6 +14,13 @@ import { signup, setError } from '../../../modules/auth'
 class Signup extends PureComponent {
   state = { loading: false }
 
+  componentWillMount () {
+    const { params } = this.props.match
+    if (params.locale) {
+      setLocale(params.locale)
+    }
+  }
+
   submit = (e) => {
     e.preventDefault()
     this.setState({ loading: true })

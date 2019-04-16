@@ -5,6 +5,13 @@ import Page from '../../components/page'
 import { t, setLocale } from '../../translations'
 
 class Dashboard extends PureComponent {
+  componentWillMount () {
+    const { params } = this.props.match
+    if (params.locale) {
+      setLocale(params.locale)
+    }
+  }
+
   render () {
     return (
       <Page title={t('dashboard')} noCrawl>

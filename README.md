@@ -1,7 +1,5 @@
 # Users Cubed Frontend
 
-Work in progress.
-
 ## Features
 
 Fully featured React.js SSR user management system (frontend).
@@ -9,7 +7,6 @@ Fully featured React.js SSR user management system (frontend).
 TODO:
 
 * profile edit/ delete
-* login
 * dashboard
 * social login (+backend part)
 

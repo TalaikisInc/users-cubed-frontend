@@ -14,9 +14,14 @@ class Confirm extends PureComponent {
   state = { loading: false, token: null }
 
   componentWillMount () {
-    const token = this.props.match.params.token
+    const { params } = this.props.match
+    const token = params.token
     if (token && token.length === 64) {
-      this.props.confirm(token)
+      this.props.confirm({ token })
+    }
+
+    if (params.locale) {
+      setLocale(params.locale)
     }
   }
 
@@ -35,12 +40,12 @@ class Confirm extends PureComponent {
 
   render () {
     const { loading } = this.state
-    const { error, status } = this.props
+    const { error, confirmStatus } = this.props
 
     return (
       <Page title={t('confirm_title')} description={DESCRIPTIONS.confirm} path="/confirm">
         { error ? <Error msg={error}/> : null }
-        { status ? <Message>{t('confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
+        { confirmStatus ? <Message>{t('confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
@@ -50,7 +55,7 @@ class Confirm extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  status: state.auth.status
+  confirmStatus: state.auth.confirmStatus
 })
 
 const mapDispatchToProps = (dispatch) => ({

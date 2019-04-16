@@ -13,6 +13,18 @@ import { confirmReset, setError } from '../../../modules/auth'
 class ConfirmReset extends PureComponent {
   state = { loading: false }
 
+  componentWillMount () {
+    const { params } = this.props.match
+    const token = params.token
+    if (token && token.length === 64) {
+      this.props.confirmReset({ token })
+    }
+
+    if (params.locale) {
+      setLocale(params.locale)
+    }
+  }
+
   submit = (e) => {
     e.preventDefault()
     this.setState({ loading: true })
@@ -28,12 +40,12 @@ class ConfirmReset extends PureComponent {
 
   render () {
     const { loading } = this.state
-    const { error, status } = this.props
+    const { error, confirmResetStatus } = this.props
 
     return (
       <Page title={t('confirm_reset')} description={DESCRIPTIONS.confirmreset} path="/confirm-reset">
         { error ? <Error msg={error}/> : null }
-        { status ? <Message>{t('reset_confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
+        { confirmResetStatus ? <Message>{t('reset_confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmResetForm handleSubmit={this.submit} loading={loading} />
         }
       </Page>
@@ -43,7 +55,7 @@ class ConfirmReset extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  status: state.auth.status
+  confirmResetStatus: state.auth.confirmResetStatus
 })
 
 const mapDispatchToProps = (dispatch) => ({
