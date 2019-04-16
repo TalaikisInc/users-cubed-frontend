@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import Error from '../../components/error'

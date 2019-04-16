@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import isemail from 'isemail'
+import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import Error from '../../components/error'
