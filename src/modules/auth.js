@@ -185,7 +185,7 @@ export const getLanguage = () => {
   return (dispatch) => {
     const cookie = Cookies.getJSON(COOKIE_ID)
     if (cookie && cookie.locale) {
-      dispatch(setLocale(locale))
+      dispatch(setLocale(cookie.locale))
     }
   }
 }
