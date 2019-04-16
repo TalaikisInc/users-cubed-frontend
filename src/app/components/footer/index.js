@@ -45,8 +45,7 @@ const CubedFooter = ({ company, ...rest }) => {
 }
 
 CubedFooter.propTypes = {
-  company: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  company: PropTypes.string.isRequired
 }
 
 export default CubedFooter

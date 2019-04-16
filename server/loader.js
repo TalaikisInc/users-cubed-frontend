@@ -13,6 +13,7 @@ import App from '../src/app/app'
 import manifest from '../build/asset-manifest.json'
 import { setCurrentUser, signoutUser } from '../src/modules/auth'
 import { injectHTML, extractAssets } from './utils'
+import { COOKIE_ID } from '../src/config'
 
 export default (req, res) => {
   readFile(resolve(__dirname, '../build/index.html'), 'utf8', (err, htmlData) => {
@@ -23,8 +24,8 @@ export default (req, res) => {
 
     const { store } = createStore(req.url)
 
-    if ('mywebsite' in req.cookies) {
-      store.dispatch(setCurrentUser(req.cookies.mywebsite))
+    if (COOKIE_ID in req.cookies) {
+      store.dispatch(setCurrentUser(req.cookies[COOKIE_ID]))
     } else {
       store.dispatch(signoutUser())
     }

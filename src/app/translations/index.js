@@ -1,7 +1,7 @@
 import { locale, fallback, set, t } from 'frenchkiss'
 
-import en from './locales/en'
-import fr from './locales/fr'
+import en from './translations/en'
+import fr from './translations/fr'
 
 set('fr', fr)
 set('en', en)

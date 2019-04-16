@@ -9,6 +9,8 @@ TODO:
 * dashboard
 * social login (+backend part)
 * refer system from an API
+* move internationalization to backedn and redux
+* review postcss css cleanup strategy
 
 ## Technologies
 

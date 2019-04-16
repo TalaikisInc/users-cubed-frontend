@@ -15,12 +15,8 @@ class Dashboard extends PureComponent {
   render () {
     return (
       <Page title={t('dashboard')} noCrawl>
-        <p>
-          <b>Email:</b> {this.props.currentUser.email}
-        </p>
-        <p>
-          <b>Password:</b> {this.props.currentUser.password}
-        </p>
+        <p><b>Email:</b> {this.props.currentUser.email}</p>
+        <p><b>First name:</b> {this.props.currentUser.firstName}</p>
       </Page>
     )
   }

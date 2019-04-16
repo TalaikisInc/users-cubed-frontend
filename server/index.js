@@ -4,6 +4,7 @@ const env = PROD ? resolve(__dirname, '../.env') : resolve(__dirname, '../.env.s
 require('dotenv').config({ path: env })
 const { strictEqual } = require('assert')
 const { sync } = require('md5-file')
+const sass = require('node-sass')
 const ignoreStyles = require('ignore-styles')
 const register = ignoreStyles.default
 const extensions = ['.gif', '.jpeg', '.jpg', '.png', '.svg']
@@ -21,6 +22,16 @@ register(ignoreStyles.DEFAULT_EXTENSIONS, (mod, filename) => {
   }
 })
 
+const processSass = (data, filename) => {
+  let result
+
+  result = sass.renderSync({
+    data: data,
+    file: filename
+  }).css
+  return result.toString('utf8')
+}
+
 require('@babel/polyfill')
 require('@babel/register')({
   ignore: [/\/(build|node_modules)\//],
@@ -30,7 +41,15 @@ require('@babel/register')({
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-transform-block-scoping',
     'dynamic-import-node',
-    'react-loadable/babel'
+    'react-loadable/babel',
+    [
+      'babel-plugin-css-modules-transform',
+      {
+        extensions: ['.scss', '.sass'],
+        preprocessCss: processSass,
+        generateScopedName: '[local]__[hash:base64:5]'
+      }
+    ]
   ]
 })
 

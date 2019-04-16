@@ -31,6 +31,8 @@ export default (state = initialState, action) => {
       return { ...state, resetStatus: action.payload }
     case 'CONTACT_STATUS':
       return { ...state, contactStatus: action.payload }
+    case 'LOCALE':
+      return { ...state, locale: action.payload }
     default:
       return state
   }
@@ -38,56 +40,64 @@ export default (state = initialState, action) => {
 
 export const getUser = () => {
   return (dispatch) => {
-    const token = Cookies.getJSON(COOKIE_ID).tokenId
-    secureApi(token, { action: 'USER_GET' }, (res) => {
-      if (res && res.error) {
-        dispatch(error(res.error))
-      } else if (res && res.email) {
-        dispatch(setCurrentUser(res))
-      }
-    })
+    const cookie = Cookies.getJSON(COOKIE_ID)
+    if (cookie && cookie.tokenId) {
+      secureApi(cookie.token, { action: 'USER_GET' }, (res) => {
+        if (res && res.error) {
+          dispatch(error(res.error))
+        } else if (res && res.email) {
+          dispatch(setCurrentUser(res))
+        }
+      })
+    }
   }
 }
 
 export const editUser = (rest) => {
   return (dispatch) => {
-    const token = Cookies.getJSON(COOKIE_ID).tokenId
-    secureApi(token, { action: 'USER_EDIT', ...rest }, (res) => {
-      if (res && res.error) {
-        dispatch(error(res.error))
-      } else if (res && res.email) {
-        dispatch(setCurrentUser(res))
-      }
-    })
+    const cookie = Cookies.getJSON(COOKIE_ID)
+    if (cookie && cookie.tokenId) {
+      secureApi(cookie.token, { action: 'USER_EDIT', ...rest }, (res) => {
+        if (res && res.error) {
+          dispatch(error(res.error))
+        } else if (res && res.email) {
+          dispatch(setCurrentUser(res))
+        }
+      })
+    }
   }
 }
 
 export const deleteUser = () => {
   return (dispatch) => {
-    const token = Cookies.getJSON(COOKIE_ID).tokenId
-    secureApi(token, { action: 'USER_DESTROY' }, (res) => {
-      if (res && res.error) {
-        dispatch(error(res.error))
-      } else if (res && res.status === 'OK.') {
-        dispatch({ type: AUTHENTICATE, isAuthenticated: false })
-        dispatch(setCurrentUser({}))
-      }
-    })
+    const cookie = Cookies.getJSON(COOKIE_ID)
+    if (cookie && cookie.tokenId) {
+      secureApi(cookie.token, { action: 'USER_DESTROY' }, (res) => {
+        if (res && res.error) {
+          dispatch(error(res.error))
+        } else if (res && res.status === 'OK.') {
+          dispatch({ type: AUTHENTICATE, isAuthenticated: false })
+          dispatch(setCurrentUser({}))
+        }
+      })
+    }
   }
 }
 
 export const signoutUser = () => {
   return (dispatch) => {
-    const tokenId = Cookies.getJSON(COOKIE_ID).tokenId
-    return api({ action: 'TOKEN_DESTROY', tokenId: tokenId }, (res) => {
-      if (res && res.error) {
-        dispatch(error(res.error))
-      } else if (res && res.status === 'OK.') {
-        dispatch({ type: AUTHENTICATE, isAuthenticated: false })
-        dispatch(setCurrentUser({}))
-        Cookies.remove(COOKIE_ID)
-      }
-    })
+    const cookie = Cookies.getJSON(COOKIE_ID)
+    if (cookie && cookie.tokenId) {
+      return api({ action: 'TOKEN_DESTROY', tokenId: cookie.tokenId }, (res) => {
+        if (res && res.error) {
+          dispatch(error(res.error))
+        } else if (res && res.status === 'OK.') {
+          dispatch({ type: AUTHENTICATE, isAuthenticated: false })
+          dispatch(setCurrentUser({}))
+          Cookies.remove(COOKIE_ID)
+        }
+      })
+    }
   }
 }
 
@@ -126,6 +136,11 @@ const setContactStatus = (status) => ({
   payload: status
 })
 
+const setLocale = (locale) => ({
+  type: 'LOCALE',
+  payload: locale
+})
+
 export const signup = ({ email, password, tosAgreement }) => {
   return (dispatch) => {
     return api({ action: 'USER_CREATE', email: email, password: password, tosAgreement: tosAgreement }, (res) => {
@@ -154,6 +169,24 @@ export const signin = ({ email, password }) => {
 export const setError = (error) => {
   return (dispatch) => {
     dispatch(error(error))
+  }
+}
+
+export const setLanguage = (locale) => {
+  return (dispatch) => {
+    const userData = Cookies.getJSON(COOKIE_ID)
+    userData['locale'] = locale
+    Cookies.set(COOKIE_ID, userData)
+    dispatch(setLocale(locale))
+  }
+}
+
+export const getLanguage = () => {
+  return (dispatch) => {
+    const cookie = Cookies.getJSON(COOKIE_ID)
+    if (cookie && cookie.locale) {
+      dispatch(setLocale(locale))
+    }
   }
 }
 
