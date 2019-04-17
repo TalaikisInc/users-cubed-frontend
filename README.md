@@ -6,12 +6,9 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* fix autosignout
 * hamburger
 * social login (+backend part)
 * refer system from an API
-* finsih internationalization (+backend part)
-* review postcss css cleanup strategy
 
 ## Technologies
 

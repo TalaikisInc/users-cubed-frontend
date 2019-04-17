@@ -5,20 +5,23 @@ import { Provider } from 'react-redux'
 import Loadable from 'react-loadable'
 import { Frontload } from 'react-frontload'
 import { ConnectedRouter } from 'connected-react-router'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import createStore from './store'
 import App from './app/app'
 import { unregister } from './serviceWorker'
 import './index.css'
-const { store, history } = createStore()
+const { store, history, persistor } = createStore()
 
 const Application = (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Frontload noServerRender={true}>
-        <App />
-      </Frontload>
-    </ConnectedRouter>
+    <PersistGate loading="loading" persistor={persistor}>
+      <ConnectedRouter history={history}>
+        <Frontload noServerRender={true}>
+          <App />
+        </Frontload>
+      </ConnectedRouter>
+    </PersistGate>
   </Provider>
 )
 

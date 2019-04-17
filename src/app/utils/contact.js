@@ -1,11 +1,13 @@
 import fetch from 'isomorphic-unfetch'
 
-import { CONTACT_API_URL, CONTACT_API_KEY } from '../../config'
+import { CONTACT_API_URL, CONTACT_API_KEY, STORAGE_ID } from '../../config'
 
 const contactApi = (name, email, message, done) => {
+  const locale = localStorage.getItem(`${STORAGE_ID}_locale`)
+
   fetch(CONTACT_API_URL, {
     method: 'POST',
-    body: JSON.stringify({ name: name, email: email, msg: message, key: CONTACT_API_KEY }),
+    body: JSON.stringify({ msg: message, key: CONTACT_API_KEY, locale, name, email }),
     headers: {
       'Content-Type': 'application/json'
     }
