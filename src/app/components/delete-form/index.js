@@ -11,13 +11,14 @@ class DeleteForm extends PureComponent {
 
   handleSubmit (e) {
     e.preventDefault()
-    this.setState({ loading: true, modal: false })
+    // @FIXME
+    // this.setState({ loading: true, modal: false })
     this.props.deleteUser()
-    this.setState({ loading: false })
+    // this.setState({ loading: false })
   }
 
   onClick () {
-    this.setState({ modal: false })
+    // this.setState({ modal: false })
   }
 
   render () {
@@ -34,7 +35,7 @@ class DeleteForm extends PureComponent {
               <h4 class="title is-4">Are you sure?</h4>
               <button class="is-large is-danger" onClick={this.handleSubmit} />
             </div>
-            <button class="modal-close is-large" aria-label="close" onClick={this.onClick} />
+            <button class="modal-close is-large" aria-label="close" onClick={() => this.onClick} />
         </div>
         : null }
       </Form>

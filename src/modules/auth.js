@@ -2,18 +2,21 @@ import { STORAGE_ID } from '../config'
 import api from '../app/utils/api'
 import contactApi from '../app/utils/contact'
 import secureApi from '../app/utils/secure'
+import { setLocale } from '../app/translations'
 
 const initialState = {
   isAuthenticated: false,
-  currentUser: {}
+  currentUser: {},
+  error: null,
+  locale: 'en'
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'AUTHENTICATE':
-      return { ...state, isAuthenticated: action.isAuthenticated }
+      return { ...state, isAuthenticated: action.payload }
     case 'SET_CURRENT_USER':
-      return { ...state, currentUser: action.user }
+      return { ...state, currentUser: action.payload }
     case 'SIGNUP':
       return { ...state, signupStatus: action.payload }
     case 'ERROR':
@@ -43,9 +46,9 @@ const signupUser = (status) => ({
   payload: status
 })
 
-const setCurrentUser = (userObj) => ({
+const setCurrentUser = (user) => ({
   type: 'SET_CURRENT_USER',
-  payload: userObj
+  payload: user
 })
 
 const setConfirmStatus = (status) => ({
@@ -68,10 +71,21 @@ const setContactStatus = (status) => ({
   payload: status
 })
 
-const setLocale = (locale) => ({
+const _setLocale = (locale) => ({
   type: 'LOCALE',
   payload: locale
 })
+
+const setSignin = (isAuthenticated) => ({
+  type: 'AUTHENTICATE',
+  payload: isAuthenticated
+})
+
+export const setError = (error) => {
+  return (dispatch) => {
+    dispatch(_error(error))
+  }
+}
 
 export const getUser = () => {
   return (dispatch) => {
@@ -81,7 +95,7 @@ export const getUser = () => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.email) {
-          dispatch({ type: 'AUTHENTICATE', isAuthenticated: true })
+          localStorage.setItem(`${STORAGE_ID}_user`, res)
           dispatch(setCurrentUser(res))
         }
       })
@@ -97,6 +111,7 @@ export const editUser = (rest) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.email) {
+          localStorage.setItem(`${STORAGE_ID}_user`, res)
           dispatch(setCurrentUser(res))
         }
       })
@@ -112,7 +127,8 @@ export const deleteUser = () => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
-          dispatch({ type: 'AUTHENTICATE', isAuthenticated: false })
+          localStorage.removeItem(`${STORAGE_ID}_user`)
+          localStorage.removeItem(`${STORAGE_ID}_token`)
           dispatch(setCurrentUser({}))
         }
       })
@@ -128,9 +144,8 @@ export const signoutUser = () => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
-          dispatch({ type: 'AUTHENTICATE', isAuthenticated: false })
-          dispatch(setCurrentUser({}))
           localStorage.removeItem(`${STORAGE_ID}_token`)
+          dispatch(setCurrentUser({}))
         }
       })
     }
@@ -156,22 +171,19 @@ export const signin = ({ email, password }) => {
         dispatch(_error(res.error))
       } else if (res && res.token) {
         localStorage.setItem(`${STORAGE_ID}_token`, res.token)
-        dispatch({ type: 'AUTHENTICATE', isAuthenticated: true })
+        dispatch(setSignin((true)))
       }
     })
   }
 }
 
-export const setError = (error) => {
-  return (dispatch) => {
-    dispatch(_error(error))
-  }
-}
-
 export const setLanguage = (locale) => {
   return (dispatch) => {
-    localStorage.setItem(`${STORAGE_ID}_locale`, locale)
-    dispatch(setLocale(locale))
+    if (locale.length === 2) {
+      localStorage.setItem(`${STORAGE_ID}_locale`, locale)
+      setLocale(locale)
+      dispatch(_setLocale(locale))
+    }
   }
 }
 
@@ -179,7 +191,8 @@ export const getLanguage = () => {
   return (dispatch) => {
     const locale = localStorage.getItem(`${STORAGE_ID}_locale`)
     if (locale) {
-      dispatch(setLocale(locale))
+      setLocale(locale)
+      dispatch(_setLocale(locale))
     }
   }
 }

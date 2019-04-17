@@ -1,8 +1,9 @@
 import fetch from 'isomorphic-unfetch'
 
-import { API_URL } from '../../config'
+import { API_URL, API_KEY } from '../../config'
 
 const api = (data, done) => {
+  data['key'] = API_KEY
   fetch(API_URL, {
     method: 'POST',
     body: JSON.stringify(data),

@@ -12,14 +12,15 @@ export const TITLE = 'The Company'
 export const COMPANY = 'The Company Ltd.'
 export const COMPANY_ADDRESS = 'The Company address'
 export const DPM_EMAIL = 'privacy@talaikis.com'
+export const API_KEY = PROD ? process.env.API_KEY : 'cEPHDFKxwxaL7cAVZFQt'
 
 // Upload
 export const UPLOAD_API_URL = PROD ? 'https://upload.talaikis.com/' : 'http://localhost:3000/upload'
-export const UPLOAD_API_KEY = process.env.UPLOAD_API_KEY
+export const UPLOAD_API_KEY = PROD ? process.env.UPLOAD_API_KEY : ''
 
 // Contact
 export const CONTACT_API_URL = PROD ? 'https://mail.talaikis.com/contactus' : 'http://localhost:3000/contactus'
-export const CONTACT_API_KEY = process.env.CONTACT_API_KEY
+export const CONTACT_API_KEY = PROD ? process.env.CONTACT_API_KEY : ''
 
 // Third parties
 export const GA = 'UA-137539256-1'
