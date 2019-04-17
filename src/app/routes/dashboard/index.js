@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import Page from '../../components/page'
 import Error from '../../components/error'
@@ -28,6 +29,7 @@ class Dashboard extends PureComponent {
         { error ? <Error msg={error}/> : null }
         <p><b>Email:</b> {currentUser.email}</p>
         <p><b>First name:</b> {currentUser.firstName}</p>
+        <p><strong><Link to="/profile-edit">Edit Profile</Link></strong></p>
       </Page>
     )
   }
