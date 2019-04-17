@@ -9,7 +9,7 @@ TODO:
 * hamburger
 * social login (+backend part)
 * refer system from an API
-* move internationalization to backedn and redux
+* finsih internationalization (+backend part)
 * review postcss css cleanup strategy
 
 ## Technologies

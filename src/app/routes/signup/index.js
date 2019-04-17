@@ -15,6 +15,7 @@ class Signup extends PureComponent {
   state = { loading: false }
 
   componentWillMount () {
+    this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
       setLocale(params.locale)

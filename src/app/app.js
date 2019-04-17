@@ -4,19 +4,12 @@ import { withRouter } from 'react-router'
 import { Section, Container } from 'react-bulma-components'
 
 import { getUser, setError } from '../modules/auth'
-import { isServer } from '../store'
 import Routes from './routes'
 import Header from './components/header'
 import CubedFooter from './components/footer'
 import { COMPANY } from '../config'
 
 class App extends PureComponent {
-  componentWillMount () {
-    if (!isServer) {
-      this.props.getUser()
-    }
-  }
-
   render () {
     const { isAuthenticated, location } = this.props
 

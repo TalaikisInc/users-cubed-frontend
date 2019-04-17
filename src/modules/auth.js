@@ -1,12 +1,7 @@
-import Cookies from 'js-cookie'
-
-import { COOKIE_ID } from '../config'
+import { STORAGE_ID } from '../config'
 import api from '../app/utils/api'
 import contactApi from '../app/utils/contact'
 import secureApi from '../app/utils/secure'
-
-export const AUTHENTICATE = 'auth/AUTHENTICATE'
-export const SET_CURRENT_USER = 'auth/SET_CURRENT_USER'
 
 const initialState = {
   isAuthenticated: false,
@@ -15,9 +10,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case AUTHENTICATE:
+    case 'AUTHENTICATE':
       return { ...state, isAuthenticated: action.isAuthenticated }
-    case SET_CURRENT_USER:
+    case 'SET_CURRENT_USER':
       return { ...state, currentUser: action.user }
     case 'SIGNUP':
       return { ...state, signupStatus: action.payload }
@@ -80,14 +75,13 @@ const setLocale = (locale) => ({
 
 export const getUser = () => {
   return (dispatch) => {
-    const cookie = Cookies.getJSON(COOKIE_ID)
-    if (cookie && cookie.token) {
-      secureApi(cookie.token, { action: 'USER_GET' }, (res) => {
-        console.log('gettinng user')
-        console.log(res)
+    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    if (token) {
+      secureApi(token, { action: 'USER_GET' }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.email) {
+          dispatch({ type: 'AUTHENTICATE', isAuthenticated: true })
           dispatch(setCurrentUser(res))
         }
       })
@@ -97,9 +91,9 @@ export const getUser = () => {
 
 export const editUser = (rest) => {
   return (dispatch) => {
-    const cookie = Cookies.getJSON(COOKIE_ID)
-    if (cookie && cookie.token) {
-      secureApi(cookie.token, { action: 'USER_EDIT', ...rest }, (res) => {
+    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    if (token) {
+      secureApi(token, { action: 'USER_EDIT', ...rest }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.email) {
@@ -112,13 +106,13 @@ export const editUser = (rest) => {
 
 export const deleteUser = () => {
   return (dispatch) => {
-    const cookie = Cookies.getJSON(COOKIE_ID)
-    if (cookie && cookie.token) {
-      secureApi(cookie.token, { action: 'USER_DESTROY' }, (res) => {
+    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    if (token) {
+      secureApi(token, { action: 'USER_DESTROY' }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
-          dispatch({ type: AUTHENTICATE, isAuthenticated: false })
+          dispatch({ type: 'AUTHENTICATE', isAuthenticated: false })
           dispatch(setCurrentUser({}))
         }
       })
@@ -128,15 +122,15 @@ export const deleteUser = () => {
 
 export const signoutUser = () => {
   return (dispatch) => {
-    const cookie = Cookies.getJSON(COOKIE_ID)
-    if (cookie && cookie.token) {
-      return api({ action: 'TOKEN_DESTROY', tokenId: cookie.token }, (res) => {
+    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    if (token) {
+      return api({ action: 'TOKEN_DESTROY', tokenId: token }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
-          dispatch({ type: AUTHENTICATE, isAuthenticated: false })
+          dispatch({ type: 'AUTHENTICATE', isAuthenticated: false })
           dispatch(setCurrentUser({}))
-          Cookies.remove(COOKIE_ID)
+          localStorage.removeItem(`${STORAGE_ID}_token`)
         }
       })
     }
@@ -161,8 +155,8 @@ export const signin = ({ email, password }) => {
       if (res && res.error) {
         dispatch(_error(res.error))
       } else if (res && res.token) {
-        Cookies.set(COOKIE_ID, res, { expires: 7 })
-        dispatch({ type: AUTHENTICATE, isAuthenticated: true })
+        localStorage.setItem(`${STORAGE_ID}_token`, res.token)
+        dispatch({ type: 'AUTHENTICATE', isAuthenticated: true })
       }
     })
   }
@@ -176,18 +170,16 @@ export const setError = (error) => {
 
 export const setLanguage = (locale) => {
   return (dispatch) => {
-    const userData = Cookies.getJSON(COOKIE_ID)
-    userData['locale'] = locale
-    Cookies.set(COOKIE_ID, userData, { expires: 7 })
+    localStorage.setItem(`${STORAGE_ID}_locale`, locale)
     dispatch(setLocale(locale))
   }
 }
 
 export const getLanguage = () => {
   return (dispatch) => {
-    const cookie = Cookies.getJSON(COOKIE_ID)
-    if (cookie && cookie.locale) {
-      dispatch(setLocale(cookie.locale))
+    const locale = localStorage.getItem(`${STORAGE_ID}_locale`)
+    if (locale) {
+      dispatch(setLocale(locale))
     }
   }
 }

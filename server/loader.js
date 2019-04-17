@@ -11,9 +11,9 @@ import Loadable from 'react-loadable'
 import createStore from '../src/store'
 import App from '../src/app/app'
 import manifest from '../build/asset-manifest.json'
-import { setCurrentUser, signoutUser } from '../src/modules/auth'
+import { getUser, signoutUser } from '../src/modules/auth'
 import { injectHTML, extractAssets } from './utils'
-import { COOKIE_ID } from '../src/config'
+import { STORAGE_ID } from '../src/config'
 
 export default (req, res) => {
   readFile(resolve(__dirname, '../build/index.html'), 'utf8', (err, htmlData) => {
@@ -24,8 +24,8 @@ export default (req, res) => {
 
     const { store } = createStore(req.url)
 
-    if (COOKIE_ID in req.cookies) {
-      store.dispatch(setCurrentUser(req.cookies[COOKIE_ID]))
+    if (typeof localStorage.getItem(`${STORAGE_ID}_token`) === 'string') {
+      store.dispatch(getUser())
     } else {
       store.dispatch(signoutUser())
     }

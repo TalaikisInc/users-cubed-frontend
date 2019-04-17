@@ -1,7 +1,7 @@
 const PROD = process.env.NODE_ENV === 'production'
 
 // Main
-export const COOKIE_ID = 'id'
+export const STORAGE_ID = 'id'
 export const URL = 'https://ufunc.com/'
 export const IMAGES_URL = 'https://ufunc.com/images/'
 export const API_URL = PROD ? 'https://api.ufunc.com/' : 'http://localhost:3000/api'
