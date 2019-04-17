@@ -4,13 +4,16 @@ import { connect } from 'react-redux'
 import Page from '../../components/page'
 import { DESCRIPTIONS } from '../../../config'
 import Error from '../../components/error'
-import { t, setLocale } from '../../translations'
+import { t } from '../../translations'
+import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class SignedOut extends PureComponent {
   componentWillMount () {
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -29,4 +32,9 @@ const mapStateToProps = (state) => ({
   error: state.auth.error
 })
 
-export default connect(mapStateToProps, null)(SignedOut)
+const mapDispatchToProps = (dispatch) => ({
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignedOut)

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 import Page from '../../components/page'
 import Error from '../../components/error'
-import { t, setLocale } from '../../translations'
-import { getUser, setError } from '../../../modules/auth'
+import { t } from '../../translations'
+import { getUser, setError, getLanguage, setLanguage } from '../../../modules/auth'
 import { isServer } from '../../../store'
 
 class Dashboard extends PureComponent {
@@ -13,7 +13,9 @@ class Dashboard extends PureComponent {
     this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
 
     if (!isServer) {
@@ -42,7 +44,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getUser: (state) => dispatch(getUser(state)),
-  setError: (state) => dispatch(setError(state))
+  setError: (state) => dispatch(setError(state)),
+  getLanguage: (state) => dispatch(getLanguage(state)),
+  setLanguage: (state) => dispatch(setLanguage(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

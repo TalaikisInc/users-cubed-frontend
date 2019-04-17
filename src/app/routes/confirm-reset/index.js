@@ -7,8 +7,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ConfirmResetForm from '../../components/confirmreset-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t, setLocale } from '../../translations'
-import { confirmReset, setError } from '../../../modules/auth'
+import { t } from '../../translations'
+import { confirmReset, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class ConfirmReset extends PureComponent {
   state = { loading: false }
@@ -22,7 +22,9 @@ class ConfirmReset extends PureComponent {
     }
 
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -61,7 +63,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   confirmReset: (state) => dispatch(confirmReset(state)),
-  setError: (state) => dispatch(setError(state))
+  setError: (state) => dispatch(setError(state)),
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfirmReset)

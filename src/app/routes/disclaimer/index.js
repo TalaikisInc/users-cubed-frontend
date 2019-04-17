@@ -1,14 +1,18 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { COMPANY, UPDATE_FREQUENCY, DESCRIPTIONS } from '../../../config'
-import { t, setLocale } from '../../translations'
+import { t } from '../../translations'
+import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class Disclaimer extends PureComponent {
   componentWillMount () {
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -30,4 +34,13 @@ class Disclaimer extends PureComponent {
   }
 }
 
-export default Disclaimer
+const mapStateToProps = (state) => ({
+  locale: state.auth.locale
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Disclaimer)

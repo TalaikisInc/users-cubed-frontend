@@ -8,8 +8,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import SignupForm from '../../components/signup-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t, setLocale } from '../../translations'
-import { signup, setError } from '../../../modules/auth'
+import { t } from '../../translations'
+import { signup, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class Signup extends PureComponent {
   state = { loading: false }
@@ -18,7 +18,9 @@ class Signup extends PureComponent {
     this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -59,7 +61,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   signup: (state) => dispatch(signup(state)),
-  setError: (state) => dispatch(setError(state))
+  setError: (state) => dispatch(setError(state)),
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

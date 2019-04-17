@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { validate } from 'isemail'
 
 import Page from '../../components/page'
-import { t, setLocale } from '../../translations'
-import { editUser, setError } from '../../../modules/auth'
+import { t } from '../../translations'
+import { editUser, setError, setLanguage, getLanguage } from '../../../modules/auth'
 import Error from '../../components/error'
 import ProfileEditForm from '../../components/profile-edit-form'
 
@@ -15,7 +15,9 @@ class ProfileEdit extends PureComponent {
     this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -59,7 +61,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   editUser: (state) => dispatch(editUser(state)),
-  setError: (state) => dispatch(setError(state))
+  setError: (state) => dispatch(setError(state)),
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit)

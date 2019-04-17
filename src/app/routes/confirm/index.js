@@ -7,8 +7,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ConfirmForm from '../../components/confirm-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t, setLocale } from '../../translations'
-import { confirm, setError } from '../../../modules/auth'
+import { t } from '../../translations'
+import { confirm, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class Confirm extends PureComponent {
   state = { loading: false, token: null }
@@ -21,7 +21,9 @@ class Confirm extends PureComponent {
     }
 
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -60,7 +62,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   confirm: (state) => dispatch(confirm(state)),
-  setError: (state) => dispatch(setError(state))
+  setError: (state) => dispatch(setError(state)),
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Confirm)

@@ -7,8 +7,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ContactForm from '../../components/contact-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t, setLocale } from '../../translations'
-import { contact, setError } from '../../../modules/auth'
+import { t } from '../../translations'
+import { contact, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class ContactUs extends PureComponent {
   state = { loading: false }
@@ -17,7 +17,9 @@ class ContactUs extends PureComponent {
     this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -58,7 +60,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   contact: (state) => dispatch(contact(state)),
-  setError: (state) => dispatch(setError(state))
+  setError: (state) => dispatch(setError(state)),
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactUs)

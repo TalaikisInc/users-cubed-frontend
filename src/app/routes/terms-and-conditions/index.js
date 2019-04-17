@@ -1,14 +1,18 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { DESCRIPTIONS, COMPANY, COMPANY_ADDRESS, URL, COMPANY_EMAIL, API_URL } from '../../../config'
-import { t, setLocale } from '../../translations'
+import { t } from '../../translations'
+import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class ToS extends PureComponent {
   componentWillMount () {
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -76,4 +80,13 @@ class ToS extends PureComponent {
   }
 }
 
-export default ToS
+const mapStateToProps = (state) => ({
+  locale: state.auth.locale
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToS)

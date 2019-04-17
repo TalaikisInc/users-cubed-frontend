@@ -8,8 +8,8 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ResetForm from '../../components/reset-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t, setLocale } from '../../translations'
-import { reset, setError } from '../../../modules/auth'
+import { t } from '../../translations'
+import { reset, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class Reset extends PureComponent {
   state = { loading: false }
@@ -18,7 +18,9 @@ class Reset extends PureComponent {
     this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
-      setLocale(params.locale)
+      this.props.setLanguage(params.locale)
+    } else {
+      this.props.getLanguage()
     }
   }
 
@@ -57,7 +59,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   reset: (state) => dispatch(reset(state)),
-  setError: (state) => dispatch(setError(state))
+  setError: (state) => dispatch(setError(state)),
+  setLanguage: (state) => dispatch(setLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reset)
