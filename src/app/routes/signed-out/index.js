@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { DESCRIPTIONS } from '../../../config'
@@ -24,4 +25,8 @@ class SignedOut extends PureComponent {
   }
 }
 
-export default SignedOut
+const mapStateToProps = (state) => ({
+  error: state.auth.error
+})
+
+export default connect(mapStateToProps, null)(SignedOut)

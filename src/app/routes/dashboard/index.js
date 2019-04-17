@@ -2,28 +2,45 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import Page from '../../components/page'
+import Error from '../../components/error'
 import { t, setLocale } from '../../translations'
+import { getUser, setError } from '../../../modules/auth'
+import { isServer } from '../../../store'
 
 class Dashboard extends PureComponent {
   componentWillMount () {
+    this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
       setLocale(params.locale)
     }
+
+    if (!isServer) {
+      this.props.getUser()
+    }
   }
 
   render () {
+    const { currentUser, error } = this.props
+
     return (
       <Page title={t('dashboard')} noCrawl>
-        <p><b>Email:</b> {this.props.currentUser.email}</p>
-        <p><b>First name:</b> {this.props.currentUser.firstName}</p>
+        { error ? <Error msg={error}/> : null }
+        <p><b>Email:</b> {currentUser.email}</p>
+        <p><b>First name:</b> {currentUser.firstName}</p>
       </Page>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  error: state.auth.error
 })
 
-export default connect(mapStateToProps, null)(Dashboard)
+const mapDispatchToProps = (dispatch) => ({
+  getUser: (state) => dispatch(getUser(state)),
+  setError: (state) => dispatch(setError(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

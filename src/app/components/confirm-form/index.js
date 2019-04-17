@@ -26,7 +26,7 @@ const ConfirmForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="token" type="text" component={InputField} label="Token" icon="check" />
+      <Field name="token" type="text" component={InputField} label="Token" icon="check" autoComplete="off" />
       <Submit label="Confirm" loading={loading} />
     </Form>
   )

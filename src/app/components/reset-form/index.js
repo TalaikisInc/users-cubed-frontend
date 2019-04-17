@@ -27,7 +27,7 @@ const ResetForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" />
+      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" autoComplete="email" />
       <Submit label="Reset" loading={loading} />
     </Form>
   )

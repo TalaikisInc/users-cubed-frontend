@@ -31,14 +31,15 @@ class ProfileEditForm extends PureComponent {
     return (
       <Fragment>
         <Form onSubmit={handleSubmit}>
-          <Field name="email" type="email" value={currentUser.email} component={InputField} label="Email" icon="envelope" />
-          <Field name="firstName" type="text" component={InputField} label="First name" icon="file-signature" />
-          <Field name="lastName" type="text" component={InputField} label="Last name" icon="file-signature" />
-          <Field name="phone" type="text" component={InputField} label="Phone" icon="phone" />
-          <Field name="address" type="text" component={InputField} label="Address" icon="address-card" />
-          <Field name="city" type="text" component={InputField} label="City" icon="address-card" />
-          <Field name="country" type="text" component={SelectCountry} label="Country" icon="address-card" />
-          <Field name="password" type="password" component={InputField} label="Password" icon="lock" />
+          <Field name="email" type="email" value={currentUser.email} component={InputField} label="Email" icon="envelope" autoComplete="email" />
+          <Field name="firstName" type="text" component={InputField} label="First name" icon="file-signature" autoComplete="given-name" />
+          <Field name="lastName" type="text" component={InputField} label="Last name" icon="file-signature" autoComplete="family-name" />
+          <Field name="phone" type="text" component={InputField} label="Phone" icon="phone" autoComplete="tel" />
+          <Field name="address" type="text" component={InputField} label="Address" icon="address-card" autoComplete="shipping street-address" />
+          <Field name="city" type="text" component={InputField} label="City" icon="address-card" autoComplete="shipping locality" />
+          <Field name="zip" type="text" component={InputField} label="Postal Code / ZIP" icon="address-card" autoComplete="shipping postal-code" />
+          <Field name="country" type="text" component={SelectCountry} label="Country" icon="address-card" autoComplete="shipping country" />
+          <Field name="password" type="password" component={InputField} label="Password" icon="lock" autoComplete="off" />
           <Submit label="Submit" loading={loading} />
         </Form>
         <hr />

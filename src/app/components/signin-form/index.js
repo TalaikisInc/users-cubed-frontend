@@ -33,8 +33,8 @@ const SigninForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" />
-      <Field name="password" type="password" component={InputField} label="Password" icon="lock" />
+      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" autoComplete="email" />
+      <Field name="password" type="password" component={InputField} label="Password" icon="lock" autoComplete="current-password" />
       <Submit label="Sign In" loading={loading} />
     </Form>
   )

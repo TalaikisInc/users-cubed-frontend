@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default () => (
   <div class="modal">
     <div class="modal-background"></div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const InputField = ({ input, label, type, icon, meta: { touched, error, warning } }) => {
+const InputField = ({ input, label, type, icon, autocomplete, meta: { touched, error, warning } }) => {
   const iconClass = `fas fa-${icon}`
   const classes = touched && error ? 'input is-danger' : 'input'
 
@@ -9,7 +9,7 @@ const InputField = ({ input, label, type, icon, meta: { touched, error, warning 
     <div className="field">
       <label className="label"> {label }</label>
       <div className="control has-icons-left">
-        <input className={classes} type={type} placeholder={label} {...input} />
+        <input className={classes} type={type} placeholder={label} autoComplete={autocomplete} {...input} />
         <span className="icon is-small is-left">
           <i className={iconClass}></i>
         </span>
@@ -27,7 +27,8 @@ InputField.propTypes = {
   meta: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  autocomplete: PropTypes.string
 }
 
 export default InputField

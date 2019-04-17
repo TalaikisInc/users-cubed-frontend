@@ -121,7 +121,6 @@ export default () => (
     <Route exact path="/reset" component={Reset} />
     <Route exact path="/reset/:locale" component={Reset} />
     <Route exact path="/confirm" component={Confirm} />
-    <Route exact path="/confirm/:locale" component={Confirm} />
     <Route exact path="/confirm/:token" component={Confirm} />
     <Route exact path="/confirm/:token/:locale" component={Confirm} />
     <Route exact path="/confirm-reset" component={ConfirmReset} />

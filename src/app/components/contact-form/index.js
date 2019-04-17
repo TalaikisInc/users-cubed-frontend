@@ -40,9 +40,9 @@ const ContactForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="name" type="text" component={InputField} label="Name" icon="user" />
-      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" />
-      <Field name="message" component={TextareaField} label="Message" />
+      <Field name="name" type="text" component={InputField} label="Name" icon="user" autoComplete="name" />
+      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" autoComplete="email" />
+      <Field name="message" component={TextareaField} label="Message" autoComplete="off" />
       <Submit label="Send" loading={loading} />
     </Form>
   )

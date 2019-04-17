@@ -6,7 +6,7 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* dashboard
+* hamburger
 * social login (+backend part)
 * refer system from an API
 * move internationalization to backedn and redux

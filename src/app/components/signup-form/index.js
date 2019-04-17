@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
 
 import InputField from '../input'
-import CheckboxField from '../checkbox'
+import TaCCheckboxField from '../tac-checkbox'
 import Submit from '../submit'
 import Form from '../form'
 
@@ -44,10 +44,10 @@ const SignupForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" />
-      <Field name="password" type="password" component={InputField} label="Password" icon="lock" />
-      <Field name="repeatPassword" type="password" component={InputField} label="Repeat Password" icon="lock" />
-      <Field name="tosAgreement" component={CheckboxField} />
+      <Field name="email" type="email" component={InputField} label="Email" icon="envelope" autoComplete="email" />
+      <Field name="password" type="password" component={InputField} label="Password" icon="lock" autoComplete="new-password" />
+      <Field name="repeatPassword" type="password" component={InputField} label="Repeat Password" icon="lock" autoComplete="off" />
+      <Field name="tosAgreement" component={TaCCheckboxField} />
       <Submit label="Sign Up" loading={loading} />
     </Form>
   )

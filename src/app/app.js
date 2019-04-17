@@ -1,10 +1,9 @@
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { Section, Container } from 'react-bulma-components'
 
-import { getUser } from '../modules/auth'
+import { getUser, setError } from '../modules/auth'
 import { isServer } from '../store'
 import Routes from './routes'
 import Header from './components/header'
@@ -14,14 +13,16 @@ import { COMPANY } from '../config'
 class App extends PureComponent {
   componentWillMount () {
     if (!isServer) {
-      // this.props.getUser()
+      this.props.getUser()
     }
   }
 
   render () {
+    const { isAuthenticated, location } = this.props
+
     return (
       <Fragment>
-        <Header isAuthenticated={this.props.isAuthenticated} current={this.props.location.pathname} />
+        <Header isAuthenticated={isAuthenticated} current={location.pathname} />
         <Section>
           <Container>
             <Routes />
@@ -37,8 +38,9 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
 })
 
-const mapDispatchToProps = (dispatch) => {
-  bindActionCreators({ getUser }, dispatch)
-}
+const mapDispatchToProps = (dispatch) => ({
+  getUser: (state) => dispatch(getUser(state)),
+  setError: (state) => dispatch(setError(state))
+})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
