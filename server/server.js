@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser'
 import rfs from 'rotating-file-stream'
 
 import loader from './loader'
+import setHeaers from './headers'
 const app = express()
 const PORT = 3000
 const accessLogStream = rfs('access.log', {
@@ -20,7 +21,7 @@ app.use(json())
 app.use(urlencoded({ extended: false }))
 app.use(morgan(':date[clf] :method :url :status :response-time ms :referrer :remote-addr - :remote-user', { stream: accessLogStream }))
 app.use(cookieParser())
-
+app.use(setHeaers)
 app.use(express.Router().get('/', loader))
 app.use(express.static(resolve(__dirname, '../build')))
 app.use(loader)

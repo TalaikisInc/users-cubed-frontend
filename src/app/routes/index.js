@@ -99,6 +99,18 @@ const ConfirmReset = Loadable({
   modules: ['confirm-reset']
 })
 
+const ReportCertTransparency = Loadable({
+  loader: () => import(/* webpackChunkName: "report-cert-transparency" */ './report-cert-transparency'),
+  loading: () => null,
+  modules: ['report-cert-transparency']
+})
+
+const XSSReport = Loadable({
+  loader: () => import(/* webpackChunkName: "xss-report" */ './xss-report'),
+  loading: () => null,
+  modules: ['xss-report']
+})
+
 export default () => (
   <Switch>
     <Route exact path="/" component={withTracker(Homepage, { userID: GA })} />
@@ -127,6 +139,8 @@ export default () => (
     <Route exact path="/confirm-reset/:locale" component={ConfirmReset} />
     <Route exact path="/confirm-reset/:token" component={ConfirmReset} />
     <Route exact path="/confirm-reset/:token/:locale" component={ConfirmReset} />
+    <Route exact path="/report-cert-transparency/:locale" component={ReportCertTransparency} />
+    <Route exact path="/xss-report/:locale" component={XSSReport} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />
     <UnauthenticatedRoute exact path="/signin/:locale" component={Signin} />
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />

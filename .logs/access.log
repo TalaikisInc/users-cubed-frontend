@@ -162,3 +162,4 @@
 16/Apr/2019:20:10:35 +0000 GET /favicon.ico 200 0.695 ms http://localhost:3000/signup ::1 - -
 16/Apr/2019:20:10:35 +0000 GET /static/js/1.5be6c892.chunk.js.map 200 42.279 ms - ::1 - -
 16/Apr/2019:20:10:35 +0000 GET /assets/icons/android-chrome-192x192.png 200 38.420 ms http://localhost:3000/signup ::1 - -
+18/Apr/2019:10:06:18 +0000 GET / 500 8.694 ms - ::1 - -

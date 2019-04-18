@@ -9,7 +9,11 @@ import Error from '../../components/error'
 import ProfileEditForm from '../../components/profile-edit-form'
 
 class ProfileEdit extends PureComponent {
-  state = { loading: false }
+  constructor (props) {
+    super(props)
+    this.state = { loading: false }
+    this.submit = this.submit.bind(this)
+  }
 
   componentWillMount () {
     this.props.setError(null)
@@ -30,8 +34,8 @@ class ProfileEdit extends PureComponent {
     const lastName = target[2].value
     const phone = target[3].value
     const address = target[4].value
-    const city = target[5].value    
-    const country = target[6].value    
+    const city = target[5].value
+    const country = target[6].value
     const password = target[7].value
     if (validate(email)) {
       this.props.editUser({ email, firstName, lastName, phone, address, city, country, password })

@@ -26,5 +26,7 @@ export default {
   reset_sent: ' the password reset is sent to you.',
   signed_out: 'Signed Out',
   signed_out_text: 'You have signed out.',
-  tac: 'Terms and Conditions'
+  tac: 'Terms and Conditions',
+  report_cert_transparency: 'Report Certificate Transparency Issues',
+  xss_report: 'Report XSS Vulnerability'
 }
