@@ -6,7 +6,8 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* profile edit/ delete, fix form input names changed, user data not showing, double errors, no such user when trying to edit
+* edit -> old values
+* delete
 * social login (+backend part)
 * refer system from an API
 

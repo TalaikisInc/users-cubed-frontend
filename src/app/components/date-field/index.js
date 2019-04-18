@@ -1,17 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const InputField = ({ input, label, type, icon, autocomplete, meta: { touched, error, warning } }) => {
-  const iconClass = `fas fa-${icon}`
+const DateField = ({ input, label, autocomplete, meta: { touched, error, warning } }) => {
   const classes = touched && error ? 'input is-danger' : 'input'
 
   return (
     <div className="field">
       <label className="label"> {label }</label>
       <div className="control has-icons-left">
-        <input className={classes} name={input.name} onChange={input.onChange} type={type} value={input.value} placeholder={label} autoComplete={autocomplete} />
+        <input className={classes} type="date" placeholder={label} autoComplete={autocomplete} {...input} />
         <span className="icon is-small is-left">
-          <i className={iconClass}></i>
+          <i className="fas fa-calendar-day"></i>
         </span>
       </div>
       { touched && (
@@ -22,13 +21,11 @@ const InputField = ({ input, label, type, icon, autocomplete, meta: { touched, e
   )
 }
 
-InputField.propTypes = {
+DateField.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  icon: PropTypes.string,
   autocomplete: PropTypes.string
 }
 
-export default InputField
+export default DateField

@@ -32,13 +32,22 @@ class ProfileEdit extends PureComponent {
     const email = target[0].value
     const firstName = target[1].value
     const lastName = target[2].value
-    const phone = target[3].value
-    const address = target[4].value
-    const city = target[5].value
-    const country = target[6].value
-    const password = target[7].value
+    const dob = target[3].value
+    const dialCode = target[4].value
+    console.log('dialCode')
+    console.log(dialCode)
+    const phone = target[5].value
+    console.log('phone')
+    console.log(phone)
+    const address = target[6].value
+    console.log('address')
+    console.log(address)
+    const city = target[7].value
+    const zipCode = target[8].value
+    const country = target[9].value
+    const password = target[10].value
     if (validate(email)) {
-      this.props.editUser({ email, firstName, lastName, phone, address, city, country, password })
+      this.props.editUser({ email, firstName, lastName, dob, phone, address, city, country, password, dialCode, zipCode })
     } else {
       this.props.setError(t('check_form'))
     }

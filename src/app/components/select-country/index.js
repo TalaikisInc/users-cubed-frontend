@@ -4,18 +4,22 @@ import PropTypes from 'prop-types'
 import countries from '../../utils/countries'
 
 class SelectCountry extends PureComponent {
-  state = { country: '' }
+  constructor (props) {
+    super(props)
+    this.state = { country: '' }
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange (e) {
+    e.preventDefault()
+    const country = e.target.value
+    this.setState({ country })
+  }
 
   render () {
-    const onChange = (e) => {
-      e.preventDefault()
-      const country = e.target.value
-      this.setState({ country })
-    }
     const countriesList = []
-
-    for (let i=0; i<countries.length;i++) {
-      countriesList.push(<option value={countries[i].key}>{countries[i].country}</option>)
+    for (let i = 0; i < countries.length; i++) {
+      countriesList.push(<option value={countries[i].key} key={i}>{countries[i].country}</option>)
     }
     const { input, label, icon, meta } = this.props
     const { touched, error, warning } = meta
@@ -27,7 +31,7 @@ class SelectCountry extends PureComponent {
         <label className="label"> {label }</label>
         <div className="control has-icons-left">
           <div className={classes}>
-            <select {...input} value={this.state.country} onChange={onChange}>
+            <select {...input} value={this.state.country} onChange={this.onChange}>
               { countriesList }
             </select>
           </div>

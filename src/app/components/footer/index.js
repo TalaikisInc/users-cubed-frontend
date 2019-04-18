@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Container, Content, Hero, Footer, Columns, Navbar } from 'react-bulma-components'
+import { Container, Content, Hero, Footer, Navbar } from 'react-bulma-components'
 
 import SelectLanguage from '../select-language'
 
@@ -10,8 +10,9 @@ const CubedFooter = ({ company, ...rest }) => {
     <Hero.Footer>
       <Footer>
         <Container>
-          <Columns>
-            <Columns.Column size={3}>
+          <div className="columns">
+            <div className="column is-2"></div>
+            <div className="column is-2">
               <Link to="/"><strong>Home</strong></Link>
               <br />
               <Link to="/about">About</Link>
@@ -21,18 +22,19 @@ const CubedFooter = ({ company, ...rest }) => {
               <Link to="/disclaimer">Disclaimer</Link>
               <br />
               <Link to="/terms-and-conditions">Terms and Conditions</Link>
-            </Columns.Column>
-            <Columns.Column size={3}>
-            </Columns.Column>
-            <Columns.Column size={3}>
-            </Columns.Column>
-            <Columns.Column size={3}>
+            </div>
+            <div className="column is-2">
+            </div>
+            <div className="column is-2">
+            </div>
+            <div className="column is-2">
               <Link to="/contact-us"><strong>Contact Us</strong></Link>
               <Navbar.Item>
                 <SelectLanguage {...rest}/>
               </Navbar.Item>
-            </Columns.Column>
-          </Columns>
+            </div>
+            <div className="column is-2"></div>
+          </div>
           <Content style={{ textAlign: 'center' }}>
             <p>
               &copy; { new Date().getFullYear() }, <strong><Link to="/">{ company }</Link></strong>

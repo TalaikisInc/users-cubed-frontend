@@ -27,7 +27,6 @@ class DeleteForm extends PureComponent {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        { error ? <Error msg={error}/> : null }
         <Submit label="Delete account" loading={loading} color='danger' />
         { modal ? <div class="modal">
           <div class="modal-background"></div>
