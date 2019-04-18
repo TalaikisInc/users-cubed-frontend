@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const InputField = ({ input, label, type, icon, autocomplete, meta: { touched, error, warning } }) => {
+const InputField = ({ input, label, type, icon, autocomplete, currentUser, meta: { touched, error, warning } }) => {
   const iconClass = `fas fa-${icon}`
   const classes = touched && error ? 'input is-danger' : 'input'
 
@@ -9,7 +10,7 @@ const InputField = ({ input, label, type, icon, autocomplete, meta: { touched, e
     <div className="field">
       <label className="label"> {label }</label>
       <div className="control has-icons-left">
-        <input className={classes} name={input.name} onChange={input.onChange} type={type} value={input.value} placeholder={label} autoComplete={autocomplete} />
+        <input className={classes} name={input.name} onChange={input.onChange} type={type} value={currentUser[input.name]} placeholder={label} autoComplete={autocomplete} />
         <span className="icon is-small is-left">
           <i className={iconClass}></i>
         </span>
@@ -31,4 +32,8 @@ InputField.propTypes = {
   autocomplete: PropTypes.string
 }
 
-export default InputField
+const mapStateToProps = (state) => ({
+  currentUser: state.auth.currentUser
+})
+
+export default connect(mapStateToProps, null)(InputField)
