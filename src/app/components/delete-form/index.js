@@ -1,43 +1,63 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Submit from '../submit'
 import Form from '../form'
-import Error from '../error'
 import { deleteUser } from '../../../modules/auth'
 
 class DeleteForm extends PureComponent {
-  state = { loading: false, modal: false }
+  constructor (props) {
+    super(props)
+    this.state = {
+      loading: false,
+      modal: false
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.open = this.open.bind(this)
+    this.close = this.close.bind(this)
+  }
 
   handleSubmit (e) {
     e.preventDefault()
-    // @FIXME
-    // this.setState({ loading: true, modal: false })
+    this.setState({ loading: true, modal: false })
     this.props.deleteUser()
-    // this.setState({ loading: false })
+    this.setState({ loading: false })
   }
 
-  onClick () {
-    // this.setState({ modal: false })
+  close () {
+    this.setState({ modal: false })
+  }
+
+  open (e) {
+    e.preventDefault()
+    this.setState({ modal: true })
   }
 
   render () {
     const { loading, modal } = this.state
-    const { error } = this.props
+    const _class = modal ? 'modal is-active' : 'modal'
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Submit label="Delete account" loading={loading} color='danger' />
-        { modal ? <div class="modal">
-          <div class="modal-background"></div>
-            <div class="modal-content">
-              <h4 class="title is-4">Are you sure?</h4>
-              <button class="is-large is-danger" onClick={this.handleSubmit} />
+      <Fragment>
+        <Form onSubmit={this.open}>
+          <Submit label="Delete account" loading={loading} color='danger' />
+        </Form>
+        <div className="container">
+          <div className={_class}>
+            <div className="modal-background"></div>
+            <div className="modal-content has-background-white has-text-centered">
+              <div className="box">
+                <h4 className="title is-4">Are you sure?</h4>
+                <p>This action is not reversible.</p>
+                <button className="button is-danger is-rounded" onClick={this.handleSubmit}>
+                  Yes, delete
+                </button>
+              </div>
             </div>
-            <button class="modal-close is-large" aria-label="close" onClick={() => this.onClick} />
+            <button className="modal-close is-large" aria-label="close" onClick={this.close} />
+          </div>
         </div>
-        : null }
-      </Form>
+      </Fragment>
     )
   }
 }

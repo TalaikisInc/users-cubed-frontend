@@ -13,7 +13,10 @@ const Form = ({ children, onSubmit }) => (
 )
 
 Form.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]).isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 
