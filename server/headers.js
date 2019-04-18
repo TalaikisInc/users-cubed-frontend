@@ -14,7 +14,7 @@ export default (req, res, done) => {
   res.setHeader('X-XSS-Protection', `1; report=${URL}xss-report`)
   res.setHeader('X-Frame-Options', 'deny')
   res.setHeader('Content-Security-Policy', 'script-src "self"')
-  res.setHeader('Expect-CT:', `max-age=2592000, enforce, report-uri="${URL}report-cert-transparency"`)
+  res.setHeader('Expect-CT', `max-age=2592000, enforce, report-uri="${URL}report-cert-transparency"`)
   res.setHeader('Content-Type', 'application/json')
   done()
 }
