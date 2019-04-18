@@ -34,14 +34,8 @@ class ProfileEdit extends PureComponent {
     const lastName = target[2].value
     const dob = target[3].value
     const dialCode = target[4].value
-    console.log('dialCode')
-    console.log(dialCode)
     const phone = target[5].value
-    console.log('phone')
-    console.log(phone)
     const address = target[6].value
-    console.log('address')
-    console.log(address)
     const city = target[7].value
     const zipCode = target[8].value
     const country = target[9].value

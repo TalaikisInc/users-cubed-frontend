@@ -1,26 +1,44 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const InputField = ({ input, label, type, icon, autocomplete, currentUser, meta: { touched, error, warning } }) => {
-  const iconClass = `fas fa-${icon}`
-  const classes = touched && error ? 'input is-danger' : 'input'
+class InputField extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      [this.props.input.name]: this.props.currentUser[this.props.input.name]
+    }
+    this.onChange = this.onChange.bind(this)
+  }
 
-  return (
-    <div className="field">
-      <label className="label"> {label }</label>
-      <div className="control has-icons-left">
-        <input className={classes} name={input.name} onChange={input.onChange} type={type} value={currentUser[input.name]} placeholder={label} autoComplete={autocomplete} />
-        <span className="icon is-small is-left">
-          <i className={iconClass}></i>
-        </span>
+  onChange (e) {
+    e.preventDefault()
+    this.setState({ [this.props.input.name]: e.target.value })
+  }
+
+  render () {
+    const { input, label, type, icon, autocomplete, currentUser, meta: { touched, error, warning } } = this.props
+    const iconClass = `fas fa-${icon}`
+    const classes = touched && error ? 'input is-danger' : 'input'
+    const disabled = typeof currentUser[input.name] === 'string' && currentUser[input.name].length > 3
+
+    return (
+      <div className="field">
+        <label className="label"> {label }</label>
+        <div className="control has-icons-left">
+          { disabled ? <input className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} disabled />
+            : <input className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} /> }
+          <span className="icon is-small is-left">
+            <i className={iconClass}></i>
+          </span>
+        </div>
+        { touched && (
+          (error && <p className="help is-danger">{ error }</p>) ||
+          (warning && <p className="help is-warning">{ warning }</p>)
+        )}
       </div>
-      { touched && (
-        (error && <p className="help is-danger">{ error }</p>) ||
-        (warning && <p className="help is-warning">{ warning }</p>)
-      )}
-    </div>
-  )
+    )
+  }
 }
 
 InputField.propTypes = {
