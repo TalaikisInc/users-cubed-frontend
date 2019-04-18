@@ -35,7 +35,7 @@ class ProfileEditForm extends PureComponent {
           <Field name="email" type="email" value={currentUser.email} component={InputField} label="Email" icon="envelope" autoComplete="email" />
           <Field name="firstName" type="text" component={InputField} label="First name" icon="file-signature" autoComplete="given-name" />
           <Field name="lastName" type="text" component={InputField} label="Last name" icon="file-signature" autoComplete="family-name" />
-          <Field name="phoneCode" component={SelectDial} label="Phone Country Code" icon="phone" autoComplete="tel-country-code" />
+          <Field name="dialCode" component={SelectDial} label="Country Code" icon="phone" autoComplete="tel-country-code" />
           <Field name="phone" type="text" component={InputField} label="Phone" icon="phone" autoComplete="tel-national" />
           <Field name="address" type="text" component={InputField} label="Address" icon="address-card" autoComplete="shipping street-address" />
           <Field name="city" type="text" component={InputField} label="City" icon="address-card" autoComplete="shipping locality" />

@@ -15,7 +15,7 @@ class SelectDial extends PureComponent {
     const list = []
 
     for (let i=0; i<dialCodes.length;i++) {
-      list.push(<option value={dialCodes[i].dial}>{dialCodes[i].name}</option>)
+      list.push(<option value={dialCodes[i].dial}>{dialCodes[i].dial}</option>)
     }
     const { input, label, icon, meta } = this.props
     const { touched, error, warning } = meta
@@ -23,23 +23,13 @@ class SelectDial extends PureComponent {
     const iconClass = `fas fa-${icon}`
 
     return (
-      <div className="field">
-        <label className="label"> {label }</label>
         <div className="control has-icons-left">
           <div className={classes}>
             <select {...input} value={this.state.country} onChange={onChange}>
               { list }
             </select>
           </div>
-          <span className="icon is-small is-left">
-            <i className={iconClass}></i>
-          </span>
         </div>
-        { touched && (
-          (error && <p className="help is-danger">{ error }</p>) ||
-          (warning && <p className="help is-warning">{ warning }</p>)
-        )}
-      </div>
     )
   }
 }

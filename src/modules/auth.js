@@ -8,7 +8,8 @@ const initialState = {
   isAuthenticated: false,
   currentUser: {},
   error: null,
-  locale: 'en'
+  locale: 'en',
+  burger: false
 }
 
 export default (state = initialState, action) => {
@@ -31,6 +32,8 @@ export default (state = initialState, action) => {
       return { ...state, contactStatus: action.payload }
     case 'LOCALE':
       return { ...state, locale: action.payload }
+    case 'SET_BURGER':
+      return { ...state, burger: action.payload }
     default:
       return state
   }
@@ -87,6 +90,11 @@ export const setError = (error) => {
   }
 }
 
+export const setBurger = (burger) => ({
+  type: 'SET_BURGER',
+  payload: burger
+})
+
 export const getUser = () => {
   return (dispatch) => {
     const token = localStorage.getItem(`${STORAGE_ID}_token`)
@@ -94,8 +102,9 @@ export const getUser = () => {
       secureApi(token, { action: 'USER_GET' }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
+          dispatch(setSignin(false))
+          dispatch(setCurrentUser({}))
         } else if (res && res.email) {
-          localStorage.setItem(`${STORAGE_ID}_user`, res)
           dispatch(setCurrentUser(res))
         }
       })
@@ -111,7 +120,6 @@ export const editUser = (rest) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.email) {
-          localStorage.setItem(`${STORAGE_ID}_user`, res)
           dispatch(setCurrentUser(res))
         }
       })
@@ -127,8 +135,8 @@ export const deleteUser = () => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
-          localStorage.removeItem(`${STORAGE_ID}_user`)
           localStorage.removeItem(`${STORAGE_ID}_token`)
+          dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
         }
       })
@@ -145,6 +153,7 @@ export const signoutUser = () => {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
           localStorage.removeItem(`${STORAGE_ID}_token`)
+          dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
         }
       })
@@ -240,6 +249,25 @@ export const contact = ({ name, email, message }) => {
         dispatch(_error(res.error))
       } else if (res && res.status === 'OK.') {
         dispatch(setContactStatus(true))
+      }
+    })
+  }
+}
+
+export const socialSignin = (provider) => {
+  return (dispatch) => {
+    api({ action: 'TOKEN_CREATE_SOCIAL' }, (res) => {
+      if (res && res.error) {
+        api({ action: `USER_CREATE_${provider}` }, (res) => {
+          if (res && res.error) {
+            dispatch(_error(res.error))
+          } else if (res && res.status === 'OK.') {
+            dispatch(signupUser(true))
+          }
+        })
+      } else if (res && res.token) {
+        localStorage.setItem(`${STORAGE_ID}_token`, res.token)
+        dispatch(setSignin((true)))
       }
     })
   }

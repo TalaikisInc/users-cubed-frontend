@@ -28,5 +28,6 @@ export default {
   signed_out_text: 'You have signed out.',
   tac: 'Terms and Conditions',
   report_cert_transparency: 'Report Certificate Transparency Issues',
-  xss_report: 'Report XSS Vulnerability'
+  xss_report: 'Report XSS Vulnerability',
+  now_sign: 'Now you can '
 }

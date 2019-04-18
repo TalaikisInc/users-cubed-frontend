@@ -3,22 +3,32 @@ import { Navbar, Button, Icon } from 'react-bulma-components'
 import { connect } from 'react-redux'
 
 import { signoutUser, setError } from '../../../modules/auth'
+import history from '../../utils/history'
 
 class Signout extends PureComponent {
-  signout (e) {
-    e.preventDefault()
-    if (this.props.currentUser && this.props.currentUser.token) {
+  constructor (props) {
+    super(props)
+    this.state = { loading: false }
+    this.signout = this.signout.bind(this)
+  }
+
+  signout () {
+    this.setState({ loading: true })
+    if (this.props.currentUser && this.props.currentUser.email) {
       this.props.signoutUser()
-      this.props.history.push('/signed-out')
+      history.push('/signed-out')
     } else {
       this.props.setError('User is already signed out.')
     }
+    this.setState({ loading: false })
   }
 
   render () {
+    const { loading } = this.state
+
     return (
       <Navbar.Item>
-        <Button rounded onClick={() => this.signout}>
+        <Button rounded onClick={this.signout} loading={loading}>
           <Icon icon="sign-out-alt" /> Sign Out
         </Button>
       </Navbar.Item>

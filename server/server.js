@@ -6,9 +6,10 @@ import morgan from 'morgan'
 import Loadable from 'react-loadable'
 import cookieParser from 'cookie-parser'
 import rfs from 'rotating-file-stream'
+import passport from 'passport'
 
 import loader from './loader'
-import setHeaers from './headers'
+import setHeaders from './headers'
 const app = express()
 const PORT = 3000
 const accessLogStream = rfs('access.log', {
@@ -21,10 +22,31 @@ app.use(json())
 app.use(urlencoded({ extended: false }))
 app.use(morgan(':date[clf] :method :url :status :response-time ms :referrer :remote-addr - :remote-user', { stream: accessLogStream }))
 app.use(cookieParser())
-app.use(setHeaers)
+app.use(setHeaders)
 app.use(express.Router().get('/', loader))
 app.use(express.static(resolve(__dirname, '../build')))
 app.use(loader)
+
+app.get('/auth/facebook', passport.authenticate('facebook'), (req, res) => {})
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/signin' }), (req, res) => {
+  res.redirect('/dashboard')
+})
+app.get('/auth/twitter', passport.authenticate('twitter'), (req, res) => {})
+app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/signin' }), (req, res) => {
+  res.redirect('/dashboard')
+})
+app.get('/auth/google', passport.authenticate('google', {
+  scope: [
+    'https://www.googleapis.com/auth/plus.login',
+    'https://www.googleapis.com/auth/plus.profile.emails.read'
+  ] }))
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/signin' }), (req, res) => {
+  res.redirect('/dashboard')
+})
+app.get('/socialSignout', (req, res) => {
+  req.logout()
+  res.redirect('/signed-out')
+})
 
 Loadable.preloadAll().then(() => {
   app.listen(PORT, console.log(`Listening on port ${PORT}`))

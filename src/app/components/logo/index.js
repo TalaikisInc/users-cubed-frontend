@@ -1,15 +1,18 @@
 import React, { PureComponent } from 'react'
 import { Navbar } from 'react-bulma-components'
+import { connect } from 'react-redux'
 
 import logo from '../../assets/logo.svg'
+import { setBurger } from '../../../modules/auth'
 
 class Logo extends PureComponent {
-  state = {
-    open: false
+  constructor (props) {
+    super(props)
+    this.toggleBurger = this.toggleBurger.bind(this)
   }
 
-  toggleBurger = () => {
-
+  toggleBurger () {
+    this.props.burger ? this.props.setBurger(!this.props.burger) : this.props.setBurger(true)
   }
 
   render () {
@@ -18,14 +21,22 @@ class Logo extends PureComponent {
         <Navbar.Item renderAs="a" href="/">
           <img src={logo} alt="BlueBlood Ltd." width="112" height="28" />
         </Navbar.Item>
-        <span role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu" onClick={this.toggleBurger}>
+        <div role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" onClick={this.toggleBurger}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </span>
+        </div>
       </Navbar.Brand>
     )
   }
 }
 
-export default Logo
+const mapStateToProps = (state) => ({
+  burger: state.auth.burger
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setBurger: (state) => dispatch(setBurger(state))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logo)
