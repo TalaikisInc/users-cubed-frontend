@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { validate } from 'isemail'
 
 import Page from '../../components/page'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { editUser, setError, setLanguage, getLanguage } from '../../../modules/auth'
 import Error from '../../components/error'
 import ProfileEditForm from '../../components/profile-edit-form'

@@ -1,8 +1,9 @@
 import { STORAGE_ID } from '../config'
-import api from '../app/utils/api'
-import contactApi from '../app/utils/contact'
-import secureApi from '../app/utils/secure'
-import { setLocale } from '../app/translations'
+import api from '../utils/api'
+import contactApi from '../utils/contact'
+import secureApi from '../utils/secure'
+import { setLocale } from '../translations'
+import history from '../utils/history'
 
 const initialState = {
   isAuthenticated: false,
@@ -99,6 +100,7 @@ export const getUser = () => {
   return (dispatch) => {
     const token = localStorage.getItem(`${STORAGE_ID}_token`)
     if (token) {
+      // @TODO extend token with each request
       secureApi(token, { action: 'USER_GET' }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
@@ -118,6 +120,7 @@ export const editUser = (rest) => {
     if (token) {
       secureApi(token, { action: 'USER_EDIT', ...rest }, (res) => {
         if (res && res.error) {
+          // @TODO dispatch logout if error is 'unauthorized'
           dispatch(_error(res.error))
         } else if (res && res.email) {
           dispatch(setCurrentUser(res))
@@ -138,6 +141,7 @@ export const deleteUser = () => {
           localStorage.removeItem(`${STORAGE_ID}_token`)
           dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
+          history.push('/profile-deleted')
         }
       })
     }
@@ -155,6 +159,7 @@ export const signoutUser = () => {
           localStorage.removeItem(`${STORAGE_ID}_token`)
           dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
+          history.push('/signed-out')
         }
       })
     }

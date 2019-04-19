@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Page from '../../components/page'
 import Error from '../../components/error'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { getUser, setError, getLanguage, setLanguage } from '../../../modules/auth'
 import { isServer } from '../../../store'
 

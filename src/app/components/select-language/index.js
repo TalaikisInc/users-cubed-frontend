@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { locales } from '../../translations'
+import { locales } from '../../../translations'
 import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class SelectLanguage extends PureComponent {

@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 
-import { CONTACT_API_URL, CONTACT_API_KEY, STORAGE_ID } from '../../config'
+import { CONTACT_API_URL, CONTACT_API_KEY, STORAGE_ID } from '../config'
 
 const contactApi = (name, email, message, done) => {
   const locale = localStorage.getItem(`${STORAGE_ID}_locale`)

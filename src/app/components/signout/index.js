@@ -3,7 +3,7 @@ import { Navbar, Button, Icon } from 'react-bulma-components'
 import { connect } from 'react-redux'
 
 import { signoutUser, setError } from '../../../modules/auth'
-import history from '../../utils/history'
+import history from '../../../utils/history'
 
 class Signout extends PureComponent {
   constructor (props) {

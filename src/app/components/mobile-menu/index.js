@@ -3,25 +3,25 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Signout from '../signout'
+import { isServer } from '../../../store'
 
 class MobileMenu extends PureComponent {
   render () {
     const { isAuthenticated, burger } = this.props
 
     return (
-      burger ? 
-        <ul class="menu-list">
-          <li><Link to="/products">Products</Link></li>
-          { !isAuthenticated ? <Fragment>
-            <li><Link to="/signin">Sign In</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
+      burger && !isServer && window.innerWidth < 800 ? <ul class="menu-list">
+        <li><Link to="/products">Products</Link></li>
+        { !isAuthenticated ? <Fragment>
+          <li><Link to="/signin">Sign In</Link></li>
+          <li><Link to="/signup">Sign Up</Link></li>
+        </Fragment>
+          : <Fragment>
+            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><Signout /></li>
           </Fragment>
-            : <Fragment>
-              <li><Link to="/dashboard">Dashboard</Link></li>
-              <li><Signout /></li>
-            </Fragment>
-          }
-        </ul>
+        }
+      </ul>
         : null
     )
   }

@@ -7,7 +7,7 @@ import SigninForm from '../../components/signin-form'
 import Error from '../../components/error'
 import { DESCRIPTIONS } from '../../../config'
 import { signin, setError, setLanguage, getLanguage } from '../../../modules/auth'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 
 class Signin extends PureComponent {
   state = { loading: false }

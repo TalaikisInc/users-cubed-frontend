@@ -8,7 +8,7 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import SignupForm from '../../components/signup-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { signup, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class Signup extends PureComponent {

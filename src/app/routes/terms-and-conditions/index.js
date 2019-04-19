@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { DESCRIPTIONS, COMPANY, COMPANY_ADDRESS, URL, COMPANY_EMAIL, API_URL } from '../../../config'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class ToS extends PureComponent {

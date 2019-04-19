@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import countries from '../../utils/countries'
+import countries from '../../../utils/countries'
 
 class SelectCountry extends PureComponent {
   constructor (props) {

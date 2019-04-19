@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-unfetch'
 
-import { STORAGE_ID, API_URL, API_KEY } from '../../config'
+import { API_URL, API_KEY, STORAGE_ID } from '../config'
 
-const api = (data, done) => {
+const secureApi = (token, data, done) => {
   const locale = localStorage.getItem(`${STORAGE_ID}_locale`)
   data['key'] = API_KEY
   data['locale'] = locale
@@ -11,7 +11,8 @@ const api = (data, done) => {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     }
   })
     .then((res) => {
@@ -25,4 +26,4 @@ const api = (data, done) => {
     })
 }
 
-export default api
+export default secureApi

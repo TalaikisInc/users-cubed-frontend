@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { COMPANY, UPDATE_FREQUENCY, DESCRIPTIONS } from '../../../config'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class Disclaimer extends PureComponent {

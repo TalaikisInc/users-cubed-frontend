@@ -7,6 +7,7 @@ import Loadable from 'react-loadable'
 import cookieParser from 'cookie-parser'
 import rfs from 'rotating-file-stream'
 import passport from 'passport'
+import rateLimit from 'express-rate-limit'
 
 import loader from './loader'
 import setHeaders from './headers'
@@ -16,7 +17,12 @@ const accessLogStream = rfs('access.log', {
   interval: '1d',
   path: resolve(__dirname, '../.logs')
 })
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // per window
+})
 
+app.use(limiter)
 app.use(compression())
 app.use(json())
 app.use(urlencoded({ extended: false }))

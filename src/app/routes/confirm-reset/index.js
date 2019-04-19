@@ -7,7 +7,7 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ConfirmResetForm from '../../components/confirmreset-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { confirmReset, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class ConfirmReset extends PureComponent {

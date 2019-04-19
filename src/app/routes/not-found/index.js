@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import Page from '../../components/page'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class NotFound extends PureComponent {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import dialCodes from '../../utils/dialCodes'
+import dialCodes from '../../../utils/dialCodes'
 
 class SelectDial extends PureComponent {
   constructor (props) {
@@ -21,7 +21,7 @@ class SelectDial extends PureComponent {
     for (let i = 0; i < dialCodes.length; i++) {
       list.push(<option value={dialCodes[i].dial} key={i}>{dialCodes[i].dial}</option>)
     }
-    const { input, label, meta, currentUser } = this.props
+    const { input, label, meta } = this.props
     const { touched, error, warning } = meta
     const classes = touched && error ? 'input is-danger' : 'input'
     const selectClasses = touched && error ? 'select is-danger' : 'select'
@@ -40,7 +40,7 @@ class SelectDial extends PureComponent {
             </div>
             <div className="column is-three-quarters">
               <div className="control">
-                <input className={classes} type="tel" placeholder={label} autoComplete="tel-national" onChange={input.onChange} value={input.value} />
+                <input className={classes} type="tel" placeholder={label} autoComplete="tel-national" {...input} />
               </div>
             </div>
           </div>

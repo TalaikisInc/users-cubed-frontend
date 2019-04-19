@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
-import { connect } from 'react-redux'
 
 import InputField from '../input'
 import Submit from '../submit'

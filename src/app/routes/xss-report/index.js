@@ -7,7 +7,7 @@ import Error from '../../components/error'
 import Message from '../../components/message'
 import ContactForm from '../../components/contact-form'
 import { DESCRIPTIONS } from '../../../config'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { contact, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class XSSReport extends PureComponent {

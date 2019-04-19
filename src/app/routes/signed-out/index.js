@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Page from '../../components/page'
 import { DESCRIPTIONS } from '../../../config'
 import Error from '../../components/error'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class SignedOut extends PureComponent {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { DESCRIPTIONS, COMPANY, URL, DPM_EMAIL } from '../../../config'
-import { t } from '../../translations'
+import { t } from '../../../translations'
 import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class PrivacyPolicy extends PureComponent {
