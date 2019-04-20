@@ -6,6 +6,7 @@ import Page from '../../components/page'
 import { t } from '../../../translations'
 import { editUser, setError, setLanguage, getLanguage } from '../../../modules/auth'
 import Error from '../../components/error'
+import Message from '../../components/message'
 import ProfileEditForm from '../../components/profile-edit-form'
 
 class ProfileEdit extends PureComponent {
@@ -46,10 +47,12 @@ class ProfileEdit extends PureComponent {
   }
 
   render () {
-    const { error, currentUser, loading } = this.props
+    const { error, currentUser, loading, editStatus } = this.props
+    console.log(currentUser)
 
     return (
       <Page title={t('profile_edit')} noCrawl>
+        { editStatus ? <Message>{t('edit_confirmed')}.</Message> : null }
         <ProfileEditForm handleSubmit={this.submit} loading={loading} currentUser={currentUser}/>
         { error ? <Error>{error}</Error> : null }
       </Page>
@@ -59,6 +62,7 @@ class ProfileEdit extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  editStatus: state.auth.editStatus,
   currentUser: state.auth.currentUser,
   loading: state.auth.loading
 })

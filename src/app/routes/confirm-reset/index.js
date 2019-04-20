@@ -47,10 +47,10 @@ class ConfirmReset extends PureComponent {
 
     return (
       <Page title={t('confirm_reset')} description={DESCRIPTIONS.confirmreset} path="/confirm-reset">
+        { error ? <Error>{error}</Error> : null }
         { confirmResetStatus ? <Message>{t('reset_confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmResetForm handleSubmit={this.submit} loading={loading} />
         }
-        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

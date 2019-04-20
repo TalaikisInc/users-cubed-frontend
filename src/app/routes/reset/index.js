@@ -43,10 +43,10 @@ class Reset extends PureComponent {
 
     return (
       <Page title={t('reset')} description={DESCRIPTIONS.reset} path="/reset">
+        { error ? <Error>{error}</Error> : null }
         { resetStatus ? <Message>{t('password_reset')}<Link to="/confirm-reset">{t('confirm')}</Link>{t('reset_sent')}</Message>
           : <ResetForm handleSubmit={this.submit} loading={loading} />
         }
-        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

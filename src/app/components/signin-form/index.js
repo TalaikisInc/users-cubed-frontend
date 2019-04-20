@@ -37,13 +37,13 @@ const SigninForm = (props) => {
       <Field name="email" type="email" component={InputField} label="Email" icon="envelope" autoComplete="email" />
       <Field name="password" type="password" component={InputField} label="Password" icon="lock" autoComplete="current-password" />
       <Submit label="Sign In" loading={loading} />
-      <FacebookLoginButton onClick={() => alert("Hello")}>
+      <FacebookLoginButton onClick={() => this.props.socialSignin('facebook')}>
         <span>Signin with Facebook</span>
       </FacebookLoginButton>
-      <GoogleLoginButton onClick={() => alert("Hello")}>
+      <GoogleLoginButton onClick={() => this.props.socialSignin('google')}>
         <span>Signin with Google</span>
       </GoogleLoginButton>
-      <TwitterLoginButton onClick={() => alert("Hello")}>
+      <TwitterLoginButton onClick={() => this.props.socialSignin('twitter')}>
         <span>Signin with Twitter</span>
       </TwitterLoginButton>
     </Form>

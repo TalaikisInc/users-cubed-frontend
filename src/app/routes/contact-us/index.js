@@ -44,10 +44,10 @@ class ContactUs extends PureComponent {
 
     return (
       <Page title={t('contact')} description={DESCRIPTIONS.contactUs} path="/contact-us">
+        { error ? <Error>{error}</Error> : null }
         { contactStatus ? <Message>{t('received')}</Message>
           : <ContactForm handleSubmit={this.submit} loading={loading} />
         }
-        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

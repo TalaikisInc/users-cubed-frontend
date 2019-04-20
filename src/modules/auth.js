@@ -58,6 +58,8 @@ export default (state = initialState, action) => {
       return { ...state, locale: action.payload }
     case 'SET_BURGER':
       return { ...state, burger: action.payload }
+    case 'EDIT_STATUS':
+      return { ...state, editStatus: action.payload }
     default:
       return state
   }
@@ -124,6 +126,11 @@ export const setBurger = (burger) => ({
   payload: burger
 })
 
+export const editStatus = (status) => ({
+  type: 'EDIT_STATUS',
+  payload: status
+})
+
 export const getUser = () => {
   return (dispatch) => {
     dispatch(isLoading(true))
@@ -150,10 +157,15 @@ export const editUser = (rest) => {
     if (token) {
       secureApi(token, { action: 'USER_EDIT', ...rest }, (res) => {
         if (res && res.error) {
-          // @TODO dispatch logout if error is 'unauthorized'
+          if (res.error === 'Unauthorized.') {
+            dispatch(setSignin(false))
+            dispatch(setCurrentUser({}))
+          }
           dispatch(_error(res.error))
         } else if (res && res.email) {
           dispatch(setCurrentUser(res))
+          dispatch(_error(null))
+          dispatch(editStatus(true))
         }
       })
     }
@@ -305,22 +317,15 @@ export const contact = ({ name, email, message }) => {
 
 export const socialSignin = (provider) => {
   return (dispatch) => {
-    dispatch(isLoading(false))
-    api({ action: 'TOKEN_CREATE_SOCIAL' }, (res) => {
+    dispatch(isLoading(true))
+    api({ action: 'USER_CREATE_SOCIAL', provider }, (res) => {
       if (res && res.error) {
-        api({ action: `USER_CREATE_${provider}` }, (res) => {
-          if (res && res.error) {
-            dispatch(_error(res.error))
-          } else if (res && res.status === 'OK.') {
-            dispatch(signupUser(true))
-          }
-          dispatch(isLoading(false))
-        })
-      } else if (res && res.token) {
-        localStorage.setItem(`${STORAGE_ID}_token`, res.token)
-        dispatch(setSignin((true)))
-        dispatch(isLoading(false))
+        dispatch(_error(res.error))
+      } else if (res && res.status === 'OK.') {
+        // @TODO we should get token here
+        dispatch(signupUser(true))
       }
+      dispatch(isLoading(false))
     })
   }
 }

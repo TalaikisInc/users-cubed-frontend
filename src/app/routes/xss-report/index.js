@@ -44,10 +44,10 @@ class XSSReport extends PureComponent {
 
     return (
       <Page title={t('xss_report')} description={DESCRIPTIONS.contactUs} path="/xss-report">
+        { error ? <Error>{error}</Error> : null }
         { contactStatus ? <Message>{t('received')}</Message>
           : <ContactForm handleSubmit={this.submit} loading={loading} />
         }
-        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

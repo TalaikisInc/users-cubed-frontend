@@ -6,7 +6,6 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* dialCode isn't sent
 * social login (+backend part)
 * refer system from an API
 

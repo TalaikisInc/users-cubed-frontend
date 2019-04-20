@@ -44,10 +44,10 @@ class ReportCertTransparency extends PureComponent {
 
     return (
       <Page title={t('report_cert_transparency')} description={DESCRIPTIONS.contactUs} path="/report-cert-transparency">
+        { error ? <Error>{error}</Error> : null }
         { contactStatus ? <Message>{t('received')}</Message>
           : <ContactForm handleSubmit={this.submit} loading={loading} />
         }
-        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

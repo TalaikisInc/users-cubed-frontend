@@ -29,5 +29,6 @@ export default {
   tac: 'Terms and Conditions',
   report_cert_transparency: 'Report Certificate Transparency Issues',
   xss_report: 'Report XSS Vulnerability',
-  now_sign: 'Now you can '
+  now_sign: 'Now you can ',
+  edit_confirmed: 'Profile updated.'
 }

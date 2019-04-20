@@ -10,7 +10,7 @@ class MobileMenu extends PureComponent {
     const { isAuthenticated, burger } = this.props
 
     return (
-      burger && !isServer && window.innerWidth < 800 ? <ul class="menu-list">
+      burger && !isServer && window.innerWidth < 800 ? <ul className="menu-list">
         <li><Link to="/products">Products</Link></li>
         { !isAuthenticated ? <Fragment>
           <li><Link to="/signin">Sign In</Link></li>

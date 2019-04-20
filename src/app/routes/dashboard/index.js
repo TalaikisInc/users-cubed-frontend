@@ -28,9 +28,18 @@ class Dashboard extends PureComponent {
 
     return (
       <Page title={t('dashboard')} noCrawl>
-        <p><b>Email:</b> {currentUser.email}</p>
-        <p><strong><Link to="/profile-edit">Edit Profile</Link></strong></p>
         { error ? <Error>{error}</Error> : null }
+        <p><b>Email:</b> {currentUser.email}</p>
+        <p><b>First name:</b> {currentUser.firstName}</p>
+        <p><b>Last name:</b> {currentUser.lastName}</p>
+        <p><b>Phone:</b> {currentUser.dialCoode} {currentUser.phone}</p>
+        <p><b>Address:</b> {currentUser.address}</p>
+        <p><b>ZIP Code:</b> {currentUser.zipCode}</p>
+        <p><b>City:</b> {currentUser.city}</p>
+        <p><b>Country:</b> {currentUser.country}</p>
+        <p><b>Date of Birth:</b> {currentUser.dob}</p>
+        <p><b>Avatar:</b> {currentUser.avatarUrl}</p>
+        <p><strong><Link to="/profile-edit">Edit Profile</Link></strong></p>
       </Page>
     )
   }

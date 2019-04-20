@@ -46,10 +46,10 @@ class Confirm extends PureComponent {
 
     return (
       <Page title={t('confirm_title')} description={DESCRIPTIONS.confirm} path="/confirm">
+        { error ? <Error>{error}</Error> : null }
         { confirmStatus ? <Message>{t('confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmForm handleSubmit={this.submit} loading={loading} />
         }
-        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

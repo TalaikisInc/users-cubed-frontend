@@ -45,10 +45,10 @@ class Signup extends PureComponent {
 
     return (
       <Page title={t('signup')} description={DESCRIPTIONS.signup} path="/signup">
+        { error ? <Error>{error}</Error> : null }
         { signupStatus ? <Message>{t('registered')}<Link to="/confirm">{t('confirm')}</Link>{t('your_account')}</Message>
           : <SignupForm handleSubmit={this.submit} loading={loading} />
         }
-        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

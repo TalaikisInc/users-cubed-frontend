@@ -45,8 +45,8 @@ class Signin extends PureComponent {
 
     return (
       <Page title={t('signin')} description={DESCRIPTIONS.signin} path="/signin">
-        <SigninForm handleSubmit={this.submit} loading={loading} />
         { error ? <Error>{error}</Error> : null }
+        <SigninForm handleSubmit={this.submit} loading={loading} />
       </Page>
     )
   }

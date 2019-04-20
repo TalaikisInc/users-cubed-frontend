@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import countries from '../../../utils/countries'
 
@@ -12,8 +13,7 @@ class SelectCountry extends PureComponent {
 
   onChange (e) {
     e.preventDefault()
-    const country = e.target.value
-    this.setState({ country })
+    this.setState({ country: e.target.value })
   }
 
   render () {
@@ -21,19 +21,22 @@ class SelectCountry extends PureComponent {
     for (let i = 0; i < countries.length; i++) {
       countriesList.push(<option value={countries[i].key} key={i}>{countries[i].country}</option>)
     }
-    const { input, label, icon, meta } = this.props
+    const { input, label, icon, meta, currentUser } = this.props
     const { touched, error, warning } = meta
     const classes = touched && error ? 'select is-danger' : 'select'
     const iconClass = `fas fa-${icon}`
+    const disabled = typeof currentUser.country === 'string' && currentUser.country.length > 0
 
     return (
       <div className="field">
         <label className="label"> {label }</label>
         <div className="control has-icons-left">
           <div className={classes}>
-            <select {...input} value={this.state.country} onChange={this.onChange}>
+            { disabled ? <select name='country' value={currentUser.country} disabled>
               { countriesList }
-            </select>
+            </select> : <select {...input} value={this.state.country} onChange={this.onChange}>
+              { countriesList }
+            </select> }
           </div>
           <span className="icon is-small is-left">
             <i className={iconClass}></i>
@@ -55,4 +58,8 @@ SelectCountry.propTypes = {
   icon: PropTypes.string
 }
 
-export default SelectCountry
+const mapStateToProps = (state) => ({
+  currentUser: state.auth.currentUser
+})
+
+export default connect(mapStateToProps, null)(SelectCountry)
