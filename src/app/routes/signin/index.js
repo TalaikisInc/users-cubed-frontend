@@ -10,7 +10,10 @@ import { signin, setError, setLanguage, getLanguage } from '../../../modules/aut
 import { t } from '../../../translations'
 
 class Signin extends PureComponent {
-  state = { loading: false }
+  constructor (props) {
+    super(props)
+    this.submit = this.submit.bind(this)
+  }
 
   componentWillMount () {
     this.props.setError(null)
@@ -22,9 +25,8 @@ class Signin extends PureComponent {
     }
   }
 
-  submit = (e) => {
+  submit (e) {
     e.preventDefault()
-    this.setState({ loading: true })
     const { target } = e
     const email = target[0].value
     const password = target[1].value
@@ -33,20 +35,18 @@ class Signin extends PureComponent {
     } else {
       this.props.setError(t('check_form'))
     }
-    this.setState({ loading: false })
   }
 
-  render() {
-    const { loading } = this.state
-    const { error, isAuthenticated, history } = this.props
+  render () {
+    const { error, isAuthenticated, history, loading } = this.props
     if (isAuthenticated) {
       history.push({ pathname: '/dashboard' })
     }
 
     return (
       <Page title={t('signin')} description={DESCRIPTIONS.signin} path="/signin">
-        { error ? <Error msg={error}/> : null }
         <SigninForm handleSubmit={this.submit} loading={loading} />
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }
@@ -54,7 +54,8 @@ class Signin extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

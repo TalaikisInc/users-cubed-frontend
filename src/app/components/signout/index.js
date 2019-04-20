@@ -8,23 +8,20 @@ import history from '../../../utils/history'
 class Signout extends PureComponent {
   constructor (props) {
     super(props)
-    this.state = { loading: false }
     this.signout = this.signout.bind(this)
   }
 
   signout () {
-    this.setState({ loading: true })
     if (this.props.currentUser && this.props.currentUser.email) {
       this.props.signoutUser()
       history.push('/signed-out')
     } else {
       this.props.setError('User is already signed out.')
     }
-    this.setState({ loading: false })
   }
 
   render () {
-    const { loading } = this.state
+    const { loading } = this.props
 
     return (
       <Navbar.Item>
@@ -37,7 +34,8 @@ class Signout extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

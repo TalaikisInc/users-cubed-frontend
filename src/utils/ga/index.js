@@ -1,3 +1,27 @@
+import ua from 'universal-analytics'
+
+import { isServer } from '../../store'
+import { GA, DEBUG } from '../../config'
+import { CIDs } from './cid'
+
+const size = !isServer ? window.innerWidth : 'none'
+const cid = !isServer ? CIDs.get() : 'none'
+const headers = {}
+const visitorOptions = {
+  cid,
+  headers,
+  sr: size
+}
+
+const visitor = ua(GA, visitorOptions).debug(DEBUG)
+
+export const pageview = (pathname) => visitor.pageview({
+  dp: pathname
+}).send()
+
+export const event = (category, action, label, value) => visitor.event(category, action, label, value).send()
+
+/*
 import React, { Component } from 'react'
 import ReactGA from 'react-ga'
 
@@ -32,3 +56,4 @@ export default function withTracker (WrappedComponent, options = {}) {
 
   return HOC
 }
+*/

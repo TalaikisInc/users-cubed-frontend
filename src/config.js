@@ -1,4 +1,5 @@
 const PROD = process.env.NODE_ENV === 'production'
+export const DEBUG = !PROD
 
 // Main
 export const STORAGE_ID = 'id'

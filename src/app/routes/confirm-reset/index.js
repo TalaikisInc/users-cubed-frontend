@@ -11,7 +11,10 @@ import { t } from '../../../translations'
 import { confirmReset, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class ConfirmReset extends PureComponent {
-  state = { loading: false }
+  constructor (props) {
+    super(props)
+    this.submit = this.submit.bind(this)
+  }
 
   componentWillMount () {
     this.props.setError(null)
@@ -28,9 +31,8 @@ class ConfirmReset extends PureComponent {
     }
   }
 
-  submit = (e) => {
+  submit (e) {
     e.preventDefault()
-    this.setState({ loading: true })
     const { target } = e
     const token = target[0].value
     if (token && token.length === 64) {
@@ -38,19 +40,17 @@ class ConfirmReset extends PureComponent {
     } else {
       this.props.setError(t('check_form'))
     }
-    this.setState({ loading: false })
   }
 
   render () {
-    const { loading } = this.state
-    const { error, confirmResetStatus } = this.props
+    const { error, confirmResetStatus, loading } = this.props
 
     return (
       <Page title={t('confirm_reset')} description={DESCRIPTIONS.confirmreset} path="/confirm-reset">
-        { error ? <Error msg={error}/> : null }
         { confirmResetStatus ? <Message>{t('reset_confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmResetForm handleSubmit={this.submit} loading={loading} />
         }
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }
@@ -58,7 +58,8 @@ class ConfirmReset extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  confirmResetStatus: state.auth.confirmResetStatus
+  confirmResetStatus: state.auth.confirmResetStatus,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

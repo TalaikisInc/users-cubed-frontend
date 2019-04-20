@@ -5,8 +5,8 @@ import Loadable from 'react-loadable'
 import AuthenticatedRoute from '../components/authenticated-route'
 import UnauthenticatedRoute from '../components/unauthenticated-route'
 import NotFound from './not-found'
-import withTracker from '../../utils/ga'
-import { GA } from '../../config'
+// import withTracker from '../../utils/ga'
+// import { GA } from '../../config'
 
 const Homepage = Loadable({
   loader: () => import(/* webpackChunkName: "homepage" */ './homepage'),
@@ -111,9 +111,11 @@ const XSSReport = Loadable({
   modules: ['xss-report']
 })
 
+// <Route exact path="/" component={withTracker(Homepage, { userID: GA })} />
+
 export default () => (
   <Switch>
-    <Route exact path="/" component={withTracker(Homepage, { userID: GA })} />
+    <Route exact path="/" component={Homepage} />
     <Route exact path="/about" component={About} />
     <Route exact path="/about/:locale" component={About} />
     <Route exact path="/contact-us" component={ContactUs} />
@@ -136,7 +138,6 @@ export default () => (
     <Route exact path="/confirm/:token" component={Confirm} />
     <Route exact path="/confirm/:token/:locale" component={Confirm} />
     <Route exact path="/confirm-reset" component={ConfirmReset} />
-    <Route exact path="/confirm-reset/:locale" component={ConfirmReset} />
     <Route exact path="/confirm-reset/:token" component={ConfirmReset} />
     <Route exact path="/confirm-reset/:token/:locale" component={ConfirmReset} />
     <Route exact path="/report-cert-transparency/:locale" component={ReportCertTransparency} />

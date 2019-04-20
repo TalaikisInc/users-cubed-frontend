@@ -11,7 +11,6 @@ import ProfileEditForm from '../../components/profile-edit-form'
 class ProfileEdit extends PureComponent {
   constructor (props) {
     super(props)
-    this.state = { loading: false }
     this.submit = this.submit.bind(this)
   }
 
@@ -27,7 +26,6 @@ class ProfileEdit extends PureComponent {
 
   submit (e) {
     e.preventDefault()
-    this.setState({ loading: true })
     const { target } = e
     const email = target[0].value
     const firstName = target[1].value
@@ -45,17 +43,15 @@ class ProfileEdit extends PureComponent {
     } else {
       this.props.setError(t('check_form'))
     }
-    this.setState({ loading: false })
   }
 
   render () {
-    const { loading } = this.state
-    const { error, currentUser } = this.props
+    const { error, currentUser, loading } = this.props
 
     return (
       <Page title={t('profile_edit')} noCrawl>
-        { error ? <Error msg={error}/> : null }
         <ProfileEditForm handleSubmit={this.submit} loading={loading} currentUser={currentUser}/>
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }
@@ -63,7 +59,8 @@ class ProfileEdit extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
+import { FacebookLoginButton, GoogleLoginButton, TwitterLoginButton } from 'react-social-login-buttons'
 
 import InputField from '../input'
 import Submit from '../submit'
@@ -36,6 +37,15 @@ const SigninForm = (props) => {
       <Field name="email" type="email" component={InputField} label="Email" icon="envelope" autoComplete="email" />
       <Field name="password" type="password" component={InputField} label="Password" icon="lock" autoComplete="current-password" />
       <Submit label="Sign In" loading={loading} />
+      <FacebookLoginButton onClick={() => alert("Hello")}>
+        <span>Signin with Facebook</span>
+      </FacebookLoginButton>
+      <GoogleLoginButton onClick={() => alert("Hello")}>
+        <span>Signin with Google</span>
+      </GoogleLoginButton>
+      <TwitterLoginButton onClick={() => alert("Hello")}>
+        <span>Signin with Twitter</span>
+      </TwitterLoginButton>
     </Form>
   )
 }

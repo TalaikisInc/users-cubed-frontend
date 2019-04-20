@@ -11,7 +11,10 @@ import { t } from '../../../translations'
 import { confirm, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class Confirm extends PureComponent {
-  state = { loading: false, token: null }
+  constructor (props) {
+    super(props)
+    this.submit = this.submit.bind(this)
+  }
 
   componentWillMount () {
     const { params } = this.props.match
@@ -29,7 +32,6 @@ class Confirm extends PureComponent {
 
   submit = (e) => {
     e.preventDefault()
-    this.setState({ loading: true })
     const { target } = e
     const token = target[0].value
     if (token && token.length === 64) {
@@ -37,19 +39,17 @@ class Confirm extends PureComponent {
     } else {
       this.props.setError(t('check_form'))
     }
-    this.setState({ loading: false })
   }
 
   render () {
-    const { loading } = this.state
-    const { error, confirmStatus } = this.props
+    const { error, confirmStatus, loading } = this.props
 
     return (
       <Page title={t('confirm_title')} description={DESCRIPTIONS.confirm} path="/confirm">
-        { error ? <Error msg={error}/> : null }
         { confirmStatus ? <Message>{t('confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmForm handleSubmit={this.submit} loading={loading} />
         }
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }
@@ -57,7 +57,8 @@ class Confirm extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  confirmStatus: state.auth.confirmStatus
+  confirmStatus: state.auth.confirmStatus,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

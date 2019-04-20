@@ -40,11 +40,14 @@
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
+    "react-social-login-buttons": "^2.3.1",
     "redux": "^4.0.0",
     "redux-form": "^8.1.0",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rotating-file-stream": "^1.4.0"
+    "rotating-file-stream": "^1.4.0",
+    "universal-analytics": "^0.4.20",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "build:scss": "node-sass --omit-source-map-url src/styles/styles.scss src/styles/main.css",
@@ -83,9 +86,11 @@
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.0",
     "glob-all": "^3.1.0",
     "lodash": "^4.17.11",

@@ -6,10 +6,7 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* edit profile (on backend part)
-* profile can render from without currentUser data
 * dialCode isn't sent
-* add loading when api calls are running
 * social login (+backend part)
 * refer system from an API
 

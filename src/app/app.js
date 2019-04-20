@@ -8,10 +8,12 @@ import Routes from './routes'
 import Header from './components/header'
 import CubedFooter from './components/footer'
 import { COMPANY } from '../config'
+import { pageview } from '../utils/ga'
 
 class App extends PureComponent {
   render () {
     const { isAuthenticated, location } = this.props
+    pageview(location.pathname)
 
     return (
       <Fragment>

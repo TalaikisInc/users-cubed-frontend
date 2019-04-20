@@ -3,7 +3,11 @@ module.exports = {
     'browser': true,
     'es6': true
   },
-  'extends': 'standard',
+  'extends': [
+    'standard',
+    'plugin:jsx-a11y/recommended',
+    'plugin:security/recommended'
+  ],
   'globals': {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly'
@@ -16,9 +20,11 @@ module.exports = {
     'sourceType': 'module'
   },
   'plugins': [
-    'react'
+    'react',
+    'jsx-a11y',
+    'security'
   ],
   'rules': {
-    'no-unused-vars': [0, 'always']
+    'no-unused-vars': 0
   }
 }

@@ -12,7 +12,10 @@ import { t } from '../../../translations'
 import { signup, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class Signup extends PureComponent {
-  state = { loading: false }
+  constructor (props) {
+    super(props)
+    this.submit = this.submit.bind(this)
+  }
 
   componentWillMount () {
     this.props.setError(null)
@@ -24,9 +27,8 @@ class Signup extends PureComponent {
     }
   }
 
-  submit = (e) => {
+  submit (e) {
     e.preventDefault()
-    this.setState({ loading: true })
     const { target } = e
     const email = target[0].value
     const password = target[1].value
@@ -36,19 +38,17 @@ class Signup extends PureComponent {
     } else {
       this.props.setError(t('check_form'))
     }
-    this.setState({ loading: false })
   }
 
   render () {
-    const { loading } = this.state
-    const { error, signupStatus } = this.props
+    const { error, signupStatus, loading } = this.props
 
     return (
       <Page title={t('signup')} description={DESCRIPTIONS.signup} path="/signup">
-        { error ? <Error msg={error}/> : null }
         { signupStatus ? <Message>{t('registered')}<Link to="/confirm">{t('confirm')}</Link>{t('your_account')}</Message>
           : <SignupForm handleSubmit={this.submit} loading={loading} />
         }
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }
@@ -56,7 +56,8 @@ class Signup extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  signupStatus: state.auth.signupStatus
+  signupStatus: state.auth.signupStatus,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

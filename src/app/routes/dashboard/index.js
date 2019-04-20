@@ -28,9 +28,9 @@ class Dashboard extends PureComponent {
 
     return (
       <Page title={t('dashboard')} noCrawl>
-        { error ? <Error msg={error}/> : null }
         <p><b>Email:</b> {currentUser.email}</p>
         <p><strong><Link to="/profile-edit">Edit Profile</Link></strong></p>
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }

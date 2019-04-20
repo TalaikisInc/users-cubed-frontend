@@ -12,7 +12,10 @@ import { t } from '../../../translations'
 import { reset, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class Reset extends PureComponent {
-  state = { loading: false }
+  constructor (props) {
+    super(props)
+    this.submit = this.submit.bind(this)
+  }
 
   componentWillMount () {
     this.props.setError(null)
@@ -24,9 +27,8 @@ class Reset extends PureComponent {
     }
   }
 
-  submit = (e) => {
+  submit (e) {
     e.preventDefault()
-    this.setState({ loading: true })
     const { target } = e
     const email = target[0].value
     if (email && isemail.validate(email)) {
@@ -34,19 +36,17 @@ class Reset extends PureComponent {
     } else {
       this.props.setError(t('check_form'))
     }
-    this.setState({ loading: false })
   }
 
   render () {
-    const { loading } = this.state
-    const { error, resetStatus } = this.props
+    const { error, resetStatus, loading } = this.props
 
     return (
       <Page title={t('reset')} description={DESCRIPTIONS.reset} path="/reset">
-        { error ? <Error msg={error}/> : null }
         { resetStatus ? <Message>{t('password_reset')}<Link to="/confirm-reset">{t('confirm')}</Link>{t('reset_sent')}</Message>
           : <ResetForm handleSubmit={this.submit} loading={loading} />
         }
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }
@@ -54,7 +54,8 @@ class Reset extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  resetStatus: state.auth.resetStatus
+  resetStatus: state.auth.resetStatus,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

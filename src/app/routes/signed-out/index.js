@@ -23,7 +23,7 @@ class SignedOut extends PureComponent {
 
     return (
       <Page title={t('signed_out')} description={DESCRIPTIONS.signedOut} path="/signed-out">
-        { error ? <Error msg={error}/> : <p>{t('signed_out_text')} {t('now_sign')}<Link to="/signin">{t('signin')}</Link></p> }
+        { error ? <Error>{error}</Error> : <p>{t('signed_out_text')} {t('now_sign')}<Link to="/signin">{t('signin')}</Link></p> }
       </Page>
     )
   }

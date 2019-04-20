@@ -11,7 +11,10 @@ import { t } from '../../../translations'
 import { contact, setError, setLanguage, getLanguage } from '../../../modules/auth'
 
 class ReportCertTransparency extends PureComponent {
-  state = { loading: false }
+  constructor (props) {
+    super(props)
+    this.submit = this.submit.bind(this)
+  }
 
   componentWillMount () {
     this.props.setError(null)
@@ -23,9 +26,8 @@ class ReportCertTransparency extends PureComponent {
     }
   }
 
-  submit = (e) => {
+  submit (e) {
     e.preventDefault()
-    this.setState({ loading: true })
     const { target } = e
     const name = target[0].value
     const email = target[1].value
@@ -35,19 +37,17 @@ class ReportCertTransparency extends PureComponent {
     } else {
       this.props.setError(t('check_form'))
     }
-    this.setState({ loading: false })
   }
 
   render () {
-    const { loading } = this.state
-    const { error, contactStatus } = this.props
+    const { error, contactStatus, loading } = this.props
 
     return (
       <Page title={t('report_cert_transparency')} description={DESCRIPTIONS.contactUs} path="/report-cert-transparency">
-        { error ? <Error msg={error}/> : null }
         { contactStatus ? <Message>{t('received')}</Message>
           : <ContactForm handleSubmit={this.submit} loading={loading} />
         }
+        { error ? <Error>{error}</Error> : null }
       </Page>
     )
   }
@@ -55,7 +55,8 @@ class ReportCertTransparency extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  contactStatus: state.auth.contactStatus
+  contactStatus: state.auth.contactStatus,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({
