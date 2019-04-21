@@ -6,7 +6,7 @@ import Page from '../../components/page'
 import { DESCRIPTIONS } from '../../../config'
 import Error from '../../components/error'
 import { t } from '../../../translations'
-import { setLanguage, getLanguage } from '../../../modules/auth'
+import { setLanguage, getLanguage, setError } from '../../../modules/auth'
 
 class SignedOut extends PureComponent {
   componentWillMount () {
@@ -36,7 +36,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setLanguage: (state) => dispatch(setLanguage(state)),
-  getLanguage: (state) => dispatch(getLanguage(state))
+  getLanguage: (state) => dispatch(getLanguage(state)),
+  setError: (state) => dispatch(setError(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignedOut)

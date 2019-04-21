@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Page from '../../components/page'
 import { t } from '../../../translations'
-import { setLanguage, getLanguage } from '../../../modules/auth'
+import { setLanguage, getLanguage, setError } from '../../../modules/auth'
 
 class NotFound extends PureComponent {
   componentWillMount () {
@@ -31,7 +31,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setLanguage: (state) => dispatch(setLanguage(state)),
-  getLanguage: (state) => dispatch(getLanguage(state))
+  getLanguage: (state) => dispatch(getLanguage(state)),
+  setError: (state) => dispatch(setError(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotFound)

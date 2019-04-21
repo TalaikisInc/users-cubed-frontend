@@ -12,6 +12,7 @@ class SelectDial extends PureComponent {
       phone: this.props.currentUser.phone
     }
     this.onChange = this.onChange.bind(this)
+    this.onDial = this.onDial.bind(this)
   }
 
   onDial (e) {

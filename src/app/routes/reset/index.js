@@ -9,7 +9,7 @@ import Message from '../../components/message'
 import ResetForm from '../../components/reset-form'
 import { DESCRIPTIONS } from '../../../config'
 import { t } from '../../../translations'
-import { reset, setError, setLanguage, getLanguage } from '../../../modules/auth'
+import { reset, setError, setLanguage, getLanguage, setResetStatus } from '../../../modules/auth'
 
 class Reset extends PureComponent {
   constructor (props) {
@@ -19,6 +19,7 @@ class Reset extends PureComponent {
 
   componentWillMount () {
     this.props.setError(null)
+    this.props.setResetStatus(false)
     const { params } = this.props.match
     if (params.locale) {
       this.props.setLanguage(params.locale)
@@ -61,6 +62,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   reset: (state) => dispatch(reset(state)),
   setError: (state) => dispatch(setError(state)),
+  setResetStatus: (state) => dispatch(setResetStatus(state)),
   setLanguage: (state) => dispatch(setLanguage(state)),
   getLanguage: (state) => dispatch(getLanguage(state))
 })

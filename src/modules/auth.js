@@ -92,7 +92,7 @@ const setConfirmStatus = (status) => ({
   payload: status
 })
 
-const setResetStatus = (status) => ({
+export const setResetStatus = (status) => ({
   type: 'RESET_STATUS',
   payload: status
 })
@@ -137,6 +137,12 @@ export const editStatus = (status) => ({
   type: 'EDIT_STATUS',
   payload: status
 })
+
+export const setEditStatus = (status) => {
+  return (dispatch) => {
+    dispatch(editStatus(status))
+  }
+}
 
 export const getUser = () => {
   return (dispatch) => {
@@ -234,7 +240,7 @@ export const signup = ({ email, password, tosAgreement }) => {
   return (dispatch) => {
     return api({ action: 'USER_CREATE', email: email, password: password, tosAgreement: tosAgreement }, (res) => {
       if (res && res.error) {
-        dispatch(_error(res.error))
+        dispatch(_error((<Fragment>{res.error}, <Link to="/signin">sign in</Link>?</Fragment>)))
       } else if (res && res.status === 'OK.') {
         dispatch(signupUser(true))
       }
@@ -247,7 +253,7 @@ export const signin = ({ email, password }) => {
     dispatch(isLoading(true))
     return api({ action: 'TOKEN_CREATE', email: email, password: password }, (res) => {
       if (res && res.error) {
-        if (res.error === 'Invalid password.') {
+        if (res.error === 'Wrong login details.') {
           dispatch(_error((<Fragment>Wrong login details, <Link to="/reset">reset password</Link>?</Fragment>)))
         } else {
           dispatch(_error(res.error))
