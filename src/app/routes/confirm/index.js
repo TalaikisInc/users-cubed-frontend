@@ -17,6 +17,7 @@ class Confirm extends PureComponent {
   }
 
   componentWillMount () {
+    this.props.setError(null)
     const { params } = this.props.match
     const token = params.token
     if (token && token.length === 64) {

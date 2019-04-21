@@ -8,6 +8,7 @@ import { setLanguage, getLanguage } from '../../../modules/auth'
 
 class About extends PureComponent {
   componentWillMount () {
+    this.props.setError(null)
     const { params } = this.props.match
     if (params.locale) {
       this.props.setLanguage(params.locale)

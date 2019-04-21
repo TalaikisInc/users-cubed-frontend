@@ -111,7 +111,11 @@ const XSSReport = Loadable({
   modules: ['xss-report']
 })
 
-// <Route exact path="/" component={withTracker(Homepage, { userID: GA })} />
+const Refer = Loadable({
+  loader: () => import(/* webpackChunkName: "refer" */ './refer'),
+  loading: () => null,
+  modules: ['refer']
+})
 
 export default () => (
   <Switch>
@@ -128,6 +132,8 @@ export default () => (
     <Route exact path="/disclaimer/:locale" component={Disclaimer} />
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/signup/:locale" component={Signup} />
+    <Route exact path="/refer" component={Refer} />
+    <Route exact path="/refer/:locale" component={Refer} />
     <Route exact path="/signed-out" component={SignedOut} />
     <Route exact path="/signed-out/:locale" component={SignedOut} />
     <Route exact path="/profile-deleted" component={ProfileDeleted} />

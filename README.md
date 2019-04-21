@@ -8,7 +8,7 @@ TODO:
 
 * message autoremove after updates
 * social login (+backend part)
-* refer system (left: REFER_USE, REFER_REGISTER)
+* refer system (left: REFER_USE -> REFER_REGISTER)
 
 ## Technologies
 
