@@ -46,6 +46,7 @@ export const DESCRIPTIONS = {
   contactUs: `${COMPANY}'s contact us page.`,
   confirmreset: `${COMPANY}'s password reset confirmation page.`,
   profile: {
-    deleted: `${COMPANY}'s profile deletd page.`
-  }
+    deleted: `${COMPANY}'s profile deletd page.`,
+  },
+  refer: 'Refer users.'
 }

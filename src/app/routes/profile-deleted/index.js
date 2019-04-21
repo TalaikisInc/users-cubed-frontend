@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import Page from '../../components/page'
 import { DESCRIPTIONS } from '../../../config'
@@ -19,8 +20,8 @@ class ProfileDeleted extends PureComponent {
   render () {
     return (
       <Page title={t('profile_deleted')} description={DESCRIPTIONS.profile.deleted} path="/profile-deleted">
-        <p>{t('profile_deleted_text')}</p>
-      </Page>      
+        <p>{t('profile_deleted_text')} {t('now_signup')}<Link to="/signup">{t('signup')}</Link></p>
+      </Page>
     )
   }
 }

@@ -48,6 +48,8 @@ export default (state = initialState, action) => {
       return { ...state, loading: action.payload }
     case 'CONFIRM_STATUS':
       return { ...state, confirmStatus: action.payload }
+    case 'REFER_STATUS':
+      return { ...state, referStatus: action.payload }
     case 'CONFIRM_RESET_STATUS':
       return { ...state, confirmResetStatus: action.payload }
     case 'RESET_STATUS':
@@ -102,6 +104,11 @@ const setResetConfirmStatus = (status) => ({
 
 const setContactStatus = (status) => ({
   type: 'CONTACT_STATUS',
+  payload: status
+})
+
+const setReferStatus = (status) => ({
+  type: 'REFER_STATUS',
   payload: status
 })
 
@@ -180,10 +187,25 @@ export const deleteUser = () => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
+          history.push('/profile-deleted')
           localStorage.removeItem(`${STORAGE_ID}_token`)
           dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
-          history.push('/profile-deleted')
+        }
+      })
+    }
+  }
+}
+
+export const refer = ({ to }) => {
+  return (dispatch) => {
+    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    if (token) {
+      secureApi(token, { action: 'REFER_REFER', to }, (res) => {
+        if (res && res.error) {
+          dispatch(_error(res.error))
+        } else if (res && res.status === 'OK.') {
+          dispatch(setReferStatus(true))
         }
       })
     }
@@ -198,10 +220,10 @@ export const signoutUser = () => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
+          history.push('/signed-out')
           localStorage.removeItem(`${STORAGE_ID}_token`)
           dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
-          history.push('/signed-out')
         }
       })
     }

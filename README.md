@@ -6,8 +6,9 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
+* message autoremove after updates
 * social login (+backend part)
-* refer system from an API
+* refer system (left: REFER_USE, REFER_REGISTER)
 
 ## Technologies
 
