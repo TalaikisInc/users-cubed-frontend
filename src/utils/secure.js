@@ -5,7 +5,7 @@ import { API_URL, API_KEY, STORAGE_ID } from '../config'
 const secureApi = (token, data, done) => {
   const locale = localStorage.getItem(`${STORAGE_ID}_locale`)
   data['key'] = API_KEY
-  data['locale'] = locale
+  data['locale'] = locale || 'en'
 
   fetch(API_URL, {
     method: 'POST',

@@ -240,7 +240,11 @@ export const signup = ({ email, password, tosAgreement }) => {
   return (dispatch) => {
     return api({ action: 'USER_CREATE', email: email, password: password, tosAgreement: tosAgreement }, (res) => {
       if (res && res.error) {
-        dispatch(_error((<Fragment>{res.error}, <Link to="/signin">sign in</Link>?</Fragment>)))
+        if (res.error === 'User exists.') {
+          dispatch(_error((<Fragment>{res.error}, <Link to="/signin">sign in</Link>?</Fragment>)))
+        } else {
+          dispatch(_error(res.error))
+        }
       } else if (res && res.status === 'OK.') {
         dispatch(signupUser(true))
       }

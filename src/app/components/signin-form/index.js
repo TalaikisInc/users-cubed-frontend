@@ -2,10 +2,12 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import isemail from 'isemail'
 import { FacebookLoginButton, GoogleLoginButton, TwitterLoginButton } from 'react-social-login-buttons'
+import { connect } from 'react-redux'
 
 import InputField from '../input'
 import Submit from '../submit'
 import Form from '../form'
+import { socialSignin } from '../../../modules/auth'
 
 const validate = (values) => {
   const errors = {}
@@ -29,25 +31,31 @@ const warn = (values) => {
   return warnings
 }
 
-const SigninForm = (props) => {
-  const { handleSubmit, loading } = props
+let SigninForm = (props) => {
+  const { handleSubmit, loading, socialSignin } = props
 
   return (
     <Form onSubmit={handleSubmit}>
       <Field name="email" type="email" component={InputField} label="Email" icon="envelope" autoComplete="email" />
       <Field name="password" type="password" component={InputField} label="Password" icon="lock" autoComplete="current-password" />
       <Submit label="Sign In" loading={loading} />
-      <FacebookLoginButton onClick={() => this.props.socialSignin('facebook')}>
+      <FacebookLoginButton onClick={() => socialSignin('facebook')}>
         <span>Signin with Facebook</span>
       </FacebookLoginButton>
-      <GoogleLoginButton onClick={() => this.props.socialSignin('google')}>
+      <GoogleLoginButton onClick={() => socialSignin('google')}>
         <span>Signin with Google</span>
       </GoogleLoginButton>
-      <TwitterLoginButton onClick={() => this.props.socialSignin('twitter')}>
+      <TwitterLoginButton onClick={() => socialSignin('twitter')}>
         <span>Signin with Twitter</span>
       </TwitterLoginButton>
     </Form>
   )
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  socialSignin: (state) => dispatch(socialSignin(state))
+})
+
+SigninForm = connect(null, mapDispatchToProps)(SigninForm)
 
 export default reduxForm({ form: 'signin', validate, warn })(SigninForm)
