@@ -117,6 +117,12 @@ const Refer = Loadable({
   modules: ['refer']
 })
 
+const ReferUse = Loadable({
+  loader: () => import(/* webpackChunkName: "refer-use" */ './refer-use'),
+  loading: () => null,
+  modules: ['refer-use']
+})
+
 export default () => (
   <Switch>
     <Route exact path="/" component={Homepage} />
@@ -132,8 +138,8 @@ export default () => (
     <Route exact path="/disclaimer/:locale" component={Disclaimer} />
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/signup/:locale" component={Signup} />
-    <Route exact path="/refer" component={Refer} />
-    <Route exact path="/refer/:locale" component={Refer} />
+    <AuthenticatedRoute exact path="/refer" component={Refer} />
+    <AuthenticatedRoute exact path="/refer/:locale" component={Refer} />
     <Route exact path="/signed-out" component={SignedOut} />
     <Route exact path="/signed-out/:locale" component={SignedOut} />
     <Route exact path="/profile-deleted" component={ProfileDeleted} />
@@ -143,6 +149,8 @@ export default () => (
     <Route exact path="/confirm" component={Confirm} />
     <Route exact path="/confirm/:token" component={Confirm} />
     <Route exact path="/confirm/:token/:locale" component={Confirm} />
+    <Route exact path="/refer-use/:token" component={ReferUse} />
+    <Route exact path="/refer-use/:token/:locale" component={ReferUse} />
     <Route exact path="/confirm-reset" component={ConfirmReset} />
     <Route exact path="/confirm-reset/:token" component={ConfirmReset} />
     <Route exact path="/confirm-reset/:token/:locale" component={ConfirmReset} />

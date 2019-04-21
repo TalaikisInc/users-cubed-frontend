@@ -48,6 +48,8 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "rotating-file-stream": "^1.4.0",
+    "source-map-explorer": "^1.8.0",
+    "terser": "^3.17.0",
     "universal-analytics": "^0.4.20",
     "uuid": "^3.3.2"
   },
@@ -62,7 +64,8 @@
     "build": "npm-run-all build:css build:js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "cross-env NODE_ENV=production node ./server/index.js"
+    "serve": "cross-env NODE_ENV=production node ./server/index.js",
+    "analyze": "source-map-explorer ./build/static/js/*.js"
   },
   "browserslist": [
     ">0.2%",
