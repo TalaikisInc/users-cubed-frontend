@@ -6,7 +6,7 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* 'user exists' after delete
+* inout field holds value for different routes than profile edit
 * social login (+backend part)
 * refer system (left: REFER_USE -> REFER_REGISTER)
 

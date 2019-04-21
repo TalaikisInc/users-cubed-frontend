@@ -43,6 +43,8 @@ class Dashboard extends PureComponent {
             <p><b>Date of Birth:</b> {currentUser.dob}</p>
             <p><b>Avatar:</b> {currentUser.avatarUrl}</p>
             <p><strong><Link to="/profile-edit">Edit Profile</Link></strong></p>
+            <p><strong><Link to="/refer">Refer</Link></strong></p>
+            <p><strong><Link to="/referred">Referred</Link></strong></p>
           </Fragment>
         }
       </Page>
