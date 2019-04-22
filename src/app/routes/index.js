@@ -32,7 +32,6 @@ const PrivacyPolicy = Loadable({
   modules: ['privacy-policy']
 })
 
-
 const TermsAndConditions = Loadable({
   loader: () => import(/* webpackChunkName: "terms-and-conditions" */ './terms-and-conditions'),
   loading: () => null,
@@ -138,8 +137,6 @@ export default () => (
     <Route exact path="/disclaimer/:locale" component={Disclaimer} />
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/signup/:locale" component={Signup} />
-    <AuthenticatedRoute exact path="/refer" component={Refer} />
-    <AuthenticatedRoute exact path="/refer/:locale" component={Refer} />
     <Route exact path="/signed-out" component={SignedOut} />
     <Route exact path="/signed-out/:locale" component={SignedOut} />
     <Route exact path="/profile-deleted" component={ProfileDeleted} />
@@ -158,6 +155,8 @@ export default () => (
     <Route exact path="/xss-report/:locale" component={XSSReport} />
     <UnauthenticatedRoute exact path="/signin" component={Signin} />
     <UnauthenticatedRoute exact path="/signin/:locale" component={Signin} />
+    <AuthenticatedRoute exact path="/refer" component={Refer} />
+    <AuthenticatedRoute exact path="/refer/:locale" component={Refer} />
     <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
     <AuthenticatedRoute exact path="/dashboard/:locale" component={Dashboard} />
     <AuthenticatedRoute exact path="/profile-edit" component={ProfileEdit} />

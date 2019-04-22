@@ -9,9 +9,8 @@ class TaCCheckboxField extends PureComponent {
       <div className="field">
         <div className="control">
           <div className="checkbox">
-            <input {...input} type="checkbox" className="styled" />
             <label htmlFor="checkbox">
-              &nbsp;I agree to the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a>
+              <input id="checkbox" {...input} type="checkbox" className="styled" />&nbsp;I agree to the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a>
             </label>
           </div>
         </div>

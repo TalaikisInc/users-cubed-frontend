@@ -1,57 +1,42 @@
-const PROD = process.env.NODE_ENV === 'produciton'
-const { resolve, basename } = require('path')
-const env = PROD ? resolve(__dirname, '../.env') : resolve(__dirname, '../.env.sample')
-require('dotenv').config({ path: env })
-const { strictEqual } = require('assert')
-const { sync } = require('md5-file')
-const sass = require('node-sass')
-const ignoreStyles = require('ignore-styles')
-const register = ignoreStyles.default
-const extensions = ['.gif', '.jpeg', '.jpg', '.png', '.svg']
+const md5File = require('md5-file');
+const path = require('path');
 
-strictEqual(typeof process.env.CONTACT_API_KEY, 'string', 'We need contact us API key')
-strictEqual(typeof process.env.UPLOAD_API_KEY, 'string', 'We need upload API key')
-strictEqual(typeof process.env.API_KEY, 'string', 'We need an API key')
+// CSS styles will be imported on load and that complicates matters... ignore those bad boys!
+const ignoreStyles = require('ignore-styles');
+const register = ignoreStyles.default;
 
+// We also want to ignore all image requests
+// When running locally these will load from a standard import
+// When running on the server, we want to load via their hashed version in the build folder
+const extensions = ['.gif', '.jpeg', '.jpg', '.png', '.svg'];
+
+// Override the default style ignorer, also modifying all image requests
 register(ignoreStyles.DEFAULT_EXTENSIONS, (mod, filename) => {
-  if (!extensions.find((f) => filename.endsWith(f))) {
-    return ignoreStyles.noOp()
+  if (!extensions.find(f => filename.endsWith(f))) {
+    // If we find a style
+    return ignoreStyles.noOp();
   } else {
-    const hash = sync(filename).slice(0, 8)
-    const bn = basename(filename).replace(/(\.\w{3})$/, `.${hash}$1`)
-    mod.exports = `/static/media/${bn}`
+    // If we find an image
+    const hash = md5File.sync(filename).slice(0, 8);
+    const bn = path.basename(filename).replace(/(\.\w{3})$/, `.${hash}$1`);
+
+    mod.exports = `/static/media/${bn}`;
   }
-})
+});
 
-const processSass = (data, filename) => {
-  let result
-
-  result = sass.renderSync({
-    data: data,
-    file: filename
-  }).css
-  return result.toString('utf8')
-}
-
-require('@babel/polyfill')
+// Set up babel to do its thing... env for the latest toys, react-app for CRA
+// Notice three plugins: the first two allow us to use import rather than require, the third is for code splitting
+// Polyfill is required for Babel 7, polyfill includes a custom regenerator runtime and core-js
+require('@babel/polyfill');
 require('@babel/register')({
   ignore: [/\/(build|node_modules)\//],
   presets: ['@babel/preset-env', '@babel/preset-react'],
   plugins: [
     '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-transform-block-scoping',
     'dynamic-import-node',
-    'react-loadable/babel',
-    [
-      'babel-plugin-css-modules-transform',
-      {
-        extensions: ['.scss', '.sass'],
-        preprocessCss: processSass,
-        generateScopedName: '[local]__[hash:base64:5]'
-      }
-    ]
+    'react-loadable/babel'
   ]
-})
+});
 
-require('./server')
+// Now that the nonsense is over... load up the server entry point
+require('./server');

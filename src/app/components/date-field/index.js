@@ -21,10 +21,11 @@ class DateField extends PureComponent {
 
     return (
       <div className="field">
-        <label className="label"> {label }</label>
+        { /* eslint-disable-next-line */ }
+        <label className="label" htmlFor="date">{ label }</label>
         <div className="control has-icons-left">
-          { disabled ? <input className={classes} type="date" value={currentUser[input.name]} name={input.name} disabled />
-            : <input className={classes} type="date" placeholder={label} autoComplete={autocomplete} name={input.name} onChange={this.onChange}/> }
+          { disabled ? <input id="date" className={classes} type="date" value={currentUser[input.name]} name={input.name} disabled />
+            : <input id="date" className={classes} type="date" placeholder={label} autoComplete={autocomplete} name={input.name} onChange={this.onChange}/> }
           <span className="icon is-small is-left">
             <i className="fas fa-calendar-day"></i>
           </span>

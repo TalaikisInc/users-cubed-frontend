@@ -24,10 +24,11 @@ class InputField extends PureComponent {
 
     return (
       <div className="field">
-        <label className="label"> {label }</label>
+        { /* eslint-disable-next-line */ }
+        <label className="label" id={input.name}>{ label }</label>
         <div className="control has-icons-left">
-          { disabled ? <input className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} disabled />
-            : <input className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} /> }
+          { disabled ? <input id={input.name} className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} disabled />
+            : <input id={input.name} className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} /> }
           <span className="icon is-small is-left">
             <i className={iconClass}></i>
           </span>

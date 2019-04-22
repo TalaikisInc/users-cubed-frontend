@@ -1,20 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import thunk from 'redux-thunk'
-import { persistStore, persistReducer } from 'redux-persist'
 import { createBrowserHistory, createMemoryHistory } from 'history'
-import storage from 'redux-persist/lib/storage'
 
 import rootReducer from '../modules'
-import { STORAGE_ID } from '../config'
 
-const persistConfig = {
-  key: STORAGE_ID,
-  storage
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
+// A nice helper to tell us if we're on the server
 export const isServer = !(
   typeof window !== 'undefined' &&
   window.document &&
@@ -22,9 +13,16 @@ export const isServer = !(
 )
 
 export default (url = '/') => {
-  const history = isServer ? createMemoryHistory({ initialEntries: [url] }) : createBrowserHistory()
+  // Create a history depending on the environment
+  const history = isServer
+    ? createMemoryHistory({
+      initialEntries: [url]
+    })
+    : createBrowserHistory()
+
   const enhancers = []
 
+  // Dev tools are helpful
   if (process.env.NODE_ENV === 'development' && !isServer) {
     const devToolsExtension = window.devToolsExtension
 
@@ -34,25 +32,28 @@ export default (url = '/') => {
   }
 
   const middleware = [thunk, routerMiddleware(history)]
-  const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers)
+  const composedEnhancers = compose(
+    applyMiddleware(...middleware),
+    ...enhancers
+  )
 
+  // Do we have preloaded state available? Great, save it.
   const initialState = !isServer ? window.__PRELOADED_STATE__ : {}
 
+  // Delete it once we have it stored in a variable
   if (!isServer) {
     delete window.__PRELOADED_STATE__
   }
 
+  // Create the store
   const store = createStore(
-    connectRouter(history)(persistedReducer),
+    connectRouter(history)(rootReducer),
     initialState,
     composedEnhancers
   )
 
-  const persistor = persistStore(store)
-
   return {
     store,
-    persistor,
     history
   }
 }

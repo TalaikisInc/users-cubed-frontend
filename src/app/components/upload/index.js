@@ -4,7 +4,12 @@ import clasifier from './clasifier'
 import { UPLOAD_API_URL } from '../../../config'
 
 class Upload extends PureCompoennt {
-  onUpload = () => {
+  constructor (props) {
+    super(props)
+    this.onUpload = this.onUpload.bind(this)
+  }
+
+  onUpload () {
     clasifier()
   }
 

@@ -13,25 +13,16 @@ const initialState = {
   isAuthenticated: false,
   currentUser: {},
   error: null,
+  loading: false,
   locale: 'en',
-  burger: false
-}
-
-if (!isServer) {
-  const hours = 1
-  const now = new Date().getTime()
-  const setupTime = localStorage.getItem('setupTime')
-  if (setupTime == null) {
-    localStorage.setItem('setupTime', now)
-  } else {
-    const token = localStorage.getItem(`${STORAGE_ID}_token`)
-    const expireIn = hours * 60 * 60 * 1000
-    const diff = now - setupTime
-    if (diff > expireIn && (typeof token === 'undefined' || (token && (token.expiry < now)))) {
-      localStorage.clear()
-      localStorage.setItem('setupTime', now)
-    }
-  }
+  burger: false,
+  signupStatus: false,
+  confirmStatus: false,
+  referStatus: false,
+  confirmResetStatus: false,
+  resetStatus: false,
+  contactStatus: false,
+  editStatus: false
 }
 
 export default (state = initialState, action) => {
@@ -147,7 +138,11 @@ export const setEditStatus = (status) => {
 export const getUser = () => {
   return (dispatch) => {
     dispatch(isLoading(true))
-    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    let token
+    if (!isServer) {
+      token = localStorage.getItem(`${STORAGE_ID}_token`)
+    }
+
     if (token) {
       // @TODO extend token with each request
       secureApi(token, { action: 'USER_GET' }, (res) => {
@@ -166,7 +161,11 @@ export const getUser = () => {
 
 export const editUser = (rest) => {
   return (dispatch) => {
-    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    let token
+    if (!isServer) {
+      token = localStorage.getItem(`${STORAGE_ID}_token`)
+    }
+
     if (token) {
       secureApi(token, { action: 'USER_EDIT', ...rest }, (res) => {
         if (res && res.error) {
@@ -187,14 +186,20 @@ export const editUser = (rest) => {
 
 export const deleteUser = () => {
   return (dispatch) => {
-    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    let token
+    if (!isServer) {
+      token = localStorage.getItem(`${STORAGE_ID}_token`)
+    }
+
     if (token) {
       secureApi(token, { action: 'USER_DESTROY' }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
-          history.push('/profile-deleted')
-          localStorage.removeItem(`${STORAGE_ID}_token`)
+          if (!isServer) {
+            history.push('/profile-deleted')
+            localStorage.removeItem(`${STORAGE_ID}_token`)
+          }
           dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
         }
@@ -205,7 +210,11 @@ export const deleteUser = () => {
 
 export const refer = ({ to }) => {
   return (dispatch) => {
-    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    let token
+    if (!isServer) {
+      token = localStorage.getItem(`${STORAGE_ID}_token`)
+    }
+
     if (token) {
       secureApi(token, { action: 'REFER_REFER', to }, (res) => {
         if (res && res.error) {
@@ -220,14 +229,20 @@ export const refer = ({ to }) => {
 
 export const signoutUser = () => {
   return (dispatch) => {
-    const token = localStorage.getItem(`${STORAGE_ID}_token`)
+    let token
+    if (!isServer) {
+      token = localStorage.getItem(`${STORAGE_ID}_token`)
+    }
+
     if (token) {
       return api({ action: 'TOKEN_DESTROY', tokenId: token }, (res) => {
         if (res && res.error) {
           dispatch(_error(res.error))
         } else if (res && res.status === 'OK.') {
-          history.push('/signed-out')
-          localStorage.removeItem(`${STORAGE_ID}_token`)
+          if (!isServer) {
+            history.push('/signed-out')
+            localStorage.removeItem(`${STORAGE_ID}_token`)
+          }
           dispatch(setSignin(false))
           dispatch(setCurrentUser({}))
         }
@@ -263,7 +278,9 @@ export const signin = ({ email, password }) => {
           dispatch(_error(res.error))
         }
       } else if (res && res.token) {
-        localStorage.setItem(`${STORAGE_ID}_token`, res.token)
+        if (!isServer) {
+          localStorage.setItem(`${STORAGE_ID}_token`, res.token)
+        }
         dispatch(setSignin((true)))
       }
       dispatch(isLoading(false))
@@ -274,7 +291,9 @@ export const signin = ({ email, password }) => {
 export const setLanguage = (locale) => {
   return (dispatch) => {
     if (locale.length === 2) {
-      localStorage.setItem(`${STORAGE_ID}_locale`, locale)
+      if (!isServer) {
+        localStorage.setItem(`${STORAGE_ID}_locale`, locale)
+      }
       setLocale(locale)
       dispatch(_setLocale(locale))
     }
@@ -283,7 +302,11 @@ export const setLanguage = (locale) => {
 
 export const getLanguage = () => {
   return (dispatch) => {
-    const locale = localStorage.getItem(`${STORAGE_ID}_locale`)
+    let locale
+    if (!isServer) {
+      locale = localStorage.getItem(`${STORAGE_ID}_locale`)
+    }
+
     if (locale) {
       setLocale(locale)
       dispatch(_setLocale(locale))

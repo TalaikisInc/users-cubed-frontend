@@ -28,6 +28,7 @@ class SelectDial extends PureComponent {
   render () {
     const list = []
     for (let i = 0; i < dialCodes.length; i++) {
+      // eslint-disable-next-line
       list.push(<option value={dialCodes[i].dial} key={i}>{dialCodes[i].dial}</option>)
     }
     const { input, label, meta, currentUser } = this.props
@@ -39,22 +40,23 @@ class SelectDial extends PureComponent {
 
     return (
       <div className="field">
-        <label className="label">{label }</label>
+        { /* eslint-disable-next-line */ }
+        <label className="label" htmlFor={phone}>{label }</label>
         <div className="control">
           <div className="columns is-gapless">
             <div className="column is-one-quarter">
               <div className={selectClasses}>
                 { disabledDial ? <select name="dialCode" className={selectClasses} value={currentUser.dialCode} disabled>
                   { list }
-                </select> : <select name="dialCode" className={selectClasses} value={this.state.dialCode} onChange={this.onDial} autoComplete="tel-country-code">
+                </select> : <select name="dialCode" className={selectClasses} value={this.state.dialCode} onBlur={this.onDial} autoComplete="tel-country-code">
                   { list }
                 </select> }
               </div>
             </div>
             <div className="column is-three-quarters">
               <div className="control">
-                { disabled ? <input className={classes} type="tel" placeholder={label} value={currentUser.phone} name='phone' disabled />
-                  : <input className={classes} type="tel" placeholder={label} autoComplete="tel-national" name={input.name} onChange={this.onChange} value={this.state.phone} /> }
+                { disabled ? <input id="phone" className={classes} type="tel" placeholder={label} value={currentUser.phone} name='phone' disabled />
+                  : <input id="phone" className={classes} type="tel" placeholder={label} autoComplete="tel-national" name={input.name} onBlur={this.onChange} value={this.state.phone} /> }
               </div>
             </div>
           </div>

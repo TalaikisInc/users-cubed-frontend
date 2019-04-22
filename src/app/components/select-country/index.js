@@ -19,6 +19,7 @@ class SelectCountry extends PureComponent {
   render () {
     const countriesList = []
     for (let i = 0; i < countries.length; i++) {
+      // eslint-disable-next-line
       countriesList.push(<option value={countries[i].key} key={i}>{countries[i].country}</option>)
     }
     const { input, label, icon, meta, currentUser } = this.props
@@ -29,12 +30,13 @@ class SelectCountry extends PureComponent {
 
     return (
       <div className="field">
-        <label className="label"> {label }</label>
+        { /* eslint-disable-next-line */ }
+        <label className="label" htmlFor="country"> {label }</label>
         <div className="control has-icons-left">
           <div className={classes}>
-            { disabled ? <select name='country' value={currentUser.country} disabled>
+            { disabled ? <select id="country" name='country' value={currentUser.country} disabled>
               { countriesList }
-            </select> : <select {...input} value={this.state.country} onChange={this.onChange}>
+            </select> : <select {...input} id="country" value={this.state.country} onBlur={this.onChange}>
               { countriesList }
             </select> }
           </div>

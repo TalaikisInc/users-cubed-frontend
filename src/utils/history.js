@@ -1,3 +1,8 @@
-import { createBrowserHistory } from 'history'
+let history
 
-export default createBrowserHistory()
+if (typeof document !== 'undefined') {
+  const { createBrowserHistory } = require('history')
+  history = createBrowserHistory()
+}
+
+export default history

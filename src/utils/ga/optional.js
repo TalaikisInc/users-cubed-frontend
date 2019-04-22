@@ -79,6 +79,7 @@ export class Optional {
   }
 
   validateTypeof (typeOf) {
+    // eslint-disable-next-line
     if (this.isPresent() && typeof this.value === typeOf) {
       return this
     }

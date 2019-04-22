@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import cookie from 'react-cookies'
-import ReactGA from 'react-ga'
 import { Notification, Button } from 'react-bulma-components'
 import { Link } from 'react-router-dom'
 
@@ -8,15 +7,16 @@ import { isServer } from '../../../store'
 import { GA } from '../../../config'
 
 class CookiePolicy extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       policy: false,
       keep: true
     }
+    this._onButtonClick = this._onButtonClick.vind(this)
   }
 
-  _onButtonClick = () => {
+  _onButtonClick () {
     this.setState({
       policy: true,
       keep: false
@@ -24,7 +24,7 @@ class CookiePolicy extends PureComponent {
     cookie.save('cookie-policy', this.state.policy, { path: '/' })
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.setState({
       policy: cookie.load('cookie-policy'),
       keep: true
@@ -33,8 +33,8 @@ class CookiePolicy extends PureComponent {
 
   componentDidMount () {
     if (!isServer && !window.GA_INITIALIZED && this.state.policy) {
-      window.GA_INITIALIZED = true
-      ReactGA.initialize(GA)
+      // window.GA_INITIALIZED = true
+      // ReactGA.initialize(GA)
     }
   }
 
@@ -47,7 +47,7 @@ class CookiePolicy extends PureComponent {
         </Notification>
       )
     } else {
-        return null
+      return null
     }
   }
 }

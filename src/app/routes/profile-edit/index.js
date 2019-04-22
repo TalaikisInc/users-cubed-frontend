@@ -49,7 +49,6 @@ class ProfileEdit extends PureComponent {
 
   render () {
     const { error, currentUser, loading, editStatus } = this.props
-    console.log(currentUser)
 
     return (
       <Page title={t('profile_edit')} noCrawl>

@@ -31,7 +31,7 @@ class SelectLanguage extends PureComponent {
       <div className="field">
         <div className="control">
           <div className="select">
-            <select name='locale' value={locale} onChange={this.onChange}>
+            <select name='locale' value={locale} onBlur={this.onChange}>
               <option value=""></option>
               <option value="en">English</option>
               <option value="fr">Français</option>

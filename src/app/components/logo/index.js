@@ -21,7 +21,7 @@ class Logo extends PureComponent {
         <Navbar.Item renderAs="a" href="/">
           <img src={logo} alt="BlueBlood Ltd." width="112" height="28" />
         </Navbar.Item>
-        <div role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" onClick={this.toggleBurger}>
+        <div role="button" className="navbar-burger burger" tabIndex={0} aria-label="menu" aria-expanded="false" onClick={this.toggleBurger} onKeyPress={this.toggleBurger}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>

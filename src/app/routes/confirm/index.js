@@ -31,7 +31,7 @@ class Confirm extends PureComponent {
     }
   }
 
-  submit = (e) => {
+  submit (e) {
     e.preventDefault()
     const { target } = e
     const token = target[0].value
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch) => ({
   confirm: (state) => dispatch(confirm(state)),
   setError: (state) => dispatch(setError(state)),
   setLanguage: (state) => dispatch(setLanguage(state)),
-  getLanguage: (state) => dispatch(getLanguage(state)),
+  getLanguage: (state) => dispatch(getLanguage(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Confirm)

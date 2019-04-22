@@ -66,7 +66,7 @@ export default [
   { name: 'Equatorial Guinea', dial: '+240', code: 'GQ' },
   { name: 'Eritrea', dial: '+291', code: 'ER' },
   { name: 'Estonia', dial: '+372', code: 'EE' },
-  { name: 'Ethiopia',  code: 'ET' },
+  { name: 'Ethiopia', code: 'ET' },
   { name: 'Falkland Islands (Malvinas)', dial: '+500', code: 'FK' },
   { name: 'Faroe Islands', dial: '+298', code: 'FO' },
   { name: 'Fiji', dial: '+679', code: 'FJ' },
