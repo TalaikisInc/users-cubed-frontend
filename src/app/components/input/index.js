@@ -6,7 +6,7 @@ class InputField extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      [this.props.input.name]: this.props.currentUser[this.props.input.name]
+      [this.props.input.name]: ''
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -33,7 +33,6 @@ class InputField extends PureComponent {
             name={input.name}
             onChange={this.onChange}
             type={type}
-            value={this.state[input.name] || currentUser[input.name]}
             placeholder={label}
             autoComplete={autocomplete} />
           <span className="icon is-small is-left">

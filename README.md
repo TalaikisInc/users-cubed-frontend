@@ -60,6 +60,12 @@ Docker:
 ./slave_start.sh <app_name> <port>
 ```
 
+## Benchmark
+
+```bash
+autocannon http://localhost:3000
+```
+
 ## Licence
 
 GPL v 3.0

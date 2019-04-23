@@ -1,11 +1,8 @@
 import { resolve } from 'path'
-import bodyParser from 'body-parser'
 import compression from 'compression'
 import express from 'express'
 import morgan from 'morgan'
-import path from 'path'
 import Loadable from 'react-loadable'
-import cookieParser from 'cookie-parser'
 import rateLimit from 'express-rate-limit'
 import rfs from 'rotating-file-stream'
 
@@ -25,13 +22,10 @@ const limiter = rateLimit({
 })
 
 app.use(compression())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan(':date[clf] :method :url :status :response-time ms :referrer :remote-addr - :remote-user', { stream: accessLogStream }))
-app.use(cookieParser())
 app.use(setHeaders)
 app.use(express.Router().get('/', loader))
-app.use(express.static(path.resolve(__dirname, '../build')))
+app.use(express.static(resolve(__dirname, '../build')))
 app.use(loader)
 app.use(limiter)
 
@@ -44,16 +38,14 @@ app.on('error', error => {
     throw error
   }
 
-  const bind = typeof PORT === 'string' ? 'Pipe ' + PORT : 'Port ' + PORT
+  const bind = typeof PORT === 'string' ? `Pipe ${PORT}` : `Port ${PORT}`
 
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
-      process.exit(1)
+      console.error(`${bind} requires elevated privileges`)
       break
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1)
+      console.error(`${bind} is already in use`);
       break
     default:
       throw error
