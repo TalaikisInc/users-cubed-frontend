@@ -1,5 +1,7 @@
 'use strict';
 
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob-all');
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
@@ -152,7 +154,7 @@ module.exports = {
           },
           output: {
             ecma: 5,
-            comments: false,
+            comments: true,
             // Turned on because emoji and regex is not minified properly using default
             // https://github.com/facebook/create-react-app/issues/2488
             ascii_only: true,
@@ -170,13 +172,13 @@ module.exports = {
           parser: safePostCssParser,
           map: shouldUseSourceMap
             ? {
-                // `inline: false` forces the sourcemap to be output into a
-                // separate file
-                inline: false,
-                // `annotation: true` appends the sourceMappingURL to the end of
-                // the css file, helping the browser find the sourcemap
-                annotation: true,
-              }
+              // `inline: false` forces the sourcemap to be output into a
+              // separate file
+              inline: false,
+              // `annotation: true` appends the sourceMappingURL to the end of
+              // the css file, helping the browser find the sourcemap
+            annotation: true,
+            }
             : false,
         },
       }),
@@ -448,14 +450,12 @@ module.exports = {
     // Otherwise React will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
-    // Generate a manifest file which contains a mapping of all asset filenames
-    // to their corresponding output file so that tools can pick it up without
-    // having to parse `index.html`.
+    new PurgecssPlugin({
+      paths: [paths.appHtml, ...glob.sync(`${paths.appSrc}/*`)]
+    }),
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
       publicPath: publicPath,

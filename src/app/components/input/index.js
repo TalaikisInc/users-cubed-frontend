@@ -20,15 +20,22 @@ class InputField extends PureComponent {
     const { input, label, type, icon, autocomplete, currentUser, meta: { touched, error, warning } } = this.props
     const iconClass = `fas fa-${icon}`
     const classes = touched && error ? 'input is-danger' : 'input'
-    const disabled = typeof currentUser[input.name] === 'string' && currentUser[input.name].length > 3
+    currentUser[input.name] = typeof currentUser[input.name] !== 'boolean' ? currentUser[input.name] : ''
 
     return (
       <div className="field">
         { /* eslint-disable-next-line */ }
         <label className="label" id={input.name}>{ label }</label>
         <div className="control has-icons-left">
-          { disabled ? <input id={input.name} className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} disabled />
-            : <input id={input.name} className={classes} name={input.name} onChange={this.onChange} type={type} value={this.state[input.name]} placeholder={label} autoComplete={autocomplete} /> }
+          <input
+            id={input.name}
+            className={classes}
+            name={input.name}
+            onChange={this.onChange}
+            type={type}
+            value={this.state[input.name] || currentUser[input.name]}
+            placeholder={label}
+            autoComplete={autocomplete} />
           <span className="icon is-small is-left">
             <i className={iconClass}></i>
           </span>

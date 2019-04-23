@@ -27,6 +27,9 @@ class SelectDial extends PureComponent {
 
   render () {
     const list = []
+    dialCodes.sort((a, b) => {
+      return a.dial - b.dial
+    })
     for (let i = 0; i < dialCodes.length; i++) {
       // eslint-disable-next-line
       list.push(<option value={dialCodes[i].dial} key={i}>{dialCodes[i].dial}</option>)
@@ -35,28 +38,24 @@ class SelectDial extends PureComponent {
     const { touched, error, warning } = meta
     const classes = touched && error ? 'input is-danger' : 'input'
     const selectClasses = touched && error ? 'select is-danger' : 'select'
-    const disabledDial = typeof currentUser.dialCode === 'string' && currentUser.dialCode.length > 0
-    const disabled = typeof currentUser.phone === 'string' && currentUser.phone.length > 0
+    currentUser[input.name] = typeof currentUser[input.name] !== 'boolean' ? currentUser[input.name] : ''
 
     return (
       <div className="field">
         { /* eslint-disable-next-line */ }
-        <label className="label" htmlFor={phone}>{label }</label>
+        <label className="label" htmlFor="phone">{label }</label>
         <div className="control">
           <div className="columns is-gapless">
             <div className="column is-one-quarter">
               <div className={selectClasses}>
-                { disabledDial ? <select name="dialCode" className={selectClasses} value={currentUser.dialCode} disabled>
+                <select name="dialCode" className={selectClasses} value={this.state.dialCode || currentUser.dialCode} onBlur={this.onDial} onChange={this.onDial} autoComplete="tel-country-code">
                   { list }
-                </select> : <select name="dialCode" className={selectClasses} value={this.state.dialCode} onBlur={this.onDial} autoComplete="tel-country-code">
-                  { list }
-                </select> }
+                </select>
               </div>
             </div>
             <div className="column is-three-quarters">
               <div className="control">
-                { disabled ? <input id="phone" className={classes} type="tel" placeholder={label} value={currentUser.phone} name='phone' disabled />
-                  : <input id="phone" className={classes} type="tel" placeholder={label} autoComplete="tel-national" name={input.name} onBlur={this.onChange} value={this.state.phone} /> }
+                <input id="phone" className={classes} type="tel" placeholder={label} autoComplete="tel-national" name={input.name} onBlur={this.onChange} value={this.state.phone || currentUser.phone} />
               </div>
             </div>
           </div>

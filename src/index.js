@@ -5,34 +5,47 @@ import Loadable from 'react-loadable'
 import { Frontload } from 'react-frontload'
 import { ConnectedRouter } from 'connected-react-router'
 import createStore from './store'
+// import { PersistGate } from 'redux-persist/integration/react'
 
 import App from './app/app'
 import './index.css'
 
-// Create a store and get back itself and its history object
-const { store, history } = createStore()
+const { store, persistor, history } = createStore()
 
-// Running locally, we should run on a <ConnectedRouter /> rather than on a <StaticRouter /> like on the server
-// Let's also let React Frontload explicitly know we're not rendering on the server here
 const Application = (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Frontload noServerRender={true}>
+    <Frontload noServerRender={true}>
+      <ConnectedRouter history={history}>
         <App />
-      </Frontload>
-    </ConnectedRouter>
+      </ConnectedRouter>
+    </Frontload>
   </Provider>
 )
 
 const root = document.querySelector('#root')
 
+/*
+persistor.subscribe(() => {
+          const { bootstrapped } = persistor.getState();
+
+          if (bootstrapped) {
+              ReactDOM.hydrate(
+                  <MyEntireApp />,
+                  document.getElementById("appOrWhatever")
+            );
+          }
+        });
+*/
+
 if (root.hasChildNodes() === true) {
-  // If it's an SSR, we use hydrate to get fast page loads by just
-  // attaching event listeners after the initial render
   Loadable.preloadReady().then(() => {
     hydrate(Application, root)
   })
 } else {
-  // If we're not running on the server, just render like normal
-  render(Application, root)
+  persistor.subscribe(() => {
+    const { bootstrapped } = persistor.getState()
+    if (bootstrapped) {
+      render(Application, root)
+    }
+  })
 }

@@ -17,16 +17,17 @@ class SelectCountry extends PureComponent {
   }
 
   render () {
-    const countriesList = []
+    const _countriesList = []
     for (let i = 0; i < countries.length; i++) {
       // eslint-disable-next-line
-      countriesList.push(<option value={countries[i].key} key={i}>{countries[i].country}</option>)
+      _countriesList.push(<option value={countries[i].key} key={i}>{countries[i].country}</option>)
     }
+
     const { input, label, icon, meta, currentUser } = this.props
     const { touched, error, warning } = meta
     const classes = touched && error ? 'select is-danger' : 'select'
     const iconClass = `fas fa-${icon}`
-    const disabled = typeof currentUser.country === 'string' && currentUser.country.length > 0
+    currentUser[input.name] = typeof currentUser[input.name] !== 'boolean' ? currentUser[input.name] : ''
 
     return (
       <div className="field">
@@ -34,11 +35,9 @@ class SelectCountry extends PureComponent {
         <label className="label" htmlFor="country"> {label }</label>
         <div className="control has-icons-left">
           <div className={classes}>
-            { disabled ? <select id="country" name='country' value={currentUser.country} disabled>
-              { countriesList }
-            </select> : <select {...input} id="country" value={this.state.country} onBlur={this.onChange}>
-              { countriesList }
-            </select> }
+            <select {...input} id="country" value={this.state.country || currentUser.country} onBlur={this.onChange} onChange={this.onChange}>
+              { _countriesList }
+            </select>
           </div>
           <span className="icon is-small is-left">
             <i className={iconClass}></i>
