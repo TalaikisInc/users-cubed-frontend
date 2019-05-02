@@ -20,7 +20,7 @@ class Homepage extends PureComponent {
   render () {
     return (
       <Page title={t('home')} description={DESCRIPTIONS.homepage} path="">
-        <p>This is homepage.</p>
+        <p>This is demo for <a href="https://github.com/TalaikisInc/users-cubed-s3">Users Cubed S3</a> and <a href="https://github.com/TalaikisInc/users-cubed-frontend">Users Cubed Frontend</a>.</p>
       </Page>
     )
   }

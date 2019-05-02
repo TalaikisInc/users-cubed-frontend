@@ -72,8 +72,8 @@ export default (req, res) => {
         // We need to tell Helmet to compute the right meta tags, title, and such
         const helmet = Helmet.renderStatic();
 
-        console.log('TITLE', helmet.title.toString());
-        console.log('BODY', routeMarkup);
+        // console.log('TITLE', helmet.title.toString());
+        // console.log('BODY', routeMarkup);
 
         const html = injectHTML(htmlData, {
           html: helmet.htmlAttributes.toString(),

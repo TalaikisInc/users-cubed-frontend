@@ -9,6 +9,7 @@ TODO:
 * social login (+backend part)
 * refer system (left: REFER_USE -> REFER_REGISTER)
 * upload field/ avatar field
+* add async queues for requests
 
 ## Technologies
 

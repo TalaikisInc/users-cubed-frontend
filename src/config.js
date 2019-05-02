@@ -3,8 +3,8 @@ export const DEBUG = !PROD
 
 // Main
 export const STORAGE_ID = 'id'
-export const URL = 'https://ufunc.com/'
-export const IMAGES_URL = 'https://ufunc.com/images/'
+export const URL = 'https://cubed.talaikis.com/'
+export const IMAGES_URL = 'https://talaikis.com/images/'
 export const API_URL = PROD ? 'https://api.ufunc.com/' : 'http://localhost:3000/api'
 export const COMPANY_EMAIL = 'info@talaikis.com'
 export const DEFAULT_DESCRIPTION = 'Default description of awesome website'
@@ -12,7 +12,7 @@ export const DEFAULT_IMAGE = 'default.jpg'
 export const TITLE = 'The Company'
 export const COMPANY = 'The Company Ltd.'
 export const COMPANY_ADDRESS = 'The Company address'
-export const DPM_EMAIL = 'privacy@talaikis.com'
+export const DPM_EMAIL = 'privacy@none.com'
 export const API_KEY = PROD ? process.env.API_KEY : 'cEPHDFKxwxaL7cAVZFQt'
 
 // Upload
@@ -24,7 +24,7 @@ export const CONTACT_API_URL = PROD ? 'https://mail.talaikis.com/contactus' : 'h
 export const CONTACT_API_KEY = PROD ? process.env.CONTACT_API_KEY : ''
 
 // Third parties
-export const GA = 'UA-137539256-1'
+export const GA = 'UA-XXXXXX-X'
 export const TWITTER_HANDLE = '@Talaikis'
 export const FB_SITE = ''
 export const FB_APP_ID = ''
