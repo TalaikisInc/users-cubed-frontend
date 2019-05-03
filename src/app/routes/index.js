@@ -5,8 +5,6 @@ import Loadable from 'react-loadable'
 import AuthenticatedRoute from '../components/authenticated-route'
 import UnauthenticatedRoute from '../components/unauthenticated-route'
 import NotFound from './not-found'
-// import withTracker from '../../utils/ga'
-// import { GA } from '../../config'
 
 const Homepage = Loadable({
   loader: () => import(/* webpackChunkName: "homepage" */ './homepage'),

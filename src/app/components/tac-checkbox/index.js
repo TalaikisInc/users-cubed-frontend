@@ -25,7 +25,9 @@ class TaCCheckboxField extends PureComponent {
 
 TaCCheckboxField.propTypes = {
   input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired
+  touched: PropTypes.object.isRequired,
+  error: PropTypes.object.isRequired,
+  warning: PropTypes.object.isRequired
 }
 
 export default TaCCheckboxField

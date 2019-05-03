@@ -39,7 +39,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  signoutUser: (state) => dispatch(signoutUser(state)),
+  signoutUser: () => dispatch(signoutUser()),
   setError: (state) => dispatch(setError(state))
 })
 

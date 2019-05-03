@@ -4,7 +4,7 @@ import { Notification, Button } from 'react-bulma-components'
 import { Link } from 'react-router-dom'
 
 import { isServer } from '../../../store'
-import { GA } from '../../../config'
+// import { GA } from '../../../config'
 
 class CookiePolicy extends PureComponent {
   constructor (props) {
