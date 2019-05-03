@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch) => ({
   setError: (state) => dispatch(setError(state)),
   setResetStatus: (state) => dispatch(setResetStatus(state)),
   setLanguage: (state) => dispatch(setLanguage(state)),
-  getLanguage: (state) => dispatch(getLanguage(state))
+  getLanguage: () => dispatch(getLanguage())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reset)

@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch) => ({
   signup: (state) => dispatch(signup(state)),
   setError: (state) => dispatch(setError(state)),
   setLanguage: (state) => dispatch(setLanguage(state)),
-  getLanguage: (state) => dispatch(getLanguage(state))
+  getLanguage: () => dispatch(getLanguage())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

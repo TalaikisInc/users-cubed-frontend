@@ -49,7 +49,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setLanguage: (state) => dispatch(setLanguage(state)),
-  getLanguage: (state) => dispatch(getLanguage(state))
+  getLanguage: () => dispatch(getLanguage())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectLanguage)

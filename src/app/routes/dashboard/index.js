@@ -60,7 +60,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getUser: (state) => dispatch(getUser(state)),
   setError: (state) => dispatch(setError(state)),
-  getLanguage: (state) => dispatch(getLanguage(state)),
+  getLanguage: () => dispatch(getLanguage()),
   setLanguage: (state) => dispatch(setLanguage(state))
 })
 

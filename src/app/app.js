@@ -8,7 +8,7 @@ import Routes from './routes'
 import Header from './components/header'
 import CubedFooter from './components/footer'
 import { COMPANY, STORAGE_ID } from '../config'
-// import { pageview } from '../utils/ga'
+import { pageview } from '../utils/ga'
 import { isServer } from '../store'
 
 class App extends PureComponent {
@@ -33,7 +33,7 @@ class App extends PureComponent {
 
   render () {
     const { isAuthenticated, location } = this.props
-    // pageview(location.pathname)
+    pageview(location.pathname)
 
     return (
       <Fragment>

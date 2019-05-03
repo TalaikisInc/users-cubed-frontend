@@ -31,7 +31,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setLanguage: (state) => dispatch(setLanguage(state)),
-  getLanguage: (state) => dispatch(getLanguage(state)),
+  getLanguage: () => dispatch(getLanguage()),
   setError: (state) => dispatch(setError(state))
 })
 

@@ -1,5 +1,4 @@
 import { resolve } from 'path'
-import compression from 'compression'
 import express from 'express'
 import morgan from 'morgan'
 import Loadable from 'react-loadable'
@@ -21,7 +20,6 @@ const limiter = rateLimit({
   max: 100 // per window
 })
 
-app.use(compression())
 app.use(morgan(':date[clf] :method :url :status :response-time ms :referrer :remote-addr - :remote-user', { stream: accessLogStream }))
 app.use(setHeaders)
 app.use(express.Router().get('/', loader))
