@@ -72,8 +72,7 @@ class SelectDial extends PureComponent {
 SelectDial.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
-  icon: PropTypes.string
+  label: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

@@ -1,3 +1,4 @@
+import 'react-app-polyfill/ie11'
 import React from 'react'
 import { render, hydrate } from 'react-dom'
 import { Provider } from 'react-redux'

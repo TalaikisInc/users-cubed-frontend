@@ -4,9 +4,18 @@
 
 Fully featured React.js SSR user management system (frontend).
 
+* Serves CSR for end-users and SSR for major crawlers
+* User signin, signup, signout
+* Profile edit, delete
+* Account confirm, password reset
+* Terms and conditions. privacy policy, disclaimer examples
+* Contact form, etc. examples
+* Rate limits
+
 TODO:
 
 * social login (+backend part)
+* test SSR for bots
 * refer system (left: REFER_USE -> REFER_REGISTER)
 * upload field/ avatar field
 * add async queues for requests
