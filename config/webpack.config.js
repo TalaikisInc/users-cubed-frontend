@@ -331,9 +331,9 @@ module.exports = function(webpackEnv) {
               include: paths.appSrc,
               loader: require.resolve('babel-loader'),
               options: {
-                customize: require.resolve(
-                  'babel-preset-react-app/webpack-overrides'
-                ),
+                presets: [
+                  require.resolve('@babel/preset-react')
+                ],
                 
                 plugins: [
                   [
@@ -367,7 +367,7 @@ module.exports = function(webpackEnv) {
                 compact: false,
                 presets: [
                   [
-                    require.resolve('babel-preset-react-app/dependencies'),
+                    require.resolve('@babel/preset-react'),
                     { helpers: true },
                   ],
                 ],

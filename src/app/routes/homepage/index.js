@@ -18,7 +18,7 @@ class Homepage extends PureComponent {
   }
 
   render () {
-    const { locale } = this.porps
+    const { locale } = this.props
 
     return (
       <Page title={t('home')} description={DESCRIPTIONS.homepage} path="" locale={locale}>

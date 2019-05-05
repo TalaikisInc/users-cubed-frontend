@@ -14,6 +14,7 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
+* ejected dockerized system doens' work properly
 * social login (+backend part)
 * real locale instead of short version?
 * refer system (left: REFER_USE -> REFER_REGISTER)
