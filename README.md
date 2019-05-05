@@ -15,7 +15,7 @@ Fully featured React.js SSR user management system (frontend).
 TODO:
 
 * social login (+backend part)
-* test SSR for bots
+* real locale instead of short version?
 * refer system (left: REFER_USE -> REFER_REGISTER)
 * upload field/ avatar field
 * add async queues for requests

@@ -40,10 +40,10 @@ class Reset extends PureComponent {
   }
 
   render () {
-    const { error, resetStatus, loading } = this.props
+    const { error, resetStatus, loading, locale } = this.props
 
     return (
-      <Page title={t('reset')} description={DESCRIPTIONS.reset} path="/reset">
+      <Page title={t('reset')} description={DESCRIPTIONS.reset} path="/reset" locale={locale}>
         { error ? <Error>{error}</Error> : null }
         { resetStatus ? <Message>{t('password_reset')}<Link to="/confirm-reset">{t('confirm')}</Link>{t('reset_sent')}</Message>
           : <ResetForm handleSubmit={this.submit} loading={loading} />
@@ -55,6 +55,7 @@ class Reset extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   resetStatus: state.auth.resetStatus,
   loading: state.auth.loading
 })

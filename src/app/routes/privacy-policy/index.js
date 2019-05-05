@@ -18,8 +18,10 @@ class PrivacyPolicy extends PureComponent {
   }
 
   render () {
+    const { locale } = this.props
+
     return (
-      <Page title={t('privacy')} description={DESCRIPTIONS.privacyPolicy} path="/privacy-policy">
+      <Page title={t('privacy')} description={DESCRIPTIONS.privacyPolicy} path="/privacy-policy" locale={locale}>
         <p>This Policy applies as between you, the User of this Web Site and { COMPANY } the owner and provider of this Web Site. This Policy applies to our use of any and all Data collected by us in relation to your use of the Web Site and any Services or Systems therein.</p>
 
         <ol>

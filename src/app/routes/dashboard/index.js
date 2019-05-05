@@ -25,10 +25,10 @@ class Dashboard extends PureComponent {
   }
 
   render () {
-    const { currentUser, error } = this.props
+    const { currentUser, error, locale } = this.props
 
     return (
-      <Page title={t('dashboard')} noCrawl>
+      <Page title={t('dashboard')} locale={locale} noCrawl>
         { error ? <Error>{error}</Error> : null }
         { !currentUser.email ? <Loader loading />
           : <Fragment>
@@ -54,6 +54,7 @@ class Dashboard extends PureComponent {
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser,
+  locale: state.auth.locale,
   error: state.auth.error
 })
 

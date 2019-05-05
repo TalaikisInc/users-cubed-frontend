@@ -38,13 +38,13 @@ class Signin extends PureComponent {
   }
 
   render () {
-    const { error, isAuthenticated, history, loading } = this.props
+    const { error, isAuthenticated, history, loading, locale } = this.props
     if (isAuthenticated) {
       history.push({ pathname: '/dashboard' })
     }
 
     return (
-      <Page title={t('signin')} description={DESCRIPTIONS.signin} path="/signin">
+      <Page title={t('signin')} description={DESCRIPTIONS.signin} path="/signin" locale={locale}>
         { error ? <Error>{error}</Error> : null }
         <SigninForm handleSubmit={this.submit} loading={loading} />
       </Page>
@@ -54,6 +54,7 @@ class Signin extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   isAuthenticated: state.auth.isAuthenticated,
   loading: state.auth.loading
 })

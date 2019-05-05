@@ -20,10 +20,10 @@ class SignedOut extends PureComponent {
   }
 
   render () {
-    const { error } = this.props
+    const { error, locale } = this.props
 
     return (
-      <Page title={t('signed_out')} description={DESCRIPTIONS.signedOut} path="/signed-out">
+      <Page title={t('signed_out')} description={DESCRIPTIONS.signedOut} path="/signed-out" locale={locale}>
         { error ? <Error>{error}</Error> : <p>{t('signed_out_text')} {t('now_sign')}<Link to="/signin">{t('signin')}</Link></p> }
       </Page>
     )
@@ -31,7 +31,8 @@ class SignedOut extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  error: state.auth.error
+  error: state.auth.error,
+  locale: state.auth.locale
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -17,8 +17,10 @@ class NotFound extends PureComponent {
   }
 
   render () {
+    const { locale } = this.props
+
     return (
-      <Page path="/not-found" title={t('not_found')} noCrawl>
+      <Page path="/not-found" title={t('not_found')} locale={locale} noCrawl>
         <p>{t('not_found_text')}</p>
       </Page>
     )

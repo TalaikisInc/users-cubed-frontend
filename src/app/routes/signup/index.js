@@ -41,10 +41,10 @@ class Signup extends PureComponent {
   }
 
   render () {
-    const { error, signupStatus, loading } = this.props
+    const { error, signupStatus, loading, locale } = this.props
 
     return (
-      <Page title={t('signup')} description={DESCRIPTIONS.signup} path="/signup">
+      <Page title={t('signup')} description={DESCRIPTIONS.signup} path="/signup" locale={locale}>
         { error ? <Error>{error}</Error> : null }
         { signupStatus ? <Message>{t('registered')}<Link to="/confirm">{t('confirm')}</Link>{t('your_account')}</Message>
           : <SignupForm handleSubmit={this.submit} loading={loading} />
@@ -56,6 +56,7 @@ class Signup extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   signupStatus: state.auth.signupStatus,
   loading: state.auth.loading
 })

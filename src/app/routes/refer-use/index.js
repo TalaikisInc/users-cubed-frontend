@@ -44,10 +44,10 @@ class ReferUse extends PureComponent {
   }
 
   render () {
-    const { error, confirmStatus, loading } = this.props
+    const { error, confirmStatus, loading, locale } = this.props
 
     return (
-      <Page title={t('confirm_title')} description={DESCRIPTIONS.confirm} path="/confirm">
+      <Page title={t('confirm_title')} description={DESCRIPTIONS.confirm} path="/confirm" locale={locale}>
         { error ? <Error>{error}</Error> : null }
         { confirmStatus ? <Message>{t('confirmed')}<Link to="/signin">{t('signin')}</Link>.</Message>
           : <ConfirmForm handleSubmit={this.submit} loading={loading} />
@@ -59,6 +59,7 @@ class ReferUse extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   confirmStatus: state.auth.confirmStatus,
   loading: state.auth.loading
 })

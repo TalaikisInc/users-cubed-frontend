@@ -1,5 +1,7 @@
 import { resolve } from 'path'
 import { readFile } from 'fs'
+import { cpus } from 'os'
+
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import Helmet from 'react-helmet'
@@ -11,21 +13,27 @@ import Loadable from 'react-loadable'
 import createStore from '../src/store'
 import App from '../src/app/app'
 import manifest from '../build/asset-manifest.json'
+import Pool from './pool'
+import { injectHTML } from './utils'
+let Queue = {}
+
+let Pooler = new Pool(resolve(__dirname, 'worker.js'), cpus().length, (msg) => {
+  let queue = [...Queue[msg.event]]
+  Queue[msg.event] = null
+  queue.forEach(cb => cb(msg.value))
+})
+
+const asyncBatching = (num, cb) => {
+  if (Queue[num]) {
+    Queue[num].push(cb)
+  } else {
+    Queue[num] = [cb]
+    Pooler.assignWork({num: num, event: num})
+  }
+}
 
 export default (req, res) => {
   if (/google|bing|msn|duckduckbot|facebot|facebookexternalhit|slurp|yandex/i.test(req.headers['user-agent'])) {
-    const injectHTML = (data, { html, title, meta, body, scripts, state }) => {
-      data = data.replace('<html>', `<html ${html}>`)
-      data = data.replace(/<title>.*?<\/title>/g, title)
-      data = data.replace('</head>', `${meta}</head>`)
-      data = data.replace(
-        '<div id="root"></div>',
-        `<div id="root">${body}</div><script>window.__PRELOADED_STATE__ = ${state}</script>`
-      )
-      data = data.replace('</body>', scripts.join('') + '</body>')
-      return data
-    }
-
     readFile(resolve(__dirname, '../build/index.html'), 'utf8', (err, htmlData) => {
       if (err) {
         console.error('Read error', err)
@@ -48,11 +56,9 @@ export default (req, res) => {
             </Provider>
           </Loadable.Capture>
         )
-      }).then(routeMarkup => {
+      }).then((routeMarkup) => {
         if (context.url) {
-          res.writeHead(302, {
-            Location: context.url
-          })
+          res.writeHead(302, { Location: context.url })
           res.end()
         } else {
           const extractAssets = (assets, chunks) =>
@@ -64,7 +70,7 @@ export default (req, res) => {
             c => `<script type="text/javascript" src="/${c.replace(/^\//, '')}"></script>`
           )
 
-          const helmet = Helmet.renderStatic();
+          const helmet = Helmet.renderStatic()
 
           // console.log('TITLE', helmet.title.toString());
           // console.log('BODY', routeMarkup);

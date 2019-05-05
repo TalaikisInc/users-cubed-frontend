@@ -18,8 +18,10 @@ class ToS extends PureComponent {
   }
 
   render () {
+    const { locale } = this.props
+
     return (
-      <Page title={t('tac')} description={DESCRIPTIONS.ToS} path="/terms-and-conditions">
+      <Page title={t('tac')} description={DESCRIPTIONS.ToS} path="/terms-and-conditions" locale={locale}>
         <p>This agreement applies as between you, the User of this Web Site and { COMPANY }, the owner(s) of this Web Site. Your agreement to comply with and be bound by these terms and conditions is deemed to occur upon your first use of the Web Site. If you do not agree to be bound by these terms and conditions, you should stop using the Web Site immediately.</p>
         <ol>
           <li><strong>Definitions and Interpretation</strong>. In this Agreement the following terms shall have the following meanings:</li>

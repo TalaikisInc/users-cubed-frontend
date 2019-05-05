@@ -19,8 +19,10 @@ class ProfileDeleted extends PureComponent {
   }
 
   render () {
+    const { locale } = this.props
+
     return (
-      <Page title={t('profile_deleted')} description={DESCRIPTIONS.profile.deleted} path="/profile-deleted">
+      <Page title={t('profile_deleted')} description={DESCRIPTIONS.profile.deleted} path="/profile-deleted" locale={locale}>
         <p>{t('profile_deleted_text')} {t('now_signup')}<Link to="/signup">{t('signup')}</Link></p>
       </Page>
     )

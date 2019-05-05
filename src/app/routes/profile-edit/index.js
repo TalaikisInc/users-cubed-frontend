@@ -48,10 +48,10 @@ class ProfileEdit extends PureComponent {
   }
 
   render () {
-    const { error, currentUser, loading, editStatus } = this.props
+    const { error, currentUser, loading, editStatus, locale } = this.props
 
     return (
-      <Page title={t('profile_edit')} noCrawl>
+      <Page title={t('profile_edit')} locale={locale} noCrawl>
         { editStatus ? <Message>{t('edit_confirmed')}.</Message> : null }
         <ProfileEditForm handleSubmit={this.submit} loading={loading} currentUser={currentUser}/>
         { error ? <Error>{error}</Error> : null }
@@ -62,6 +62,7 @@ class ProfileEdit extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   editStatus: state.auth.editStatus,
   currentUser: state.auth.currentUser,
   loading: state.auth.loading

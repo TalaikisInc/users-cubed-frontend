@@ -38,10 +38,10 @@ class Refer extends PureComponent {
   }
 
   render () {
-    const { error, loading, referStatus } = this.props
+    const { error, loading, referStatus, locale } = this.props
 
     return (
-      <Page title={t('refer')} description={DESCRIPTIONS.refer} path="/refer">
+      <Page title={t('refer')} description={DESCRIPTIONS.refer} path="/refer" locale={locale}>
         { error ? <Error>{error}</Error> : null }
         { referStatus ? <Message>{t('referred')}</Message> : null }
         <ReferForm handleSubmit={this.submit} loading={loading} />
@@ -52,6 +52,7 @@ class Refer extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   referStatus: state.auth.referStatus,
   loading: state.auth.loading
 })

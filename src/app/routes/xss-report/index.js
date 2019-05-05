@@ -40,10 +40,10 @@ class XSSReport extends PureComponent {
   }
 
   render () {
-    const { error, contactStatus, loading } = this.props
+    const { error, contactStatus, loading, locale } = this.props
 
     return (
-      <Page title={t('xss_report')} description={DESCRIPTIONS.contactUs} path="/xss-report">
+      <Page title={t('xss_report')} description={DESCRIPTIONS.contactUs} path="/xss-report" locale={locale}>
         { error ? <Error>{error}</Error> : null }
         { contactStatus ? <Message>{t('received')}</Message>
           : <ContactForm handleSubmit={this.submit} loading={loading} />
@@ -55,6 +55,7 @@ class XSSReport extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   contactStatus: state.auth.contactStatus,
   loading: state.auth.loading
 })

@@ -40,10 +40,10 @@ class ReportCertTransparency extends PureComponent {
   }
 
   render () {
-    const { error, contactStatus, loading } = this.props
+    const { error, contactStatus, loading, locale } = this.props
 
     return (
-      <Page title={t('report_cert_transparency')} description={DESCRIPTIONS.contactUs} path="/report-cert-transparency">
+      <Page title={t('report_cert_transparency')} description={DESCRIPTIONS.contactUs} path="/report-cert-transparency" locale={locale}>
         { error ? <Error>{error}</Error> : null }
         { contactStatus ? <Message>{t('received')}</Message>
           : <ContactForm handleSubmit={this.submit} loading={loading} />
@@ -55,6 +55,7 @@ class ReportCertTransparency extends PureComponent {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  locale: state.auth.locale,
   contactStatus: state.auth.contactStatus,
   loading: state.auth.loading
 })
