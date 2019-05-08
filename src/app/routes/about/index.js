@@ -18,7 +18,7 @@ class About extends PureComponent {
   }
 
   render () {
-    const { locale } = this.porps
+    const { locale } = this.props
 
     return (
       <Page title={t('about')} description={DESCRIPTIONS.about} path="/about" locale={locale}>
