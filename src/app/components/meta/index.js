@@ -9,7 +9,7 @@ const Meta = ({ title, path, image, description, noCrawl, locale, type }) => {
     path: typeof path === 'string' ? path : '',
     image: typeof image === 'string' ? `${IMAGES_URL}${image}` : `${IMAGES_URL}${DEFAULT_IMAGE}`,
     fullTitle: `${title} | ${TITLE}`,
-    fullUrl: `${URL}${path}`,
+    fullUrl: locale && locale !== 'en' ? `${URL}${path}/${locale}` : `${URL}${path}`,
     description: typeof description === 'string' ? description : DEFAULT_DESCRIPTION,
     locale: typeof locale === 'string' ? locale : 'en_US',
     type: typeof type === 'string' ? type : 'company'
