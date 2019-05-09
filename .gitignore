@@ -26,3 +26,5 @@ yarn-error.log*
 .log
 *.log
 index.css
+nightwatch/reports
+nightwatch/screenshots

@@ -9,6 +9,7 @@ import loader from './loader'
 import setHeaders from './headers'
 const app = express()
 const PORT = process.env.PORT || 3000
+let server
 
 const accessLogStream = rfs('access.log', {
   interval: '1d',
@@ -28,7 +29,7 @@ app.use(loader)
 app.use(limiter)
 
 Loadable.preloadAll().then(() => {
-  app.listen(PORT, console.log(`App listening on port ${PORT}!`))
+  server = app.listen(PORT, console.log(`App listening on port ${PORT}!`))
 })
 
 app.on('error', error => {
@@ -49,3 +50,12 @@ app.on('error', error => {
       throw error
   }
 })
+
+function stop () {
+  if (server) {
+    server.close()
+  }
+}
+
+module.exports = app
+module.exports.stop = stop

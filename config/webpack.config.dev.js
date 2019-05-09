@@ -12,7 +12,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
-// const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
+const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const PurgecssPlugin = require('purgecss-webpack-plugin');
@@ -210,10 +210,10 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              presets: [
-                require.resolve('@babel/preset-react')
-              ],
-
+              customize: require.resolve(
+                'babel-preset-react-app/webpack-overrides'
+              ),
+              
               plugins: [
                 [
                   require.resolve('babel-plugin-named-asset-import'),
@@ -246,7 +246,7 @@ module.exports = {
               compact: false,
               presets: [
                 [
-                  require.resolve('@babel/preset-react'),
+                  require.resolve('babel-preset-react-app/dependencies'),
                   { helpers: true },
                 ],
               ],

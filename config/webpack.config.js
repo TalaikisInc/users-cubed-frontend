@@ -331,9 +331,9 @@ module.exports = function(webpackEnv) {
               include: paths.appSrc,
               loader: require.resolve('babel-loader'),
               options: {
-                presets: [
-                  require.resolve('@babel/preset-react')
-                ],
+                customize: require.resolve(
+                  'babel-preset-react-app/webpack-overrides'
+                ),
                 
                 plugins: [
                   [
@@ -362,12 +362,12 @@ module.exports = function(webpackEnv) {
               exclude: /@babel(?:\/|\\{1,2})runtime/,
               loader: require.resolve('babel-loader'),
               options: {
-                babelrc: true,
+                babelrc: false,
                 configFile: false,
                 compact: false,
                 presets: [
                   [
-                    require.resolve('@babel/preset-react'),
+                    require.resolve('babel-preset-react-app/dependencies'),
                     { helpers: true },
                   ],
                 ],

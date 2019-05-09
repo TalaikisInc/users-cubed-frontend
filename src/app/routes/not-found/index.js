@@ -6,6 +6,13 @@ import { t } from '../../../translations'
 import { setLanguage, getLanguage, setError } from '../../../modules/auth'
 
 class NotFound extends PureComponent {
+  constructor (props) {
+    super(props)
+    if (props.staticContext) {
+      props.staticContext.status = 404
+    }
+  }
+
   componentWillMount () {
     this.props.setError(null)
     const { params } = this.props.match
