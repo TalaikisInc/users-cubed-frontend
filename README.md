@@ -6,6 +6,8 @@
 
 # Users Cubed Frontend
 
+DEPRECATED, use [users-cubed-next-frontend](https://github.com/TalaikisInc/users-cubed-next-frontend) instead.
+
 ## Features
 
 Fully featured React.js SSR user management system (frontend).
