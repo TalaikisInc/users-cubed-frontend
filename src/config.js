@@ -1,4 +1,4 @@
-const PROD = process.env.NODE_ENV === 'production'
+export const PROD = true
 export const DEBUG = !PROD
 
 // Main
@@ -50,3 +50,5 @@ export const DESCRIPTIONS = {
   },
   refer: 'Refer users.'
 }
+
+export const GA_TRACKING_ID = 'UA-137539256-1'

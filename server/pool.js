@@ -30,7 +30,7 @@ class Pool {
   assignWork (msg) {
     if (this.active.length >= this.maxPool) {
       this.waiting.push(msg)
-      console.log(this.waiting)
+      // console.log(this.waiting)
     }
 
     if (this.pool.length > 0) {

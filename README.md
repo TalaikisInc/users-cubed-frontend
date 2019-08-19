@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://talaikis.com/">
+    <img alt="Talaikis Ltd." src="https://github.com/TalaikisInc/talaikis.com_react/blob/master/media/logo.png" width="228">
+  </a>
+</p>
+
 # Users Cubed Frontend
 
 ## Features
@@ -14,12 +20,11 @@ Fully featured React.js SSR user management system (frontend).
 
 TODO:
 
-* ejected dockerized system doens' work properly
+* frontload for apis doesn't work
 * social login (+backend part)
 * real locale instead of short version?
 * refer system (left: REFER_USE -> REFER_REGISTER)
 * upload field/ avatar field
-* add async queues for requests
 
 ## Technologies
 
