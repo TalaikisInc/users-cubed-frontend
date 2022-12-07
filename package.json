@@ -132,7 +132,7 @@
     "gremlins.js": "^0.1.0",
     "http-proxy-middleware": "^0.19.1",
     "husky": "^2.2.0",
-    "lint-staged": "^8.1.6",
+    "lint-staged": "^13.1.0",
     "mocha": "^6.1.4",
     "nightwatch": "^1.0.19",
     "postcss-cli": "^6.1.2",
